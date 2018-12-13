@@ -1,0 +1,11 @@
+{
+  "extends": "@c4605-tookit/tool-configs/tsconfig.json",
+  "compilerOptions": {
+  },
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

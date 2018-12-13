@@ -1,0 +1,38 @@
+extends:
+  - tslint:recommended
+  - tslint-react
+  - tslint-config-prettier
+rules:
+  semicolon: false
+  member-access: false
+  interface-over-type-literal: false
+  object-literal-sort-keys: false
+  array-type:
+    - true
+    - array
+  no-empty: false
+  no-empty-interface: false
+  no-floating-promises: true
+  no-shadowed-variable: false
+  no-console: false
+  no-unused-expression: false
+  no-namespace: false
+  no-debugger: false
+  curly: false
+  jsdoc-format: false
+  member-ordering: false
+  interface-name: false
+  max-classes-per-file: false
+  variable-name:
+    - true
+    - check-format
+    - allow-leading-underscore
+    - allow-trailing-underscore
+    - allow-pascal-case
+  new-parens: false
+  align: false
+  ordered-imports: false
+  max-line-length: false
+  jsx-boolean-value: ["never"]
+jsRules:
+  object-literal-sort-keys: false

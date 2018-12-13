@@ -1,0 +1,13 @@
+{
+  "name": "@c4605-tookit/js-toolkit",
+  "version": "1.0.0",
+  "description": "My JavaScript toolkit",
+  "main": null,
+  "repository": "https://github.com/bolasblack/js-toolkit",
+  "author": "c4605 <bolasblack@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "name": "@c4605-toolkit/react-components",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react-side-effect": "^1.1.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@storybook/addon-actions": "^4.1.1",
+    "@storybook/addon-info": "^4.1.1",
+    "@storybook/addon-knobs": "^4.1.3",
+    "@storybook/addon-options": "^4.1.3",
+    "@storybook/addon-storysource": "^4.1.3",
+    "@storybook/react": "^4.1.3",
+    "@types/jest": "23.3.10",
+    "@types/node": "10.12.12",
+    "@types/ramda": "types/npm-ramda#dist",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "16.0.11",
+    "@types/react-side-effect": "^1.1.1",
+    "@types/storybook__addon-actions": "^3.4.1",
+    "@types/storybook__addon-info": "^3.4.2",
+    "@types/storybook__addon-knobs": "^4.0.0",
+    "@types/storybook__addon-options": "^4.0.0",
+    "@types/storybook__react": "^4.0.0",
+    "@types/webpack": "^4.4.21",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-auto-import": "bolasblack/babel-plugin-auto-import",
+    "git-hook-pure": "^1.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest-cli": "^23.6.0",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.15.3",
+    "react-docgen-typescript-loader": "^3.0.0",
+    "ts-loader": "^5.3.1",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "prettier-js": "prettier --parser flow --write",
+    "prettier-ts": "prettier --parser typescript --write",
+    "prettier-css": "prettier --parser css --write",
+    "storybook": "TS_NODE_FILES=true TS_NODE_PROJECT=./configs/tsconfig.node.json start-storybook -p 9001 -c ./configs/storybook --ci",
+    "build": "yarn parcel build src/index.html",
+    "test": "NODE_ENV=test yarn jest --no-cache src"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "npm run prettier-js",
+      "git add"
+    ],
+    "*.{ts,tsx}": [
+      "tslint -p .",
+      "npm run prettier-ts",
+      "git add"
+    ],
+    "*.{css,scss,less}": [
+      "npm run prettier-css",
+      "git add"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.(ts|tsx)$": "babel-jest"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "ts",
+      "tsx"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead"
+  ],
+  "peerDependencies": {
+    "react": "16.7.0-alpha.2",
+    "react-dom": "16.7.0-alpha.2"
+  },
+  "resolutions": {
+    "**/react": "16.7.0-alpha.2",
+    "**/react-dom": "16.7.0-alpha.2"
+  }
+}

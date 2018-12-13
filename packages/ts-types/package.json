@@ -1,0 +1,21 @@
+{
+  "name": "@c4605-toolkit/ts-types",
+  "version": "0.1.0",
+  "description": "TypeScript type helpers",
+  "main": "src/index.ts",
+  "license": "MIT",
+  "scripts": {
+    "start": "yarn test && watch -p src/**/*.ts -p dtslint/**/*.ts -c 'yarn test'",
+    "test": "dtslint --onlyTestTsNext dtslint"
+  },
+  "devDependencies": {
+    "dtslint": "^0.4.2",
+    "watch-cli": "^0.2.3"
+  },
+  "peerDependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "typescript": "^3.2.2"
+  },
+  "dependencies": {}
+}
