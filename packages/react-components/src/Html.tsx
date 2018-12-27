@@ -3,11 +3,11 @@ import { uniq, join, split, pipe, filter } from 'ramda'
 import { SimpleJSON } from '@c4605-toolkit/ts-types'
 
 export interface HtmlProps {
-  /** specify document.title */
+  /** Specify document.title */
   title?: string
-  /** specify class in html tag */
+  /** Specify class in html tag */
   className?: string
-  /** specify style in html tag */
+  /** Specify style in html tag */
   style?: React.CSSProperties & SimpleJSON
 }
 

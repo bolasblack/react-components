@@ -13,8 +13,6 @@
     "watch-cli": "^0.2.3"
   },
   "peerDependencies": {
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
     "typescript": "^3.2.2"
   },
   "dependencies": {}

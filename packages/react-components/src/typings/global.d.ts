@@ -1,5 +1,5 @@
-import * as _React from 'react'
-import * as _ReactDOM from 'react-dom'
+import _React from 'react'
+import _ReactDOM from 'react-dom'
 
 declare global {
   const React: typeof _React
