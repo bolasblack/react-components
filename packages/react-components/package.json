@@ -1,7 +1,7 @@
 {
   "name": "@c4605-toolkit/react-components",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
   "dependencies": {
     "react-side-effect": "^1.1.5"
   },
