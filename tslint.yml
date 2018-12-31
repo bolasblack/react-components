@@ -1,1 +1,1 @@
-extends: ./packages/tool-configs/tslint.yml
+extends: '@c4605-toolkit/toolconfs/tslint.yml'
