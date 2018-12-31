@@ -1,1 +1,1 @@
-extends: '@c4605-toolkit/toolconfs/tslint.yml'
+extends: '@c4605/toolconfs/tslint.yml'

@@ -1,6 +1,6 @@
 import withSideEffect from 'react-side-effect'
 import { uniq, join, split, pipe, filter } from 'ramda'
-import { SimpleJSON } from '@c4605-toolkit/ts-types'
+import { SimpleJSON } from '@c4605/ts-types'
 
 export interface HtmlProps {
   /** Specify document.title */

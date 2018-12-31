@@ -1,5 +1,5 @@
 import { Portal } from './Portal'
-import { SimpleJSON } from '@c4605-toolkit/ts-types'
+import { SimpleJSON } from '@c4605/ts-types'
 
 export interface PopoverVisibleInfo {
   visible: boolean

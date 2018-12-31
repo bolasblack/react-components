@@ -1,5 +1,5 @@
 {
-  "name": "@c4605-toolkit/ts-types",
+  "name": "@c4605/ts-types",
   "version": "0.1.0",
   "description": "TypeScript type helpers",
   "main": "src/index.ts",

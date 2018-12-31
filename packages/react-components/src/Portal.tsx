@@ -1,5 +1,5 @@
 import { equals } from 'ramda'
-import { SimpleJSON } from '@c4605-toolkit/ts-types'
+import { SimpleJSON } from '@c4605/ts-types'
 
 export interface PortalProps {
   /** Specify the parent element for portal */
