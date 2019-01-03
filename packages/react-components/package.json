@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "license": "MIT",
   "dependencies": {
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
     "react-side-effect": "^1.1.5"
   },
   "devDependencies": {
@@ -32,7 +34,7 @@
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
-    "babel-plugin-auto-import": "bolasblack/babel-plugin-auto-import",
+    "babel-plugin-auto-import": "^1.0.0",
     "css-loader": "^2.0.2",
     "git-hook-pure": "^1.2.0",
     "identity-obj-proxy": "^3.0.0",
@@ -46,7 +48,8 @@
     "ts-loader": "^5.3.1",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "3.3.0-dev.20181221"
+    "typescript": "3.3.0-dev.20181221",
+    "webpack": "^4.28.3"
   },
   "scripts": {
     "prettier-js": "prettier --parser flow --write",
@@ -91,13 +94,5 @@
   "browserslist": [
     ">0.2%",
     "not dead"
-  ],
-  "peerDependencies": {
-    "react": "16.7.0-alpha.2",
-    "react-dom": "16.7.0-alpha.2"
-  },
-  "resolutions": {
-    "**/react": "16.7.0-alpha.2",
-    "**/react-dom": "16.7.0-alpha.2"
-  }
+  ]
 }
