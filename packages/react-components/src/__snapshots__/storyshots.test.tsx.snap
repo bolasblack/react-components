@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Html base 1`] = `
+<div
+  style={
+    Object {
+      "color": "var(--font-color)",
+    }
+  }
+>
+  Some text
+</div>
+`;
+
+exports[`Storyshots Popover State Up 1`] = `
+<div>
+  <div
+    className="Popover__trigger "
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <p
+      style={
+        Object {
+          "background": "#ddd",
+        }
+      }
+    >
+      Trigger
+    </p>
+  </div>
+  <div
+    data-create-portal={true}
+  >
+    <div
+      className="Popover__content"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Popover base 1`] = `
+<div>
+  <div
+    className="Popover__trigger "
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <p
+      style={
+        Object {
+          "background": "#ddd",
+        }
+      }
+    >
+      Trigger
+    </p>
+  </div>
+  <div
+    data-create-portal={true}
+  >
+    <div
+      className="Popover__content"
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    />
+  </div>
+</div>
+`;
+
+exports[`Storyshots Portal base 1`] = `
+<div>
+  <p>
+    <label>
+      closeOnClick
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </label>
+  </p>
+  <p>
+    <label>
+      closeOnOutsideClick
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="checkbox"
+      />
+    </label>
+  </p>
+  <p>
+    <button
+      onClick={[Function]}
+      type="button"
+    >
+      Show Portal
+    </button>
+  </p>
+  <div
+    data-create-portal={true}
+  >
+    <div
+      className="PortalContent__overlay"
+    >
+      <div
+        className="PortalContent__content"
+      >
+        <p>
+          Portal content
+        </p>
+        <p>
+          <button
+            onClick={[Function]}
+            type="button"
+          >
+            Close Portal
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

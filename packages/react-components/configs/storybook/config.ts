@@ -2,8 +2,11 @@ import { configure, addDecorator } from '@storybook/react'
 import { withInfo } from '@storybook/addon-info'
 import { withOptions } from '@storybook/addon-options'
 import { withKnobs } from '@storybook/addon-knobs'
+import requireContext from 'require-context.macro'
 
-addDecorator(withInfo({ inline: true }))
+if (process.env.NODE_ENV !== 'test') {
+  addDecorator(withInfo({ inline: true }))
+}
 
 addDecorator(
   withOptions({ selectedAddonPanel: 'storybooks/storybook-addon-knobs' }),
@@ -11,6 +14,6 @@ addDecorator(
 
 addDecorator(withKnobs)
 
-const req = require.context('../../src', true, /\.stories\.tsx$/)
+const req = requireContext('../../src', true, /\.stories\.tsx$/)
 
 configure(() => req.keys().forEach(req), module)

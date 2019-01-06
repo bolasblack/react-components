@@ -5,7 +5,7 @@ export interface PortalProps {
   /** Specify the parent element for portal */
   parent: HTMLElement
   /** Children in portal */
-  children: React.ReactNode
+  children?: React.ReactNode
 
   /** Specify portal class  */
   className: string
@@ -26,7 +26,7 @@ export class Portal extends React.PureComponent<PortalProps> {
     parent: document.body,
     className: '',
     style: {},
-    visible: false,
+    visible: true,
     onVisibleChange: () => {},
     clickClose: () => {},
   }
@@ -81,20 +81,25 @@ export class Portal extends React.PureComponent<PortalProps> {
 
     if (nextProps) {
       if (!prevProps || prevProps.className !== nextProps.className) {
-        portal.setAttribute('class', nextProps.className.trim() || '')
+        portal.className = nextProps.className.trim() || ''
       }
 
       const prevStyle = prevProps && prevProps.style
       const nextStyle = nextProps.style
       if (!equals(prevStyle, nextStyle)) {
-        portal.removeAttribute('style')
+        portal.style.cssText = ''
         Object.assign(
           portal.style,
-          { display: nextProps.visible ? 'block' : 'none' },
+          { display: nextProps.visible ? null : 'none' },
           nextStyle,
         )
+        Object.keys(nextStyle)
+          .filter(p => p.startsWith('--'))
+          .forEach(p => {
+            portal.style.setProperty(p, nextStyle[p])
+          })
       } else {
-        portal.style.display = nextProps.visible ? 'block' : 'none'
+        portal.style.display = nextProps.visible ? null : 'none'
       }
     }
   }

@@ -1,11 +1,14 @@
 module.exports = {
   plugins: [
+    '@babel/plugin-proposal-class-properties',
+    'babel-plugin-macros',
     [
       'babel-plugin-auto-import',
       {
         declarations: [
           { default: 'React', path: 'react' },
           { default: 'ReactDOM', path: 'react-dom' },
+          { default: 'regeneratorRuntime', path: 'regenerator-runtime' },
         ],
       },
     ],

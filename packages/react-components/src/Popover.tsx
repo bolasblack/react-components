@@ -8,8 +8,10 @@ export interface PopoverVisibleInfo {
 }
 
 export interface PopoverProps {
-  /** If set to true, popover won't be shown, popoverStyle, content, onVisibleChange won't be called */
-  disabled: boolean
+  /** Trigger element renderer */
+  trigger: () => React.ReactNode
+  /** Popover content renderer */
+  content: () => React.ReactNode
   /** Trigger container element class */
   triggerClassName: string
   /** Popover container element class */
@@ -20,14 +22,12 @@ export interface PopoverProps {
   openOn: 'hover' | 'click'
   /** Popover close cause */
   closeOn: 'hover' | 'clickInside' | 'clickOutside'
-  /** Trigger element renderer */
-  trigger: () => React.ReactNode
-  /** Popover content renderer */
-  content: () => React.ReactNode
   /** Popover visiblity */
   visible?: boolean
   /** Callback when popover visiblity changed */
   onVisibleChange: (visible: boolean) => void
+  /** If set to true, popover won't be shown, popoverStyle, content, onVisibleChange won't be called */
+  disabled: boolean
 }
 
 export interface PopoverState extends PopoverVisibleInfo {}
@@ -42,6 +42,10 @@ let popoverContainer: HTMLDivElement | null = null
  * need change visible state, will callback `onVisibleChange(expectedVisibleState)`
  */
 export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
+  static get popoverContainer() {
+    return popoverContainer
+  }
+
   static defaultProps = {
     triggerClassName: '',
     popoverClassName: '',
@@ -65,9 +69,9 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     popoverLeft: 0,
   }
 
-  private triggerRef = React.createRef<HTMLDivElement>()
+  private triggerContainerRef = React.createRef<HTMLDivElement>()
 
-  private contentRef = React.createRef<HTMLDivElement>()
+  private contentContainerRef = React.createRef<HTMLDivElement>()
 
   render() {
     if (!popoverContainer) {
@@ -77,32 +81,30 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
 
     return (
       <React.Fragment>
-        {typeof this.props.trigger !== 'function' ? null : (
-          <div
-            ref={this.triggerRef}
-            className={`Popover__trigger ${this.props.triggerClassName}`}
-            onClick={this.onTriggerClick}
-            onMouseEnter={this.onMouseEnter}
-            onMouseLeave={this.onMouseLeave}
-          >
-            {this.props.trigger()}
-          </div>
-        )}
+        <div
+          ref={this.triggerContainerRef}
+          className={`Popover__trigger ${this.props.triggerClassName}`}
+          onClick={this.onTriggerClick}
+          onMouseEnter={this.onMouseEnter}
+          onMouseLeave={this.onMouseLeave}
+        >
+          {this.props.trigger()}
+        </div>
         <Portal
           parent={popoverContainer}
           className={`Popover__container ${this.props.popoverClassName}`}
           style={this.popoverStyle()}
           clickClose={this.clickClose}
-          visible={this.props.disabled ? false : this.visible}
+          visible={this.visible}
           onVisibleChange={this.changeVisible}
         >
           <div
-            ref={this.contentRef}
+            ref={this.contentContainerRef}
             className="Popover__content"
             onMouseEnter={this.onMouseEnter}
             onMouseLeave={this.onMouseLeave}
           >
-            {this.props.disabled ? null : this.props.content()}
+            {!this.visible ? null : this.props.content()}
           </div>
         </Portal>
       </React.Fragment>
@@ -112,23 +114,23 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   private popoverStyle() {
     if (this.props.disabled) return
     if (!document.scrollingElement) return
-    if (!this.triggerRef.current) return
+    if (!this.triggerContainerRef.current) return
     return this.props.popoverStyle({
       visible: this.visible,
       ...this.getPositionInfo(
-        this.triggerRef.current,
+        this.triggerContainerRef.current,
         document.scrollingElement,
       ),
     })
   }
 
   private clickClose = (event: MouseEvent) => {
-    if (!this.triggerRef.current) return
-    if (!this.contentRef.current) return
+    if (!this.triggerContainerRef.current) return
+    if (!this.contentContainerRef.current) return
     if (!(event.target instanceof HTMLElement)) return
     const clickInside =
-      this.triggerRef.current.contains(event.target) ||
-      this.contentRef.current.contains(event.target)
+      this.triggerContainerRef.current.contains(event.target) ||
+      this.contentContainerRef.current.contains(event.target)
     if (this.props.closeOn === 'clickInside') {
       return clickInside
     } else if (this.props.closeOn === 'clickOutside') {
@@ -142,6 +144,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   }
 
   private get visible() {
+    if (this.props.disabled) return false
     if (this.visibleDelegated) {
       return !!this.props.visible
     } else {
@@ -150,6 +153,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   }
 
   private changeVisible = (visible: boolean) => {
+    visible = this.props.disabled ? false : visible
     if (this.visibleDelegated) {
       if (typeof this.props.onVisibleChange !== 'function') return
       if (this.visible === visible) return
@@ -172,9 +176,12 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     if (this.props.disabled) return
     if (this.props.openOn !== 'click') return
     if (!document.scrollingElement) return
-    if (!this.triggerRef.current) return
+    if (!this.triggerContainerRef.current) return
     this.setState(
-      this.getPositionInfo(this.triggerRef.current, document.scrollingElement),
+      this.getPositionInfo(
+        this.triggerContainerRef.current,
+        document.scrollingElement,
+      ),
     )
     this.changeVisible(true)
   }
@@ -186,9 +193,12 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
       if (this.props.closeOn !== 'hover') return
     }
     if (!document.scrollingElement) return
-    if (!this.triggerRef.current) return
+    if (!this.triggerContainerRef.current) return
     this.setState(
-      this.getPositionInfo(this.triggerRef.current, document.scrollingElement),
+      this.getPositionInfo(
+        this.triggerContainerRef.current,
+        document.scrollingElement,
+      ),
     )
     this.changeVisible(true)
   }

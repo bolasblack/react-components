@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
@@ -17,8 +18,10 @@
     "@storybook/addon-info": "^4.1.1",
     "@storybook/addon-knobs": "^4.1.3",
     "@storybook/addon-options": "^4.1.3",
+    "@storybook/addon-storyshots": "^4.1.4",
     "@storybook/addon-storysource": "^4.1.3",
     "@storybook/react": "^4.1.3",
+    "@types/enzyme": "^3.1.15",
     "@types/jest": "23.3.10",
     "@types/node": "10.12.12",
     "@types/ramda": "types/npm-ramda#dist",
@@ -35,13 +38,18 @@
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "babel-plugin-auto-import": "^1.0.0",
+    "babel-plugin-macros": "^2.4.3",
     "css-loader": "^2.0.2",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "git-hook-pure": "^1.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest-cli": "^23.6.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
     "react-docgen-typescript-loader": "^3.0.0",
+    "react-test-renderer": "^16.7.0",
+    "require-context.macro": "^1.0.4",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
@@ -75,6 +83,9 @@
     ]
   },
   "jest": {
+    "setupFiles": [
+      "./configs/jestSetup.ts"
+    ],
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "identity-obj-proxy"
     },
@@ -85,10 +96,13 @@
       "**/?(*.)+(spec|test).ts?(x)"
     ],
     "moduleFileExtensions": [
+      "ts",
+      "tsx",
       "js",
       "jsx",
-      "ts",
-      "tsx"
+      "json",
+      "node",
+      "html"
     ]
   },
   "browserslist": [
