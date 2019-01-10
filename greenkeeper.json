@@ -1,0 +1,12 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "package.json",
+        "packages/react-components/package.json",
+        "packages/toolconfs/package.json",
+        "packages/ts-types/package.json"
+      ]
+    }
+  }
+}
