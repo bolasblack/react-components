@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ `git status --porcelain | grep 'react-components/' | wc -l` -eq 0 ]; then
+if ! git status --porcelain | grep 'react-components/'; then
   exit
 fi
 
