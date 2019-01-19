@@ -1,6 +1,5 @@
 declare module 'react-docgen-typescript-webpack-plugin'
 declare module '@storybook/addons'
-declare module '@storybook/addon-storyshots'
 declare module 'sass'
 declare module 'enzyme-adapter-react-16'
 

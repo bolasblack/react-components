@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - node
+  - lts/*
 script:
   - cd `git rev-parse --show-toplevel`/packages/ts-types && yarn test
   - cd `git rev-parse --show-toplevel`/packages/react-components && yarn test

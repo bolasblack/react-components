@@ -1,10 +1,13 @@
 {
   "extends": "@c4605/toolconfs/tsconfig.json",
   "compilerOptions": {
-    "rootDir": "."
+    "skipLibCheck": true,
   },
   "include": [
     "configs",
     "src",
-  ]
+  ],
+  "exclude": [
+    "node_modules",
+  ],
 }
