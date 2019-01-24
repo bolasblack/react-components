@@ -1,6 +1,6 @@
 {
   "name": "@c4605/react-components",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "license": "MIT",
   "dependencies": {
     "react": "^16.7.0",
@@ -13,6 +13,8 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@c4605/toolconfs": "^0.1.0",
+    "@c4605/ts-types": "^0.1.1",
     "@sambego/storybook-state": "^1.3.2",
     "@storybook/addon-actions": "^4.1.1",
     "@storybook/addon-info": "^4.1.1",
@@ -44,6 +46,7 @@
     "enzyme-adapter-react-16": "^1.7.1",
     "git-hook-pure": "^1.2.0",
     "identity-obj-proxy": "^3.0.0",
+    "jest": "^23.6.0",
     "jest-cli": "^23.6.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.3",
@@ -56,7 +59,7 @@
     "ts-loader": "^5.3.1",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "3.3.0-dev.20181221",
+    "typescript": "^3.3.0-rc",
     "webpack": "^4.28.3"
   },
   "scripts": {
@@ -64,7 +67,6 @@
     "prettier-ts": "prettier --parser typescript --write",
     "prettier-css": "prettier --parser css --write",
     "storybook": "TS_NODE_FILES=true TS_NODE_PROJECT=./configs/tsconfig.node.json start-storybook -p 9001 -c ./configs/storybook --ci",
-    "build": "yarn parcel build src/index.html",
     "compile": "rm -rf lib && tsc -p ./configs/tsconfig.compile.json",
     "test": "NODE_ENV=test yarn jest --no-cache src"
   },

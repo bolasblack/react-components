@@ -998,6 +998,17 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@c4605/toolconfs@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-0.1.0.tgz#fa5f8887150f9d9b3a707f12ce237c46913dabc3"
+  integrity sha512-1zuNwcGe10q5WyB4x5phaZfugkbieIS8jNwZB1hdPLU0vWHUmBXtyMZMV1mGsumj/TQVJowXgqMxDzE90OZfSw==
+  dependencies:
+    tslint-config-prettier "^1.17.0"
+    tslint-loader "^3.5.4"
+    tslint-react "^3.6.0"
+  optionalDependencies:
+    typescript ">= 3.2.2"
+
 "@emotion/cache@^0.8.8":
   version "0.8.8"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-0.8.8.tgz#2c3bd1aa5fdb88f1cc2325176a3f3201739e726c"
@@ -6529,6 +6540,14 @@ jest-worker@^23.2.0:
   dependencies:
     merge-stream "^1.0.1"
 
+jest@^23.6.0:
+  version "23.6.0"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-23.6.0.tgz#ad5835e923ebf6e19e7a1d7529a432edfee7813d"
+  integrity sha512-lWzcd+HSiqeuxyhG+EnZds6iO3Y3ZEnMrfZq/OTGvF/C+Z4fPMCdhWTGSAiO2Oym9rbEXfwddHhh6jqrTF3+Lw==
+  dependencies:
+    import-local "^1.0.0"
+    jest-cli "^23.6.0"
+
 js-levenshtein@^1.1.3:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/js-levenshtein/-/js-levenshtein-1.1.4.tgz#3a56e3cbf589ca0081eb22cd9ba0b1290a16d26e"
@@ -10261,15 +10280,15 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.3.0-dev.20181221:
-  version "3.3.0-dev.20181221"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.0-dev.20181221.tgz#abb0490f7274b0f6cefad1d622d9147ff58f1894"
-  integrity sha512-vReSF1bOGIKkCd7EhmUhLouAwnBKtiXQQeM87PYeiIyJJydNmyGwNHw/G+xzeiVfj7K6iYr1MLR2z7qFwQ5k5Q==
+"typescript@>= 3.2.2":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.4.tgz#c585cb952912263d915b462726ce244ba510ef3d"
+  integrity sha512-0RNDbSdEokBeEAkgNbxJ+BLwSManFy9TeXz8uW+48j/xhEXv1ePME60olyzw2XzUqUBNAYFeJadIqAgNqIACwg==
 
-typescript@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.2.2.tgz#fe8101c46aa123f8353523ebdcf5730c2ae493e5"
-  integrity sha512-VCj5UiSyHBjwfYacmDuc/NOk4QQixbE+Wn7MFJuS0nRuPQbof132Pw4u53dm264O8LPc2MVsc7RJNml5szurkg==
+typescript@^3.3.0-rc:
+  version "3.3.0-rc"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.3.0-rc.tgz#700578b55868f99c79870c5611570663b3e21e44"
+  integrity sha512-C8FMc5pU+gFLm/rXKcwjHIeQnXJXfPNmONhKDSUWeVhyrnSqEI84EzoZylTqN0g6sJwdsn1W1AuG0RQRhfhSEA==
 
 typescript@next:
   version "3.3.0-dev.20181220"

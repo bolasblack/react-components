@@ -1,6 +1,6 @@
 {
   "name": "@c4605/ts-types",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TypeScript type helpers",
   "main": "src/index.ts",
   "license": "MIT",
@@ -9,6 +9,7 @@
     "test": "dtslint --onlyTestTsNext dtslint"
   },
   "devDependencies": {
+    "@c4605/toolconfs": "^0.1.0",
     "dtslint": "^0.4.2",
     "watch-cli": "^0.2.3"
   },
