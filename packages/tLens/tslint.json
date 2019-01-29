@@ -1,0 +1,3 @@
+{
+  "extends": "@c4605/toolconfs/tslint.json",
+}

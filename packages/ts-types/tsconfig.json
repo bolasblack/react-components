@@ -1,5 +1,5 @@
 {
-  "extends": "@c4605-tookit/toolconfs/tsconfig.json",
+  "extends": "@c4605/toolconfs/tsconfig.json",
   "compilerOptions": {
   },
   "include": [

@@ -1,6 +1,6 @@
 {
   "name": "@c4605/ts-types",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "TypeScript type helpers",
   "main": "src/index.ts",
   "license": "MIT",
