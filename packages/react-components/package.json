@@ -27,7 +27,7 @@
     "@types/jest": "^23.3.12",
     "@types/node": "^10.12.18",
     "@types/ramda": "types/npm-ramda#dist",
-    "@types/react": "^16.7.18",
+    "@types/react": "^16.8.3",
     "@types/react-dom": "^16.0.11",
     "@types/react-side-effect": "^1.1.1",
     "@types/storybook__addon-actions": "^3.4.1",
