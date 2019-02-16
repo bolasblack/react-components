@@ -11,7 +11,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@commitlint/cli": "^7.3.2",
+    "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.3.1"
   }
 }
