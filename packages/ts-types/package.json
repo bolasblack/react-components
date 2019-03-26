@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "yarn test && watch -p src/**/*.ts -p dtslint/**/*.ts -c 'yarn test'",
-    "test": "dtslint --onlyTestTsNext dtslint"
+    "test": "node ./node_modules/.bin/dtslint --onlyTestTsNext dtslint"
   },
   "devDependencies": {
     "@c4605/toolconfs": "^0.1.0",
