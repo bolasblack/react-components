@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@c4605/toolconfs": "^0.1.0",
-    "dtslint": "^0.5.0",
+    "dtslint": "^0.5.8",
     "watch-cli": "^0.2.3"
   },
   "peerDependencies": {
