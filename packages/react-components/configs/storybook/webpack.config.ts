@@ -1,7 +1,7 @@
 import { Configuration } from 'webpack'
 import Sass from 'sass'
 
-export default (baseConfig: Configuration, env: any, config: Configuration) => {
+export default ({ config }: { config: Configuration }) => {
   config.module!.rules = config.module!.rules.concat([
     {
       test: /\.(ts|tsx)$/,
