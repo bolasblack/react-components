@@ -39,7 +39,7 @@
     "babel-core": "^7.0.0-bridge",
     "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
-    "babel-plugin-auto-import": "^1.0.0",
+    "babel-plugin-auto-import": "^1.0.5",
     "babel-plugin-macros": "^2.4.3",
     "css-loader": "^2.0.2",
     "enzyme": "^3.8.0",

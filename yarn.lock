@@ -2947,12 +2947,13 @@ babel-plugin-add-react-displayname@^0.0.5:
   resolved "https://registry.yarnpkg.com/babel-plugin-add-react-displayname/-/babel-plugin-add-react-displayname-0.0.5.tgz#339d4cddb7b65fd62d1df9db9fe04de134122bd5"
   integrity sha1-M51M3be2X9YtHfnbn+BN4TQSK9U=
 
-babel-plugin-auto-import@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-auto-import/-/babel-plugin-auto-import-1.0.0.tgz#5cc110700f9a942264a6c365c337655b0709272a"
-  integrity sha512-q6dQFRO3IlqgZ+P0FadVZ9SqHIdU/U0Kzfhr2XXGWROzL5Zz1ZYmI4XzBVMzYqgqiM4ZPux+LMYbo5WFqE0CHg==
+babel-plugin-auto-import@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/babel-plugin-auto-import/-/babel-plugin-auto-import-1.0.5.tgz#350778fbbc2a341420b7059e8f543b9fb2636b60"
+  integrity sha512-U/TmCczhGEU9l65yKVdKMGP0bNlWUpulFaaRMcNaVwCRSgjfnASdwZUVrHdKbVW1EV02iR0JtO6J96aTHB9NXw==
   dependencies:
     "@babel/core" "^7.2.2"
+    logical-not "^1.0.0"
 
 babel-plugin-dynamic-import-node@2.2.0:
   version "2.2.0"
@@ -7828,6 +7829,11 @@ log-update@^2.3.0:
     ansi-escapes "^3.0.0"
     cli-cursor "^2.0.0"
     wrap-ansi "^3.0.1"
+
+logical-not@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/logical-not/-/logical-not-1.0.0.tgz#3149848c0cce1fea1f76a0e45725c7bcdb33a627"
+  integrity sha512-l3X5Sf25wwZkprKfrfJ2YjCcxkNnitMvuqoVPAFNz1xpAMG7B4CkdELK19hafcR8K9fcUs0K0LkzZ62U+xdHpA==
 
 loglevelnext@^1.0.1:
   version "1.0.5"
