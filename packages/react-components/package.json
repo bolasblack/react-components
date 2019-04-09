@@ -4,6 +4,7 @@
   "license": "MIT",
   "dependencies": {
     "@c4605/ts-types": "^0.1.1",
+    "@types/react-side-effect": "^1.1.1",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-side-effect": "^1.1.5"
@@ -29,7 +30,6 @@
     "@types/ramda": "types/npm-ramda#dist",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",
-    "@types/react-side-effect": "^1.1.1",
     "@types/storybook__addon-actions": "^3.4.2",
     "@types/storybook__addon-info": "^4.1.1",
     "@types/storybook__addon-knobs": "^4.0.4",
