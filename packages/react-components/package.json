@@ -1,6 +1,6 @@
 {
   "name": "@c4605/react-components",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "license": "MIT",
   "dependencies": {
     "@c4605/ts-types": "^0.1.1",
