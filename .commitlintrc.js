@@ -1,4 +1,4 @@
 module.exports = {
-  extends: ['@commitlint/config-conventional'],
+  extends: ['@c4605/toolconfs/commitlintrc'],
   rules: {},
 }
