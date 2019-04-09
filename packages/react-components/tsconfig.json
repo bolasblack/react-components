@@ -1,6 +1,7 @@
 {
   "extends": "@c4605/toolconfs/tsconfig.json",
   "compilerOptions": {
+    "jsx": "preserve",
     "skipLibCheck": true,
   },
   "include": [

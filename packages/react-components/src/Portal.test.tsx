@@ -15,18 +15,37 @@ describe('Portal', () => {
     expect(document.querySelectorAll('.portal')).toHaveLength(0)
   })
 
-  it('support `parent` prop', () => {
-    const parent = document.createElement('div')
-    const wrapper = mount(
-      <div>
-        <Portal parent={parent} />
-      </div>,
-    )
-    const { portal } = getPortal(wrapper)
-    expect(portal.parentElement).toBe(parent)
-    wrapper.unmount()
-    expect(portal.parentElement).toBe(null)
-    expect(document.querySelectorAll('.portal')).toHaveLength(0)
+  describe('support `parent` prop', () => {
+    function assertParentPropWorks(
+      wrapper: ReturnType<typeof mount>,
+      parent: HTMLElement,
+    ) {
+      const { portal } = getPortal(wrapper)
+      expect(portal.parentElement).toBe(parent)
+      wrapper.unmount()
+      expect(portal.parentElement).toBe(null)
+      expect(document.querySelectorAll('.portal')).toHaveLength(0)
+    }
+
+    it('as an element', () => {
+      const parent = document.createElement('div')
+      const wrapper = mount(
+        <div>
+          <Portal parent={parent} />
+        </div>,
+      )
+      assertParentPropWorks(wrapper, parent)
+    })
+
+    it('as a function', () => {
+      const parent = document.createElement('div')
+      const wrapper = mount(
+        <div>
+          <Portal parent={() => parent} />
+        </div>,
+      )
+      assertParentPropWorks(wrapper, parent)
+    })
   })
 
   it('support `className` prop', () => {
