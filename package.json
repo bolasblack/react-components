@@ -1,7 +1,7 @@
 {
-  "name": "@c4605/js-toolkit",
+  "name": "@c4605/react-components",
   "version": "1.0.0",
-  "description": "My JavaScript toolkit",
+  "description": "Some useful React components",
   "main": null,
   "repository": "https://github.com/bolasblack/js-toolkit",
   "author": "c4605 <bolasblack@gmail.com>",
@@ -10,8 +10,70 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "compile": "tsc -b ./tsconfig.compile.json",
+    "postinstall": "patch-package",
+    "docz:dev": "docz dev",
+    "docz:build": "docz build",
+    "docz:publish": "./scripts/publish_docz.sh",
+    "test": "yarn compile && NODE_ENV=test yarn jest --no-cache 'packages/.*/src'"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx,css,scss,sass,less}": [
+      "yarn prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "setupFiles": [
+      "./configs/jestSetup.ts"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|less|scss)$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
+    "testMatch": [
+      "**/?(*.)+(spec|test).ts?(x)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node",
+      "html"
+    ]
+  },
   "dependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.2.3",
+    "@babel/preset-env": "^7.2.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@c4605/toolconfs": "^0.2.1",
     "@commitlint/cli": "^7.5.2",
-    "@commitlint/config-conventional": "^7.3.1"
+    "@commitlint/config-conventional": "^7.3.1",
+    "@types/enzyme": "^3.1.15",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^11.11.7",
+    "babel-plugin-auto-import": "^1.0.5",
+    "docz": "^1.0.0",
+    "docz-theme-default": "^1.0.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "git-hook-pure": "^1.2.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.7.1",
+    "jest-cli": "^24.7.1",
+    "lint-staged": "^8.1.0",
+    "patch-package": "^6.1.2",
+    "postinstall-postinstall": "^2.0.0",
+    "prettier": "^1.16.4",
+    "react-test-renderer": "^16.7.0",
+    "tslint": "^5.15.0",
+    "typescript": "^3.4.3"
   }
 }

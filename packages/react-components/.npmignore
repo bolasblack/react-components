@@ -1,6 +1,0 @@
-__snapshots__
-configs
-tslint*
-*.test.*
-*.stories.*
-*.tgz

@@ -1,3 +1,0 @@
-extends: '@c4605/toolconfs/tslint.yml'
-rules:
-  jsx-no-lambda: false

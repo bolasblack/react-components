@@ -1,1 +1,3 @@
 extends: '@c4605/toolconfs/tslint'
+rules:
+  jsx-no-lambda: false

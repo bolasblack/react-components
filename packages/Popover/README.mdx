@@ -1,0 +1,138 @@
+---
+name: Popover
+---
+
+# @c4605/react-popover
+
+import { useState, useRef } from 'react'
+import { Playground, Props } from 'docz'
+import { Popover } from './src/Popover'
+import { DocumentElement } from '../DocumentElement'
+import { useInputValue } from '../DocHelpers/useInputValue'
+
+## Introduction
+
+Powerful and highly customizable popover component, can adapt to most use case.
+
+Support both host visible state inside or [lift state up](https://reactjs.org/docs/lifting-state-up.html).
+
+## Properties
+
+<Props of={Popover} />
+
+## Host state inside
+
+<Playground>
+  {() => {
+    const [appearDelay, setAppearDelay] = useInputValue(0)
+    const [disappearDelay, setDisappearDelay] = useInputValue(0)
+    const [openOn, setOpenOn] = useInputValue('hover')
+    const [closeOn, setCloseOn] = useInputValue('hover')
+
+    return (<>
+      {customField('appearDelay (ms)', <input
+        key="appearDelay"
+        type="number"
+        value={appearDelay}
+        onChange={setAppearDelay}
+      />)}
+      {customField('disappearDelay (ms)', <input
+        key="disappearDelay"
+        type="number"
+        value={disappearDelay}
+        onChange={setDisappearDelay}
+      />)}
+      {customField('openOn', <select
+        key="openOn"
+        value={openOn}
+        onChange={setOpenOn}
+      >
+        {['hover', 'click'].map(type =>
+          <option key={type} value={type}>{type}</option>
+        )}
+      </select>)}
+      {customField('closeOn', <select
+        key="closeOn"
+        value={closeOn}
+        onChange={setCloseOn}
+      >
+        {['hover', 'clickOutside', 'clickInside'].map(type =>
+          <option key={type} value={type}>{type}</option>
+        )}
+      </select>)}
+      <div>
+        <Popover
+          popoverStyle={info => ({
+            ...Popover.defaultProps.popoverStyle(info),
+            transition: 'visibility, top, left',
+            transitionDelay: info.visible
+              ? `${appearDelay / 1000}s`
+              : `${disappearDelay / 1000}s`,
+          })}
+          openOn={openOn}
+          closeOn={closeOn}
+          trigger={() =>
+            <p style={{ background: '#ddd' }}>Trigger</p>
+          }
+          content={() => (
+            <p
+              style={{
+                position: 'relative',
+                margin: 0,
+                width: '300px',
+                height: '100px',
+                background: '#eaeaea',
+              }}
+            >
+              Popover Content
+            </p>
+          )}
+        />
+      </div>
+    </>)
+
+    function customField(...children) {
+      return (
+        <p>
+          <label>
+            {children}
+          </label>
+        </p>
+      )
+    }
+  }}
+</Playground>
+
+## Lifting State Up
+
+<Playground>
+  {() => {
+    const [visible, setVisible] = useState(false)
+
+    return (<>
+      <button onClick={() => setVisible(!visible)}>Toggle Poppover</button>
+      <Popover
+        visible={visible}
+        onVisibleChange={setVisible}
+        openOn="click"
+        closeOn="clickInside"
+        trigger={() =>
+          <p style={{ background: '#ddd' }}>Click me to show popover</p>
+        }
+        content={() => (
+          <p
+            style={{
+              position: 'relative',
+              margin: 0,
+              width: '300px',
+              height: '100px',
+              background: '#eaeaea',
+            }}
+          >
+            Click me to hide poppover
+          </p>
+        )}
+      />
+    </>)
+  }}
+</Playground>

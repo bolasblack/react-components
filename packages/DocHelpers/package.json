@@ -1,0 +1,14 @@
+{
+  "name": "@c4605/react-doc-helpers",
+  "version": "0.1.0",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "compile": "exit"
+  },
+  "dependencies": {
+    "@c4605/ts-types": "^0.1.1",
+    "@types/react": "^16.8.0",
+    "react": "^16.8.0"
+  }
+}

@@ -1,0 +1,58 @@
+---
+name: DocumentElement
+---
+
+# @c4605/react-document-element
+
+import { useState } from 'react'
+import { Playground, Props } from 'docz'
+import { DocumentElement, _DocumentElementInner } from './src/DocumentElement'
+
+## Introduction
+
+Provides a declarative way to specify `document.documentElement` attributes in a single-page app.
+
+This component can be used on server side (but won't produce any effect).
+
+Built with [React Side Effect](https://github.com/gaearon/react-side-effect).
+
+Inspired by [React Document Title](https://github.com/gaearon/react-document-title).
+
+## Features
+
+- Can be defined in many places throughout the application;
+- Supports arbitrary levels of nesting, so you can set app-wide and page-specific
+  class name or style to `document.documentElement`;
+- Works just as well with isomorphic apps.
+
+## Properties
+
+<Props of={_DocumentElementInner} />
+
+## Usage
+
+<Playground>
+  {() => {
+    const [color, changeColor] = useState('blue')
+
+    return (
+      <DocumentElement
+        className="root-class-name"
+        style={{ '--font-color': 'black' }}
+      >
+        <DocumentElement style={{ '--font-color': color }} />
+        <label>
+          Choose text color:
+          <select value={color} onChange={e => changeColor(e.target.value)}>
+            {['green', 'blue', 'yellow'].map(color => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+        </label>
+        <div style={{ color: 'var(--font-color)' }}>Some text</div>
+      </DocumentElement>
+    )
+  }}
+</Playground>

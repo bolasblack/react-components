@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {},
+  "include": [],
+  "references": [
+    { "path": "./packages/DocumentElement/tsconfig.compile.json" },
+    { "path": "./packages/Portal/tsconfig.compile.json" },
+    { "path": "./packages/Popover/tsconfig.compile.json" }
+  ]
+}

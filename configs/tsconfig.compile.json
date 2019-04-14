@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig",
+  "compilerOptions": {
+    "declarationMap": true,
+    "composite": true,
+    "incremental": true,
+    "declaration": true
+  },
+  "exclude": ["../packages/**/*.test.*"]
+}

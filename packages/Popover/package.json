@@ -1,0 +1,21 @@
+{
+  "name": "@c4605/react-popover",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "lib/Popover.js",
+  "scripts": {
+    "prepublish": "yarn compile",
+    "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json"
+  },
+  "dependencies": {
+    "@c4605/ts-types": "^0.2.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.0",
+    "react": "^16.8.0"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.8.0",
+    "react": "^16.8.0"
+  }
+}
