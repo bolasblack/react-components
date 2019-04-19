@@ -3,9 +3,11 @@
     "default": {
       "packages": [
         "package.json",
-        "packages/react-components/package.json",
-        "packages/toolconfs/package.json",
-        "packages/ts-types/package.json"
+        "packages/DocHelpers/package.json",
+        "packages/DocumentElement/package.json",
+        "packages/Modal/package.json",
+        "packages/Popover/package.json",
+        "packages/Portal/package.json"
       ]
     }
   }
