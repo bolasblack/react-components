@@ -1,5 +1,7 @@
-__snapshots__
 tsconfig.compile.*
+bili.config.*
+.rpt2_cache
+__snapshots__
 *.test.*
 *.tgz
 *.tsbuildinfo

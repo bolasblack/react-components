@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal basicly works 1`] = `
+<div
+  class="Modal"
+  style="display: none;"
+>
+  <div
+    class="Modal__backdrop"
+  />
+  <div
+    class="Modal__body"
+  >
+    <div
+      class="test-modal-classname"
+    >
+      test modal content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Modal basicly works 2`] = `
+<div
+  class="Modal"
+  style=""
+>
+  <div
+    class="Modal__backdrop"
+  />
+  <div
+    class="Modal__body"
+  >
+    <div
+      class="test-modal-classname"
+    >
+      test modal content
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Modal props.backdrop support \`"clickHide"\` 1`] = `
+<div
+  class="Modal"
+  style="display: none;"
+>
+  <div
+    class="Modal__backdrop"
+  />
+  <div
+    class="Modal__body"
+  />
+</div>
+`;
+
+exports[`Modal props.backdrop support \`"static"\` 1`] = `
+<div
+  class="Modal"
+  style="display: none;"
+>
+  <div
+    class="Modal__backdrop"
+  />
+  <div
+    class="Modal__body"
+  />
+</div>
+`;
+
+exports[`Modal props.backdrop support \`false\` 1`] = `
+<div
+  class="Modal"
+  style="display: none;"
+>
+  <div
+    class="Modal__body"
+  />
+</div>
+`;

@@ -1,9 +1,12 @@
 .DS_Store
-lib
 node_modules
+lib
+es
+types
 .docz
 gh-pages
 .gh-pages-git
+.rpt2_cache
 *.tsbuildinfo
 *.log
 *.tgz

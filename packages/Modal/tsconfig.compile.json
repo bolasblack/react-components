@@ -1,0 +1,13 @@
+{
+  "extends": "../../configs/tsconfig.compile",
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "rootDir": "./src",
+    "outDir": "./lib",
+  },
+  "include": ["./src"]
+  "references": [
+    { "path": "../DocumentElement/tsconfig.compile.json" },
+    { "path": "../Portal/tsconfig.compile.json" },
+  ]
+}

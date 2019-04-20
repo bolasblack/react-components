@@ -1,0 +1,77 @@
+---
+name: Modal
+---
+
+# @c4605/react-modal
+
+import { useState, useCallback, useMemo } from 'react'
+import { Playground, Props } from 'docz'
+import { Modal, useModal } from './src/Modal'
+
+## Introduction
+
+A simple modal component. Provide react hook [`useModal`](#use-react-hook).
+
+## Properties
+
+<Props of={Modal} />
+
+## Basic Usage
+
+<Playground>
+  {() => {
+    const [visible, setVisible] = useState(false)
+    const showModal = useCallback(() => setVisible(true), [setVisible])
+    const hideModal = useCallback(() => setVisible(false), [setVisible])
+
+    return (
+      <>
+        <button onClick={showModal}>show modal</button>
+        <Modal visible={visible} onVisibleChange={setVisible}>
+          <div style={{
+            "display": "flex",
+            "alignItems": "center",
+            "justifyContent": "center",
+            "maxWidth": "576px",
+            "width": "calc(100vw - 72px)",
+            "height": "100px",
+            "borderRadius": "6px",
+            "background": "#fff",
+          }}>
+            <button onClick={hideModal}>hide modal</button>
+          </div>
+        </Modal>
+      </>
+    )
+  }}
+</Playground>
+
+## Use React Hook
+
+<Playground>
+  {() => {
+    const [modal, helpers] = useModal({
+      children: helpers => (
+        <div style={{
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "maxWidth": "576px",
+          "width": "calc(100vw - 72px)",
+          "height": "100px",
+          "borderRadius": "6px",
+          "background": "#fff",
+        }}>
+          <button onClick={helpers.hide}>hide modal</button>
+        </div>
+      ),
+    })
+
+    return (
+      <>
+        <button onClick={helpers.show}>show modal</button>
+        {modal}
+      </>
+    )
+  }}
+</Playground>

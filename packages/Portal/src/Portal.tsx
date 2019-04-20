@@ -9,9 +9,9 @@ export interface PortalProps {
   /** Children in portal */
   children?: React.ReactNode
 
-  /** Specify portal class  */
+  /** Specify portal class name */
   className: string
-  /** Specify portal style  */
+  /** Specify portal style */
   style: React.CSSProperties & SimpleJSON
 
   /** The visibility of portal */

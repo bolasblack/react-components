@@ -13,8 +13,8 @@
   "scripts": {
     "compile": "tsc -b ./tsconfig.compile.json",
     "postinstall": "patch-package",
-    "docz:dev": "docz dev",
-    "docz:build": "docz build",
+    "docz:dev": "rm -rf .docz && docz dev",
+    "docz:build": "rm -rf .docz && docz build",
     "docz:publish": "./scripts/publish_docz.sh",
     "test": "yarn compile && NODE_ENV=test yarn jest --no-cache 'packages/.*/src'"
   },
@@ -28,11 +28,11 @@
     "setupFiles": [
       "./configs/jestSetup.ts"
     ],
+    "transform": {
+      "^.+\\.(t|j)sx?$": "babel-jest"
+    },
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "identity-obj-proxy"
-    },
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
     },
     "testMatch": [
       "**/?(*.)+(spec|test).ts?(x)"
@@ -53,13 +53,14 @@
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
-    "@c4605/toolconfs": "^0.2.1",
+    "@c4605/toolconfs": "^0.3.0",
     "@commitlint/cli": "^7.5.2",
     "@commitlint/config-conventional": "^7.3.1",
     "@types/enzyme": "^3.1.15",
     "@types/jest": "^24.0.0",
     "@types/node": "^11.11.7",
     "babel-plugin-auto-import": "^1.0.5",
+    "css-loader": "^2.1.1",
     "docz": "^1.0.0",
     "docz-theme-default": "^1.0.0",
     "enzyme": "^3.8.0",
@@ -69,10 +70,15 @@
     "jest": "^24.7.1",
     "jest-cli": "^24.7.1",
     "lint-staged": "^8.1.0",
+    "marked": "^0.6.2",
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
     "prettier": "^1.16.4",
     "react-test-renderer": "^16.7.0",
+    "sass": "^1.18.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-loader": "^5.3.3",
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
   }

@@ -1,0 +1,29 @@
+{
+  "name": "@c4605/react-modal",
+  "version": "0.1.0",
+  "license": "MIT",
+  "main": "lib/Modal.min.js",
+  "module": "./lib/Modal.esm.min.js",
+  "types": "./lib/Modal.d.ts",
+  "scripts": {
+    "prepublish": "yarn compile",
+    "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json && bili"
+  },
+  "dependencies": {
+    "@c4605/react-document-element": "^0.1.1",
+    "@c4605/react-portal": "^0.1.0",
+    "@c4605/ts-types": "^0.2.1",
+    "@types/shallowequal": "^1.1.1",
+    "shallowequal": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.8.0",
+    "bili": "^4.7.3",
+    "react": "^16.8.0",
+    "rollup-plugin-typescript2": "^0.20.1"
+  },
+  "peerDependencies": {
+    "@types/react": "^16.8.0",
+    "react": "^16.8.0"
+  }
+}
