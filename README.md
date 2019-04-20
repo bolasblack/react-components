@@ -5,6 +5,7 @@ Some useful react components.
 - [DocumentElement](./packages/DocumentElement/README.mdx): Provides a declarative way to specify `document.documentElement` attributes in a single-page app.
 - [Portal](./packages/Portal/README.mdx): Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#createportal) replacement. Make most `React.createPortal` use case more easier.
 - [Popover](./packages/Popover/README.mdx): Powerful and highly customizable popover component, can adapt to most use case.
+- [Modal](./packages/Modal/README.mdx): A simple modal component. Provide react hook `useModal`.
 
 ## Documention
 
