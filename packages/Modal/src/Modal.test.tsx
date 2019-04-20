@@ -1,6 +1,6 @@
 import React, { createRef } from 'react'
 import { Portal } from '@c4605/react-portal'
-import { Modal } from '../'
+import { Modal } from '../src/Modal'
 import { mount } from 'enzyme'
 
 const defaultProps = Modal.defaultProps!

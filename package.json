@@ -29,7 +29,8 @@
       "./configs/jestSetup.ts"
     ],
     "transform": {
-      "^.+\\.(t|j)sx?$": "babel-jest"
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.tsx?$": "ts-jest"
     },
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "identity-obj-proxy"
@@ -78,6 +79,7 @@
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
+    "ts-jest": "^24.0.2",
     "ts-loader": "^5.3.3",
     "tslint": "^5.15.0",
     "typescript": "^3.4.3"
