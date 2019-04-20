@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Some useful React components",
   "main": null,
-  "repository": "https://github.com/bolasblack/js-toolkit",
+  "repository": "https://github.com/bolasblack/react-component",
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
   "private": true,
