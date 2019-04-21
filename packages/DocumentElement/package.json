@@ -1,6 +1,8 @@
 {
   "name": "@c4605/react-document-element",
   "version": "0.1.1",
+  "repository": "https://github.com/bolasblack/react-components",
+  "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
   "main": "lib/DocumentElement.js",
   "scripts": {
