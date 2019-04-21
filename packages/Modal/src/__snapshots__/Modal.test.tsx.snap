@@ -78,3 +78,39 @@ exports[`Modal props.backdrop support \`false\` 1`] = `
   />
 </div>
 `;
+
+exports[`useModal basicly works 1`] = `
+<Modal
+  backdrop="clickHide"
+  backdropClassName="Modal__backdrop"
+  bodyClassName="Modal__body"
+  documentElementClassName="Modal__html"
+  documentElementClassNameWhenInvisible={null}
+  documentElementClassNameWhenVisible="Modal__html--visible"
+  onVisibleChange={[Function]}
+  portalClassName="Modal"
+  visible={true}
+>
+  <div>
+    hello
+  </div>
+</Modal>
+`;
+
+exports[`useModal basicly works 2`] = `
+<Modal
+  backdrop="clickHide"
+  backdropClassName="Modal__backdrop"
+  bodyClassName="Modal__body"
+  documentElementClassName="Modal__html"
+  documentElementClassNameWhenInvisible={null}
+  documentElementClassNameWhenVisible="Modal__html--visible"
+  onVisibleChange={[Function]}
+  portalClassName="Modal"
+  visible={false}
+>
+  <div>
+    hello
+  </div>
+</Modal>
+`;

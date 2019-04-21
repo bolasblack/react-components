@@ -1,7 +1,8 @@
 import React, { createRef } from 'react'
+import { act } from 'react-dom/test-utils'
 import { Portal } from '@c4605/react-portal'
-import { Modal } from '../src/Modal'
-import { mount } from 'enzyme'
+import { Modal, useModal } from '../src/Modal'
+import { mount, shallow } from 'enzyme'
 
 const defaultProps = Modal.defaultProps!
 
@@ -99,5 +100,45 @@ describe('Modal', () => {
 
       expect(portalRef.current!.portal).toMatchSnapshot()
     })
+  })
+})
+
+describe('useModal', () => {
+  const ModalContainer = (props: {
+    hookArg: Parameters<typeof useModal>[0]
+    helpersRef: React.RefObject<useModal.Helpers>
+  }) => {
+    const [modal, helpers] = useModal(props.hookArg)
+    ;(props.helpersRef as any).current = helpers
+    return modal
+  }
+
+  it('basicly works', () => {
+    const onVisibleChange = jest.fn()
+    const children = jest.fn(() => <div>hello</div>)
+    const helpersRef = React.createRef<useModal.Helpers>()
+    const wrapper = shallow(
+      <ModalContainer
+        helpersRef={helpersRef}
+        hookArg={{
+          visible: true,
+          onVisibleChange,
+          children,
+        }}
+      />,
+    )
+
+    expect(wrapper).toMatchSnapshot()
+    let helpers = helpersRef.current!
+    expect(helpers.visible).toBe(true)
+    expect(wrapper.find(Modal).prop('onVisibleChange')).not.toBe(
+      onVisibleChange,
+    )
+
+    act(() => helpers.hide())
+    expect(wrapper).toMatchSnapshot()
+    expect(helpersRef.current).not.toBe(helpers)
+    helpers = helpersRef.current!
+    expect(helpers.visible).toBe(false)
   })
 })

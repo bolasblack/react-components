@@ -32,6 +32,7 @@
       "^.+\\.jsx?$": "babel-jest",
       "^.+\\.tsx?$": "ts-jest"
     },
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "moduleNameMapper": {
       "\\.(css|less|scss)$": "identity-obj-proxy"
     },
@@ -67,6 +68,7 @@
     "docz-theme-default": "^1.0.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.5",
     "git-hook-pure": "^1.2.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.7.1",
