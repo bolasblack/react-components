@@ -2,4 +2,4 @@ language: node_js
 node_js:
   - lts/*
 script:
-  - yarn test --coverage --coverageReporters=text-lcov
+  - yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls && rm -rf ./coverage
