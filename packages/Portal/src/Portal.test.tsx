@@ -3,17 +3,26 @@ import { mount, ReactWrapper } from 'enzyme'
 import { Portal, PortalProps } from './Portal'
 
 describe('Portal', () => {
+  let wrapper: ReactWrapper
+
+  afterEach(() => {
+    try {
+      wrapper.unmount()
+    } catch {}
+  })
+
   it('basicly works', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <div>
         <Portal className="portal" />
       </div>,
     )
     const { portal } = getPortal(wrapper)
     expect(portal.parentElement).toBe(document.body)
+
     wrapper.unmount()
     expect(portal.parentElement).toBe(null)
-    expect(document.querySelectorAll('portal')).toHaveLength(0)
+    expect(document.querySelectorAll('.portal')).toHaveLength(0)
   })
 
   describe('support `parent` prop', () => {
@@ -25,12 +34,12 @@ describe('Portal', () => {
       expect(portal.parentElement).toBe(parent)
       wrapper.unmount()
       expect(portal.parentElement).toBe(null)
-      expect(document.querySelectorAll('portal')).toHaveLength(0)
+      expect(document.querySelectorAll('.portal')).toHaveLength(0)
     }
 
     it('as an element', () => {
       const parent = document.createElement('div')
-      const wrapper = mount(
+      wrapper = mount(
         <div>
           <Portal parent={parent} />
         </div>,
@@ -40,7 +49,7 @@ describe('Portal', () => {
 
     it('as a function', () => {
       const parent = document.createElement('div')
-      const wrapper = mount(
+      wrapper = mount(
         <div>
           <Portal parent={() => parent} />
         </div>,
@@ -69,7 +78,7 @@ describe('Portal', () => {
   })
 
   it('support `visible` prop', () => {
-    const wrapper = render({ visible: false })
+    wrapper = render({ visible: false })
     const { portal } = getPortal(wrapper)
 
     expect(portal.style.display).toBe('none')
@@ -86,7 +95,7 @@ describe('Portal', () => {
     const fakeClickEvent = new Event('click')
     const clickClose = jest.fn(() => clickCloseReturn)
     const onVisibleChange = jest.fn()
-    const wrapper = render({ visible: false, clickClose, onVisibleChange })
+    wrapper = render({ visible: false, clickClose, onVisibleChange })
     const { portal } = getPortal(wrapper)
 
     document.dispatchEvent(fakeClickEvent)
@@ -128,5 +137,4 @@ const getPortal = (wrapper: ReactWrapper<any>) =>
     .at(0)
     .instance() as Portal
 
-const render = (props: Partial<PortalProps>) =>
-  mount<Portal>(<Portal {...props} />)
+const render = (props: Partial<PortalProps>) => mount(<Portal {...props} />)

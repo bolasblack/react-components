@@ -138,7 +138,11 @@ describe('useModal', () => {
     act(() => helpers.hide())
     expect(wrapper).toMatchSnapshot()
     expect(helpersRef.current).not.toBe(helpers)
-    helpers = helpersRef.current!
-    expect(helpers.visible).toBe(false)
+    expect(helpersRef.current!.visible).toBe(false)
+
+    act(() => helpers.show())
+    expect(wrapper).toMatchSnapshot()
+    expect(helpersRef.current).not.toBe(helpers)
+    expect(helpersRef.current!.visible).toBe(true)
   })
 })

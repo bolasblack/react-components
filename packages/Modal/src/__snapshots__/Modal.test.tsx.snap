@@ -114,3 +114,21 @@ exports[`useModal basicly works 2`] = `
   </div>
 </Modal>
 `;
+
+exports[`useModal basicly works 3`] = `
+<Modal
+  backdrop="clickHide"
+  backdropClassName="Modal__backdrop"
+  bodyClassName="Modal__body"
+  documentElementClassName="Modal__html"
+  documentElementClassNameWhenInvisible={null}
+  documentElementClassNameWhenVisible="Modal__html--visible"
+  onVisibleChange={[Function]}
+  portalClassName="Modal"
+  visible={true}
+>
+  <div>
+    hello
+  </div>
+</Modal>
+`;

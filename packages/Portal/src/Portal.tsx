@@ -31,8 +31,11 @@ export class Portal extends React.PureComponent<PortalProps> {
     className: '',
     style: {},
     visible: true,
-    onVisibleChange: () => {},
-    clickClose: () => {},
+    onVisibleChange() {},
+    clickClose(event: MouseEvent) {
+      /* istanbul ignore next */
+      return event.button && event.button !== 0
+    },
   }
 
   portal = document.createElement('div')
@@ -121,9 +124,8 @@ export class Portal extends React.PureComponent<PortalProps> {
   }
 
   private _onClickDocument = (event: MouseEvent) => {
+    /* istanbul ignore next */
     if (!this.props.visible) return
-    const { portal } = this
-    if (!portal || (event.button && event.button !== 0)) return
     if (this.props.clickClose(event)) {
       this.props.onVisibleChange(false)
     }

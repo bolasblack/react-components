@@ -176,18 +176,28 @@ describe('Popover', () => {
     it('in normal case', () => {
       const popoverStyle = jest.fn((a: any) => a)
       const content = jest.fn(() => <div className="content" />)
-      const { wrapper, triggerContainer } = render({
-        disabled: true,
-        popoverStyle,
-        content,
-      })
+      const { wrapper, triggerContainer } = render({ popoverStyle, content })
+
+      triggerContainer.simulate('mouseenter')
+      expect(wrapper.find(Portal).prop('visible')).toBe(true)
+      expect(content).toHaveBeenCalledTimes(1)
+      expect(popoverStyle).toHaveBeenCalledTimes(2)
+
+      wrapper.setProps({ disabled: true })
       expect(wrapper.find(Portal).prop('visible')).toBe(false)
-      expect(content).not.toHaveBeenCalled()
-      expect(popoverStyle).not.toHaveBeenCalled()
+      expect(content).toHaveBeenCalledTimes(1)
+      expect(popoverStyle).toHaveBeenCalledTimes(2)
+
       triggerContainer.simulate('mouseenter')
       expect(wrapper.find(Portal).prop('visible')).toBe(false)
-      expect(content).not.toHaveBeenCalled()
-      expect(popoverStyle).not.toHaveBeenCalled()
+      expect(content).toHaveBeenCalledTimes(1)
+      expect(popoverStyle).toHaveBeenCalledTimes(2)
+
+      wrapper.setProps({ openOn: 'click' })
+      triggerContainer.simulate('click')
+      expect(wrapper.find(Portal).prop('visible')).toBe(false)
+      expect(content).toHaveBeenCalledTimes(1)
+      expect(popoverStyle).toHaveBeenCalledTimes(2)
     })
 
     it('in State Up pattern', () => {

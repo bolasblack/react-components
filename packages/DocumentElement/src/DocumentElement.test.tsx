@@ -1,15 +1,24 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { mount, ReactWrapper } from 'enzyme'
 import { DocumentElement } from './DocumentElement'
 
 describe(DocumentElement.name, () => {
+  let wrapper: ReactWrapper
+
+  afterEach(() => {
+    try {
+      wrapper.unmount()
+    } catch {}
+  })
+
   it('works', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <DocumentElement
         className="html-class"
         style={{
           display: 'flex',
           width: '10px',
+          '--test-var': '20px',
         }}
       />,
     )
@@ -19,6 +28,11 @@ describe(DocumentElement.name, () => {
     expect(document.documentElement.style.cssText).toBe(
       'display: flex; width: 10px;',
     )
+    // jsdom not support css variable
+    // https://github.com/jsdom/jsdom/issues/1895
+    // expect(document.documentElement.style.getPropertyValue('--test-var')).toBe(
+    //   '20px',
+    // )
     wrapper.unmount()
     expect(document.title).toBe('')
     expect(Array.from(document.documentElement.classList)).toEqual([])
@@ -26,13 +40,13 @@ describe(DocumentElement.name, () => {
   })
 
   it('support nesting', () => {
-    const wrapper = mount(
+    wrapper = mount(
       <DocumentElement
         className="html-class-1"
         style={{ display: 'flex', width: '10px' }}
       >
         <div>
-          <DocumentElement className="html-class-2" style={{ height: 'auto' }}>
+          <DocumentElement style={{ height: 'auto' }}>
             <span>
               <DocumentElement
                 className="html-class-3"
@@ -47,7 +61,6 @@ describe(DocumentElement.name, () => {
     )
     expect(Array.from(document.documentElement.classList)).toEqual([
       'html-class-1',
-      'html-class-2',
       'html-class-3',
     ])
     expect(document.documentElement.style.cssText).toBe(
