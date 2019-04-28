@@ -53,8 +53,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   static defaultProps = {
     triggerClassName: '',
     popoverClassName: '',
-    openOn: 'hover',
-    closeOn: 'hover',
+    openOn: 'hover' as 'hover',
+    closeOn: 'hover' as 'hover',
     disabled: false,
     onVisibleChange: /* istanbul ignore next */ () => {},
     popoverStyle: (info: PopoverVisibleInfo) => ({
