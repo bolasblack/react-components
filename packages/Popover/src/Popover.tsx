@@ -57,7 +57,9 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     closeOn: 'hover' as 'hover',
     disabled: false,
     onVisibleChange: /* istanbul ignore next */ () => {},
-    popoverStyle: (info: PopoverVisibleInfo) => ({
+    popoverStyle: (
+      info: PopoverVisibleInfo,
+    ): React.CSSProperties & SimpleJSON => ({
       position: 'absolute',
       top: `${info.popoverTop}px`,
       left: `${info.popoverLeft}px`,
