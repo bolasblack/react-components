@@ -41,6 +41,7 @@ export class Portal extends React.PureComponent<PortalProps> {
   portal = document.createElement('div')
 
   componentDidMount() {
+    document.addEventListener('click', this._onClickDocument)
     this._updateNode(null, this.props)
   }
 
@@ -49,6 +50,7 @@ export class Portal extends React.PureComponent<PortalProps> {
   }
 
   componentWillUnmount() {
+    document.removeEventListener('click', this._onClickDocument)
     this._updateNode(this.props, null)
   }
 
@@ -73,17 +75,6 @@ export class Portal extends React.PureComponent<PortalProps> {
     if (!prevProps || !nextProps || prevProps.parent !== nextProps.parent) {
       this._operateParent(prevProps, parent => parent.removeChild(this.portal))
       this._operateParent(nextProps, parent => parent.appendChild(this.portal))
-    }
-
-    document.removeEventListener('click', this._onClickDocument)
-    if (
-      (!prevProps && nextProps && nextProps.visible) ||
-      (prevProps &&
-        nextProps &&
-        prevProps.visible !== nextProps.visible &&
-        nextProps.visible)
-    ) {
-      document.addEventListener('click', this._onClickDocument)
     }
 
     if (nextProps) {
