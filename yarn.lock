@@ -1254,10 +1254,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@c4605/toolconfs@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-0.3.0.tgz#add35604f1fe4d4f8b71b23763bc0b054026cfe8"
-  integrity sha512-2EqSrwUVxMftmpuLxgd4izZln9kHerQbUNoPGyp7TfQmYUKRbgxphkjh4RbtZjqtuA4GbQl1lR/eU5tuW9omLQ==
+"@c4605/toolconfs@^0.5.0":
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-0.5.0.tgz#c28c5879e9a25f7494a39a0c91c9117703c87bb6"
+  integrity sha512-gkD6RUORSenhOZPUGzxwhZqfEH/hB/n4gHfJ8ijUPvu0fpIXqKBH939wNE5hYKYaxk2R2/WWICOG+uY+d2oy0Q==
   dependencies:
     "@commitlint/config-conventional" "^7.5.0"
     tslint-config-prettier "^1.18.0"
@@ -10696,13 +10696,20 @@ rollup-plugin-typescript2@^0.21.1:
     rollup-pluginutils "2.6.0"
     tslib "1.9.3"
 
-rollup-pluginutils@2.6.0, rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.0, rollup-pluginutils@^2.3.1, rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.6.0:
+rollup-pluginutils@2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.6.0.tgz#203706edd43dfafeaebc355d7351119402fc83ad"
   integrity sha512-aGQwspEF8oPKvg37u3p7h0cYNwmJR1sCBMZGZ5b9qy8HGtETknqjzcxrDRrcAnJNXN18lBH4Q9vZYth/p4n8jQ==
   dependencies:
     estree-walker "^0.6.0"
     micromatch "^3.1.10"
+
+rollup-pluginutils@^2.0.1, rollup-pluginutils@^2.3.0, rollup-pluginutils@^2.3.1, rollup-pluginutils@^2.3.3, rollup-pluginutils@^2.6.0:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/rollup-pluginutils/-/rollup-pluginutils-2.8.1.tgz#8fa6dd0697344938ef26c2c09d2488ce9e33ce97"
+  integrity sha512-J5oAoysWar6GuZo0s+3bZ6sVZAC0pfqKz68De7ZgDi5z63jOVZn1uJL/+z1jeKHNbGII8kAyHF5q8LnxSX5lQg==
+  dependencies:
+    estree-walker "^0.6.1"
 
 rollup@^1.1.2:
   version "1.14.6"
