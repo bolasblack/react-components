@@ -80,7 +80,7 @@
     "marked": "^0.6.2",
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
-    "prettier": "^1.16.4",
+    "prettier": "^1.18.2",
     "react-test-renderer": "^16.7.0",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
