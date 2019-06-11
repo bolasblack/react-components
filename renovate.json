@@ -1,0 +1,11 @@
+{
+  "extends": ["config:base"],
+  "rangeStrategy": "replace",
+  "packageRules": [
+    {
+      "paths": ["packages/*"],
+      "depTypeList": ["dependencies", "peerDependencies"],
+      "rangeStrategy": "widen"
+    }
+  ]
+}
