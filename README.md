@@ -1,4 +1,4 @@
-# @c4605/react-components [![Build Status](https://travis-ci.com/bolasblack/react-components.svg?branch=master)](https://travis-ci.com/bolasblack/react-components) [![Coverage Status](https://coveralls.io/repos/github/bolasblack/react-components/badge.svg?branch=master)](https://coveralls.io/github/bolasblack/react-components?branch=master) [![Greenkeeper badge](https://badges.greenkeeper.io/bolasblack/react-components.svg)](https://greenkeeper.io/)
+# @c4605/react-components [![Build Status](https://travis-ci.com/bolasblack/react-components.svg?branch=master)](https://travis-ci.com/bolasblack/react-components) [![Coverage Status](https://coveralls.io/repos/github/bolasblack/react-components/badge.svg?branch=master)](https://coveralls.io/github/bolasblack/react-components?branch=master)
 
 Some useful react components.
 
