@@ -70,7 +70,7 @@
     "docz": "^1.0.0",
     "docz-theme-default": "^1.0.0",
     "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.3.5",
     "git-hook-pure": "^1.2.2",
     "identity-obj-proxy": "^3.0.0",
