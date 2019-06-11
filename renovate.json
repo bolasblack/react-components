@@ -3,7 +3,7 @@
   "packageRules": [
     {
       "packagePatterns": ["*"],
-      "excludePackagePatterns": ["^docz-"],
+      "excludePackagePatterns": ["^docz"],
       "rangeStrategy": "bump"
     },
     {
