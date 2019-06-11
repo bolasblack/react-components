@@ -18,6 +18,7 @@
     "docz:publish": "./scripts/publish_docz.sh",
     "test": "yarn compile && NODE_ENV=test yarn jest --no-cache 'packages/.*/src'"
   },
+  "prettier": "@c4605/toolconfs/prettierrc",
   "lint-staged": {
     "*.{ts,tsx,js,jsx,css,scss,sass,less}": [
       "yarn prettier --write",
