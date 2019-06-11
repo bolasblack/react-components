@@ -15,11 +15,11 @@
     "react-side-effect": "^1.1.5"
   },
   "devDependencies": {
-    "@types/react": "^16.8.0",
+    "@types/react": "^16.8.19",
     "react": "^16.8.0"
   },
   "peerDependencies": {
-    "@types/react": "^16.8.0",
+    "@types/react": "^16.8.19",
     "react": "^16.8.0"
   }
 }
