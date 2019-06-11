@@ -1,7 +1,6 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
   "rangeStrategy": "replace",
-  "semanticCommitType": "chore",
   "packageRules": [
     {
       "paths": ["packages/*"],
