@@ -1,16 +1,14 @@
 {
   "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
-  "rangeStrategy": "replace",
   "packageRules": [
+    {
+      "packagePatterns": ["*"],
+      "rangeStrategy": "replace"
+    },
     {
       "paths": ["packages/*"],
       "depTypeList": ["dependencies", "peerDependencies"],
       "rangeStrategy": "widen"
-    },
-    {
-      "paths": ["packages/*"],
-      "depTypeList": ["devDependencies"],
-      "rangeStrategy": "replace"
     }
   ]
 }
