@@ -21,11 +21,11 @@
   "devDependencies": {
     "@types/react": "^16.8.19",
     "bili": "^4.8.0",
-    "react": "^16.8.0",
+    "react": "^16.8.6",
     "rollup-plugin-typescript2": "^0.21.1"
   },
   "peerDependencies": {
     "@types/react": "^16.8.19",
-    "react": "^16.8.0"
+    "react": "^16.8.6"
   }
 }

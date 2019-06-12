@@ -16,10 +16,10 @@
   },
   "devDependencies": {
     "@types/react": "^16.8.19",
-    "react": "^16.8.0"
+    "react": "^16.8.6"
   },
   "peerDependencies": {
     "@types/react": "^16.8.19",
-    "react": "^16.8.0"
+    "react": "^16.8.6"
   }
 }
