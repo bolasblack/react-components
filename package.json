@@ -76,7 +76,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
-    "lint-staged": "^8.2.1",
+    "lint-staged": "^9.2.0",
     "marked": "^0.6.2",
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
