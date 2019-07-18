@@ -1288,12 +1288,12 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@c4605/toolconfs@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-0.5.0.tgz#c28c5879e9a25f7494a39a0c91c9117703c87bb6"
-  integrity sha512-gkD6RUORSenhOZPUGzxwhZqfEH/hB/n4gHfJ8ijUPvu0fpIXqKBH939wNE5hYKYaxk2R2/WWICOG+uY+d2oy0Q==
+"@c4605/toolconfs@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-1.1.0.tgz#7d6b314b167dc53bffa32e4ab78e91fe702d9d85"
+  integrity sha512-IMISF3DP3d4FHreobf+MvTnKdvHjoOK0iN8z/8PNO8NWIC2FR5cvAvVNf4Q56YhNwb518iD/cGh51mP/Nwwk1w==
   dependencies:
-    "@commitlint/config-conventional" "^7.5.0"
+    "@commitlint/config-conventional" "^8.0.0"
     tslint-config-prettier "^1.18.0"
     tslint-react "^4.0.0"
 
@@ -1326,11 +1326,6 @@
     meow "5.0.0"
     resolve-from "5.0.0"
     resolve-global "1.0.0"
-
-"@commitlint/config-conventional@^7.5.0":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-7.5.0.tgz#3afd4e3e34e5c2f6ec6af03e78ae924fed883ce7"
-  integrity sha512-odLgBfQ5xntFAmMfAmDY2C4EWhW+cSTbvbsRS7seb55DCa3IaxxSHHC9eXrR+hN/BdUT5vqAxdX1PkR996sq9Q==
 
 "@commitlint/config-conventional@^8.0.0":
   version "8.0.0"

@@ -1,8 +1,8 @@
 {
-  "extends": "@c4605/toolconfs/tsconfig",
+  "extends": "@c4605/toolconfs/tsconfig-esModule",
   "compilerOptions": {
     "jsx": "react",
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["configs", "packages/*/src"],
   "exclude": ["node_modules"]
