@@ -1,6 +1,7 @@
 {
   "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
   "ignoreDeps": ["docz", "docz-theme-default"],
+  "baseBranches": ["develop"],
   "packageRules": [
     {
       "packagePatterns": ["*"],
