@@ -1288,12 +1288,12 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@c4605/toolconfs@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-1.1.0.tgz#7d6b314b167dc53bffa32e4ab78e91fe702d9d85"
-  integrity sha512-IMISF3DP3d4FHreobf+MvTnKdvHjoOK0iN8z/8PNO8NWIC2FR5cvAvVNf4Q56YhNwb518iD/cGh51mP/Nwwk1w==
+"@c4605/toolconfs@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-2.1.0.tgz#164c42f5fe9778c4c2591c05defb7c427943b38b"
+  integrity sha512-BumELsWlJhAkbcGCE1ivuSpAMmnz6MjTq6mRQmZbuTZ33jvVMfX8T0fouI5lSPbIzCVX2U3P8Ys2wbqG3BOolw==
   dependencies:
-    "@commitlint/config-conventional" "^8.0.0"
+    "@commitlint/config-conventional" "^8.1.0"
     tslint-config-prettier "^1.18.0"
     tslint-react "^4.0.0"
 
@@ -1331,6 +1331,11 @@
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-8.0.0.tgz#f45349cab9dcfc08a30fbcf2b6317506e17bc8e6"
   integrity sha512-umg1irroowOV+x8oZPBw8woCogZO5MFKUYQq+fRZvhowoSwDHXYILP3ETcdHUgvytw/K/a8Xvu7iCypK6oZQ+g==
+
+"@commitlint/config-conventional@^8.1.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-8.1.0.tgz#ba61fbf0ad4df52da2b5ee3034470371a2cbf039"
+  integrity sha512-/JY+FNBnrT91qzDVIoV1Buiigvj7Le7ezFw+oRqu0nYREX03k7xnaG/7t7rUSvm7hM6dnLSOlaUsevjgMI9AEw==
 
 "@commitlint/ensure@^8.0.0":
   version "8.0.0"
