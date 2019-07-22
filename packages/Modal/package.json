@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@types/react": "^16.8.19",
-    "bili": "^4.8.0",
+    "bili": "^4.8.1",
     "react": "^16.8.0",
     "rollup-plugin-typescript2": "^0.22.0"
   },
