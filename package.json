@@ -82,7 +82,7 @@
     "postinstall-postinstall": "^2.0.0",
     "prettier": "^1.18.2",
     "react-test-renderer": "^16.7.0",
-    "sass": "^1.22.8",
+    "sass": "^1.22.9",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "ts-jest": "^24.0.2",
