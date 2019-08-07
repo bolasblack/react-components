@@ -65,7 +65,7 @@
     "@types/jest": "^24.0.17",
     "@types/node": "^12.6.9",
     "babel-plugin-auto-import": "^1.0.5",
-    "coveralls": "^3.0.4",
+    "coveralls": "^3.0.6",
     "css-loader": "^3.2.0",
     "docz": "^1.0.0",
     "docz-theme-default": "^1.0.0",
