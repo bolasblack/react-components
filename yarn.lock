@@ -1288,10 +1288,10 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
-"@c4605/toolconfs@^4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-4.3.0.tgz#c9a24f870d9ae137c42993f040b92fd06b6d4717"
-  integrity sha512-3B0ZHtpSyb38Rr0cRXJUa3qxisLl5elxrjO6iqJUAePCdxhPAhLrdZHth+Avj9KD+/4kEh0gdLZm30VTCIMlCQ==
+"@c4605/toolconfs@^4.4.0":
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-4.4.0.tgz#1ca2c20814e620f5edd6775d13d3069482bc7c11"
+  integrity sha512-fsMrZo2gpva60LTkj1TDGTI3t1DV956rn/9Trh+b3emnSyE1h7eWfk72QAgNfjLDuVKsM+/Nn73JTf+B74JtKg==
   optionalDependencies:
     "@commitlint/config-conventional" "^8.1.0"
     "@typescript-eslint/eslint-plugin" "^1.13.0"
