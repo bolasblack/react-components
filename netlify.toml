@@ -1,0 +1,10 @@
+[build]
+  base = ""
+  publish = ".docz/dist"
+  command = "yarn compile && yarn docz:build"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
+  force = false

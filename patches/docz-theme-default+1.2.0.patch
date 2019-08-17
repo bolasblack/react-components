@@ -1,0 +1,92 @@
+diff --git a/node_modules/docz-theme-default/dist/index.esm.js b/node_modules/docz-theme-default/dist/index.esm.js
+index 8329fc7..dc6a1ee 100644
+--- a/node_modules/docz-theme-default/dist/index.esm.js
++++ b/node_modules/docz-theme-default/dist/index.esm.js
+@@ -27,6 +27,7 @@ import SearchIcon from 'react-feather/dist/icons/search';
+ import ChevronDown from 'react-feather/dist/icons/chevron-down';
+ import { Location } from '@reach/router';
+ import Edit from 'react-feather/dist/icons/edit-2';
++import marked from 'marked';
+ 
+ const white = '#FFFFFF';
+ const grayUltraLight = '#FCFBFA';
+@@ -1282,14 +1283,14 @@ const PropsRaw = ({
+ }) => {
+   const entries = Object.entries(props);
+   const components = useComponents();
+-  const Paragraph = useMemo(() => styled(components.P || 'p').withConfig({
+-    displayName: "PropsRaw__Paragraph"
+-  })(["font-size:16px;color:", ";"], get('colors.sidebarText')), []);
++  const Div = useMemo(() => styled('div').withConfig({
++    displayName: "PropsRaw__Div"
++  })(["font-size:16px;color:", ";p {margin: 0;}"], get('colors.sidebarText')), []);
+   return createElement(Fragment, null, entries.map(([key, prop]) => {
+     if (!prop.type && !prop.flowType) return null;
+     return createElement(Wrapper$b, {
+       key: key
+-    }, createElement(Title$1, null, createElement(PropName, null, key), createElement(PropType, null, getPropType(prop)), prop.defaultValue && createElement(PropDefaultValue, null, prop.defaultValue.value === "''" ? createElement("em", null, "= [Empty String]") : createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && createElement(PropRequired, null, createElement("em", null, "required"))), prop.description && createElement(Paragraph, null, prop.description));
++    }, createElement(Title$1, null, createElement(PropName, null, key), createElement(PropType, null, getPropType(prop)), prop.defaultValue && createElement(PropDefaultValue, null, prop.defaultValue.value === "''" ? createElement("em", null, "= [Empty String]") : createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && createElement(PropRequired, null, createElement("em", null, "required"))), prop.description && createElement(Div, { dangerouslySetInnerHTML: { __html: marked(prop.description) } }, null));
+   }));
+ };
+ 
+@@ -1333,14 +1334,14 @@ const PropsTable = ({
+ }) => {
+   const entries = Object.entries(props);
+   const components = useComponents();
+-  const Paragraph = useMemo(() => styled(components.P || 'p').withConfig({
+-    displayName: "PropsTable__Paragraph"
+-  })(["margin:0;font-size:16px;color:", ";padding:0 15px 8px 15px;"], get('colors.blockquoteColor')), []);
++  const Div = useMemo(() => styled('div').withConfig({
++    displayName: "PropsTable__Div"
++  })(["margin:0;font-size:16px;color:", ";padding:0 15px 8px 15px;p {margin: 0;}"], get('colors.blockquoteColor')), []);
+   return createElement(Container$1, null, entries.map(([key, prop]) => {
+     if (!prop.type && !prop.flowType) return null;
+     return createElement(Line, {
+       key: key
+-    }, createElement(Content$1, null, createElement(ColumnName, null, createElement(PropName$1, null, key)), createElement(ColumnType, null, createElement(PropType$1, null, getPropType(prop))), createElement(ColumnValue, null, prop.defaultValue && createElement(PropDefaultValue$1, null, prop.defaultValue.value === "''" ? createElement("em", null, "= [Empty String]") : createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && createElement(PropRequired$1, null, createElement("strong", null, "required")))), prop.description && createElement(Paragraph, null, prop.description));
++    }, createElement(Content$1, null, createElement(ColumnName, null, createElement(PropName$1, null, key)), createElement(ColumnType, null, createElement(PropType$1, null, getPropType(prop))), createElement(ColumnValue, null, prop.defaultValue && createElement(PropDefaultValue$1, null, prop.defaultValue.value === "''" ? createElement("em", null, "= [Empty String]") : createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && createElement(PropRequired$1, null, createElement("strong", null, "required")))), prop.description && createElement(Div, { dangerouslySetInnerHTML: { __html: marked(prop.description) } }, null));
+   }));
+ };
+ 
+diff --git a/node_modules/docz-theme-default/dist/index.js b/node_modules/docz-theme-default/dist/index.js
+index 92b50f5..4e7948d 100644
+--- a/node_modules/docz-theme-default/dist/index.js
++++ b/node_modules/docz-theme-default/dist/index.js
+@@ -1289,14 +1289,14 @@ const PropsRaw = ({
+ }) => {
+   const entries = Object.entries(props);
+   const components = docz.useComponents();
+-  const Paragraph = React.useMemo(() => styled__default(components.P || 'p').withConfig({
+-    displayName: "PropsRaw__Paragraph"
+-  })(["font-size:16px;color:", ";"], __chunk_1.get('colors.sidebarText')), []);
++  const Div = React.useMemo(() => styled__default('div').withConfig({
++    displayName: "PropsRaw__Div"
++  })(["font-size:16px;color:", ";p {margin: 0;}"], __chunk_1.get('colors.sidebarText')), []);
+   return React.createElement(React.Fragment, null, entries.map(([key, prop]) => {
+     if (!prop.type && !prop.flowType) return null;
+     return React.createElement(Wrapper$b, {
+       key: key
+-    }, React.createElement(Title$1, null, React.createElement(PropName, null, key), React.createElement(PropType, null, getPropType(prop)), prop.defaultValue && React.createElement(PropDefaultValue, null, prop.defaultValue.value === "''" ? React.createElement("em", null, "= [Empty String]") : React.createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && React.createElement(PropRequired, null, React.createElement("em", null, "required"))), prop.description && React.createElement(Paragraph, null, prop.description));
++    }, React.createElement(Title$1, null, React.createElement(PropName, null, key), React.createElement(PropType, null, getPropType(prop)), prop.defaultValue && React.createElement(PropDefaultValue, null, prop.defaultValue.value === "''" ? React.createElement("em", null, "= [Empty String]") : React.createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && React.createElement(PropRequired, null, React.createElement("em", null, "required"))), prop.description && React.createElement(Div, { dangerouslySetInnerHTML: { __html: marked(prop.description) } }, null));
+   }));
+ };
+ 
+@@ -1340,14 +1340,14 @@ const PropsTable = ({
+ }) => {
+   const entries = Object.entries(props);
+   const components = docz.useComponents();
+-  const Paragraph = React.useMemo(() => styled__default(components.P || 'p').withConfig({
+-    displayName: "PropsTable__Paragraph"
+-  })(["margin:0;font-size:16px;color:", ";padding:0 15px 8px 15px;"], __chunk_1.get('colors.blockquoteColor')), []);
++  const Div = React.useMemo(() => styled__default('div').withConfig({
++    displayName: "PropsTable__Div"
++  })(["margin:0;font-size:16px;color:", ";padding:0 15px 8px 15px;p {margin: 0;}"], __chunk_1.get('colors.blockquoteColor')), []);
+   return React.createElement(Container$1, null, entries.map(([key, prop]) => {
+     if (!prop.type && !prop.flowType) return null;
+     return React.createElement(Line, {
+       key: key
+-    }, React.createElement(Content$1, null, React.createElement(ColumnName, null, React.createElement(PropName$1, null, key)), React.createElement(ColumnType, null, React.createElement(PropType$1, null, getPropType(prop))), React.createElement(ColumnValue, null, prop.defaultValue && React.createElement(PropDefaultValue$1, null, prop.defaultValue.value === "''" ? React.createElement("em", null, "= [Empty String]") : React.createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && React.createElement(PropRequired$1, null, React.createElement("strong", null, "required")))), prop.description && React.createElement(Paragraph, null, prop.description));
++    }, React.createElement(Content$1, null, React.createElement(ColumnName, null, React.createElement(PropName$1, null, key)), React.createElement(ColumnType, null, React.createElement(PropType$1, null, getPropType(prop))), React.createElement(ColumnValue, null, prop.defaultValue && React.createElement(PropDefaultValue$1, null, prop.defaultValue.value === "''" ? React.createElement("em", null, "= [Empty String]") : React.createElement("em", null, "= ", prop.defaultValue.value.replace(/\'/g, '"'))), prop.required && React.createElement(PropRequired$1, null, React.createElement("strong", null, "required")))), prop.description && React.createElement(Div, { dangerouslySetInnerHTML: { __html: marked(prop.description) } }, null));
+   }));
+ };
+ 

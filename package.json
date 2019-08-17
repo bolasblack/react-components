@@ -15,6 +15,7 @@
     "postinstall": "patch-package",
     "docz:dev": "rm -rf .docz && docz dev",
     "docz:build": "rm -rf .docz && docz build",
+    "docz:serve": "rm -rf .docz && docz serve",
     "docz:publish": "./scripts/publish_docz.sh",
     "test": "yarn compile && NODE_ENV=test yarn jest --no-cache 'packages/.*/src'"
   },
@@ -67,8 +68,8 @@
     "babel-plugin-auto-import": "^1.0.5",
     "coveralls": "^3.0.6",
     "css-loader": "^3.2.0",
-    "docz": "^1.0.0",
-    "docz-theme-default": "^1.0.0",
+    "docz": "^1.2.0",
+    "docz-theme-default": "^1.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-to-json": "^3.4.0",
@@ -81,6 +82,8 @@
     "patch-package": "^6.1.2",
     "postinstall-postinstall": "^2.0.0",
     "prettier": "^1.18.2",
+    "react": "*",
+    "react-dom": "*",
     "react-test-renderer": "^16.7.0",
     "sass": "^1.22.9",
     "sass-loader": "^7.2.0",
@@ -91,7 +94,9 @@
     "typescript": "^3.4.3"
   },
   "resolutions": {
-    "**/@types/react": "*"
+    "**/@types/react": "^16.8.6",
+    "**/react": "^16.8.6",
+    "**/react-dom": "^16.8.6"
   },
   "devDependencies": {}
 }

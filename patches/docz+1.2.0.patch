@@ -1,0 +1,22 @@
+diff --git a/node_modules/docz/dist/index.esm.js b/node_modules/docz/dist/index.esm.js
+index 313e30d..2e0a57c 100644
+--- a/node_modules/docz/dist/index.esm.js
++++ b/node_modules/docz/dist/index.esm.js
+@@ -162,7 +162,7 @@ const getTypeStr = type => {
+       return JSON.stringify(rst, null, 2);
+ 
+     default:
+-      return capitalize(type.name);
++      return type.name;
+   }
+ };
+ 
+@@ -173,7 +173,7 @@ const getPropType = prop => {
+ 
+   if (!propName) return null;
+   const isEnum = propName.startsWith('"') || propName === 'enum';
+-  const name = capitalize(isEnum ? 'enum' : propName);
++  const name = isEnum ? 'Enum' : propName;
+ 
+   const value = _get('type.value', prop);
+ 
