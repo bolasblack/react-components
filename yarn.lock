@@ -1243,10 +1243,10 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
-"@c4605/toolconfs@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-4.5.0.tgz#954bf963c68408d5b05b31ec5610af5fb956132f"
-  integrity sha512-9ODmW4udW2dvy7XApyQ2kefXSndl1GFoVjzsPT/+8IZs4OY6LW+d90CaKZruFL91jZv8dMSF1obSkJkCTKE+4g==
+"@c4605/toolconfs@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@c4605/toolconfs/-/toolconfs-4.5.2.tgz#3e16a25e57354797e4b8a2fec6def8d7aa7d4bb1"
+  integrity sha512-48PgZJCjfK5L4x+V9ohxpi4CiRtbzSdVH9AnrkTdrtE24DUp7PNSOrPgOaPWY/nx3x6FiaTZTDOXi8NU6fzOXg==
   optionalDependencies:
     "@commitlint/config-conventional" "^8.1.0"
     "@typescript-eslint/eslint-plugin" "^2.0.0"
