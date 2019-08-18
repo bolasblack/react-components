@@ -1,5 +1,19 @@
 language: node_js
 node_js:
   - lts/*
+matrix:
+  include:
+    - name: "react 16.8"
+      env: REACT_VERSION=^16.8.0
+    - name: "react 16.9"
+      env: REACT_VERSION=^16.9.0
 script:
-  - yarn test --coverage && cat ./coverage/lcov.info | yarn coveralls && rm -rf ./coverage
+  - |
+    for PKG in react react-dom react-test-renderer; do
+      sed -i -E 's/"'$PKG'": ".*",/"'$PKG'": "'$REACT_VERSION'",/' package.json
+      yarn
+    done
+  - >
+    yarn test --coverage &&
+    cat ./coverage/lcov.info | yarn coveralls &&
+    rm -rf ./coverage

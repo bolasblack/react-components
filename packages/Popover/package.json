@@ -13,12 +13,8 @@
     "@c4605/react-portal": "^0.1.2",
     "@c4605/ts-types": "^0.2.2"
   },
-  "devDependencies": {
-    "@types/react": "^16.9.2",
-    "react": "^16.8.0"
-  },
   "peerDependencies": {
-    "@types/react": "^16.9.2",
-    "react": "^16.8.0"
+    "@types/react": "^16.8.0 || ^16.9.0",
+    "react": "^16.8.0 || ^16.9.0"
   }
 }
