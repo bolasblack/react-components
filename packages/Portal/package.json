@@ -15,16 +15,12 @@
     "shallowequal": "^1.1.0"
   },
   "devDependencies": {
-    "@c4605/react-document-element": "^0.1.0",
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.8.5",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "@c4605/react-document-element": "^0.1.0"
   },
   "peerDependencies": {
-    "@types/react": "^16.9.2",
-    "@types/react-dom": "^16.8.5",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "@types/react": "^16.8.0 || ^16.9.0",
+    "@types/react-dom": "^16.8.0 || ^16.9.0",
+    "react": "^16.8.0 || ^16.9.0",
+    "react-dom": "^16.8.0 || ^16.9.0"
   }
 }
