@@ -79,7 +79,7 @@
     "jest-cli": "^24.9.0",
     "lint-staged": "^9.2.3",
     "marked": "^0.7.0",
-    "patch-package": "^6.1.2",
+    "patch-package": "^6.1.4",
     "postinstall-postinstall": "^2.0.0",
     "prettier": "^1.18.2",
     "react": "*",
