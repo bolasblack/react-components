@@ -26,10 +26,7 @@ describe('Portal', () => {
   })
 
   describe('support `parent` prop', () => {
-    function assertParentPropWorks(
-      wrapper: ReturnType<typeof mount>,
-      parent: HTMLElement,
-    ) {
+    function assertParentPropWorks(wrapper: ReactWrapper, parent: HTMLElement) {
       const { portal } = getPortal(wrapper)
       expect(portal.parentElement).toBe(parent)
       wrapper.unmount()

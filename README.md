@@ -12,3 +12,16 @@ Some useful react components.
 * https://react-components.c4605.com/
 * or read `README.mdx` in `packages/`;
 * or execute `yarn && yarn docz:dev` to generate [docz](https://github.com/pedronauck/docz).
+
+## Unit test
+
+### Run unit test
+
+```
+yarn test
+```
+
+### Run unit test in watch mode
+
+1. Install [watchman](https://facebook.github.io/watchman/)
+1. `yarn test --watch`
