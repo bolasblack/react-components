@@ -25,3 +25,10 @@ yarn test
 
 1. Install [watchman](https://facebook.github.io/watchman/)
 1. `yarn test --watch`
+
+## Release
+
+1. `cp .direnv.example .direnv`
+1. Edit `.direnv`
+1. Install [direnv](https://direnv.net/)
+1. `direnv allow`

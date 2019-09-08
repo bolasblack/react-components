@@ -10,13 +10,14 @@
     "packages/*"
   ],
   "scripts": {
-    "compile": "tsc -b ./tsconfig.compile.json",
     "postinstall": "patch-package",
     "docz:dev": "rm -rf .docz && docz dev",
     "docz:build": "rm -rf .docz && docz build",
     "docz:serve": "rm -rf .docz && docz serve",
     "docz:publish": "./scripts/publish_docz.sh",
-    "test": "yarn compile && NODE_ENV=test yarn jest --no-cache 'packages/.*/src'"
+    "test": "yarn compile && NODE_ENV=test yarn jest --no-cache 'packages/.*/src'",
+    "compile": "tsc -b ./tsconfig.compile.json",
+    "release": "lerna version --sign-git-tag --conventional-commits --create-release github"
   },
   "prettier": "@c4605/toolconfs/prettierrc",
   "lint-staged": {
