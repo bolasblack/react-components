@@ -1,6 +1,6 @@
 {
   "name": "@c4605/react-modal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "repository": "https://github.com/bolasblack/react-components",
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@c4605/react-document-element": "^0.1.1",
-    "@c4605/react-portal": "^0.1.2",
+    "@c4605/react-portal": "^0.2.0",
     "@c4605/ts-types": "^0.2.2",
     "@types/shallowequal": "^1.1.1",
     "shallowequal": "^1.1.0"

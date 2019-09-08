@@ -1,6 +1,6 @@
 {
   "name": "@c4605/react-popover",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "repository": "https://github.com/bolasblack/react-components",
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
@@ -10,7 +10,7 @@
     "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json"
   },
   "dependencies": {
-    "@c4605/react-portal": "^0.1.2",
+    "@c4605/react-portal": "^0.2.0",
     "@c4605/ts-types": "^0.2.2"
   },
   "peerDependencies": {
