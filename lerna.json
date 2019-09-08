@@ -4,5 +4,16 @@
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "0.2.0"
+  "version": "independent",
+  "ignoreChanges": [
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.md",
+    "**/*.mdx"
+  ],
+  "command": {
+    "version": {
+      "message": "chore(release): bump version"
+    }
+  }
 }

@@ -6,6 +6,7 @@ types
 .docz
 gh-pages
 coverage
+.envrc
 .gh-pages-git
 .rpt2_cache
 *.tsbuildinfo
