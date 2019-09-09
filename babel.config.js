@@ -18,13 +18,6 @@ module.exports = {
         modules: 'commonjs',
       },
     ],
-    [
-      '@babel/preset-typescript',
-      {
-        allExtensions: true,
-        isTSX: true,
-      },
-    ],
     '@babel/preset-react',
   ],
 }

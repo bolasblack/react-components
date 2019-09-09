@@ -14,7 +14,6 @@ script:
       for PKG in react react-dom react-test-renderer; do
         node scripts/change_react_deps_version.js "$REACT_VERSION"
       done
-      cat package.json
       yarn
       yarn test --coverage
       cat ./coverage/lcov.info | yarn coveralls
