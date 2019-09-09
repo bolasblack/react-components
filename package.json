@@ -61,7 +61,7 @@
     "@c4605/toolconfs": "^4.7.1",
     "@commitlint/cli": "^8.1.0",
     "@commitlint/config-conventional": "^8.1.0",
-    "@types/enzyme": "^3.9.3",
+    "@types/enzyme": "^3.10.3",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.4",
     "babel-plugin-auto-import": "^1.0.5",
