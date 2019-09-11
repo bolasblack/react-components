@@ -1,16 +1,5 @@
 {
-  "extends": ["config:base", ":semanticCommitTypeAll(chore)"],
+  "extends": ["github>bolasblack/js-toolconfs:renovate"],
   "ignoreDeps": ["docz", "docz-theme-default"],
-  "baseBranches": ["develop"],
-  "packageRules": [
-    {
-      "packagePatterns": ["*"],
-      "rangeStrategy": "bump"
-    },
-    {
-      "paths": ["packages/*"],
-      "depTypeList": ["dependencies", "peerDependencies"],
-      "rangeStrategy": "widen"
-    }
-  ]
+  "baseBranches": ["develop"]
 }
