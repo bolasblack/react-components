@@ -40,17 +40,16 @@ function handleStateChangeOnClient(
   props: ReturnType<typeof reducePropsToState>,
 ) {
   const { documentElement } = document
+  const { style } = props
 
   documentElement.style.cssText = ''
-  if (props.style) {
-    Object.assign(documentElement.style, props.style)
-
+  if (style) {
     // jsdom not support css variable
     // https://github.com/jsdom/jsdom/issues/1895
     // istanbul ignore next
-    Object.keys(props.style)
-      .filter(k => k.startsWith('--'))
-      .forEach(k => documentElement.style.setProperty(k, props.style![k]))
+    Object.keys(style).forEach(k =>
+      documentElement.style.setProperty(k, style[k]),
+    )
   }
 
   const nextClassName = props.className || ''
