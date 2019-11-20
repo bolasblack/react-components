@@ -1,14 +1,14 @@
 import {
   ReactNode,
+  FunctionComponent,
+  RefObject,
   useMemo,
   useState,
   useCallback,
-  FunctionComponent,
-  RefObject,
+  useEffect,
 } from 'react'
 import * as React from 'react'
 import { Portal, PortalProps } from '@c4605/react-portal'
-import { DocumentElement } from '@c4605/react-document-element'
 import './Modal.scss'
 
 export interface ModalProps {
@@ -95,7 +95,7 @@ export const Modal: FunctionComponent<ModalProps> = function Modal({
   children,
   ...props
 }) {
-  const documentElement = useMemo(() => {
+  useEffect(() => {
     const classNames = [props.documentElementClassName]
     if (props.visible && props.documentElementClassNameWhenVisible) {
       classNames.push(props.documentElementClassNameWhenVisible)
@@ -103,8 +103,11 @@ export const Modal: FunctionComponent<ModalProps> = function Modal({
     if (!props.visible && props.documentElementClassNameWhenInvisible) {
       classNames.push(props.documentElementClassNameWhenInvisible)
     }
-
-    return <DocumentElement className={classNames.join(' ')} />
+    const finalClassNames = classNames.join(' ').split(' ')
+    document.documentElement.classList.add(...finalClassNames)
+    return () => {
+      document.documentElement.classList.remove(...finalClassNames)
+    }
   }, [
     props.visible,
     props.documentElementClassName,
@@ -160,12 +163,7 @@ export const Modal: FunctionComponent<ModalProps> = function Modal({
     ],
   )
 
-  return (
-    <>
-      {documentElement}
-      {portal}
-    </>
-  )
+  return portal
 }
 
 Modal.defaultProps = {

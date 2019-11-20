@@ -3,11 +3,8 @@
   "compilerOptions": {
     "emitDeclarationOnly": true,
     "rootDir": "./src",
-    "outDir": "./lib",
+    "outDir": "./lib"
   },
-  "include": ["./src"]
-  "references": [
-    { "path": "../DocumentElement/tsconfig.compile.json" },
-    { "path": "../Portal/tsconfig.compile.json" },
-  ]
+  "include": ["./src"],
+  "references": [{ "path": "../Portal/tsconfig.compile.json" }]
 }
