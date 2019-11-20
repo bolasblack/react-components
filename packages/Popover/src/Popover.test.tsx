@@ -1,6 +1,6 @@
 /* tslint:disable:no-string-literal */
 
-import React from 'react'
+import * as React from 'react'
 import { mount } from 'enzyme'
 import { Portal } from '@c4605/react-portal'
 import { Popover, PopoverProps, PopoverVisibleInfo } from './Popover'
@@ -50,13 +50,18 @@ describe('Popover', () => {
     } as PopoverVisibleInfo)
 
     const triggerContainerElem = triggerContainer.getDOMNode() as HTMLDivElement
-    triggerContainerElem.getBoundingClientRect = () => ({
+    triggerContainerElem.getBoundingClientRect = (): DOMRect => ({
+      x: 20,
+      y: 20,
       top: 20,
       left: 20,
       bottom: 60,
       right: 60,
       width: 40,
       height: 40,
+      toJSON() {
+        return this
+      },
     })
     document.documentElement.scrollTop = 60
     document.documentElement.scrollLeft = 30

@@ -1,4 +1,4 @@
-import React, {
+import {
   ReactNode,
   useMemo,
   useState,
@@ -6,6 +6,7 @@ import React, {
   FunctionComponent,
   RefObject,
 } from 'react'
+import * as React from 'react'
 import { Portal, PortalProps } from '@c4605/react-portal'
 import { DocumentElement } from '@c4605/react-document-element'
 import './Modal.scss'

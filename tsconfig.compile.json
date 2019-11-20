@@ -5,7 +5,7 @@
   "references": [
     { "path": "./packages/DocumentElement/tsconfig.compile.json" },
     { "path": "./packages/Portal/tsconfig.compile.json" },
-    { "path": "./packages/Popover/tsconfig.compile.json" }
+    { "path": "./packages/Popover/tsconfig.compile.json" },
     { "path": "./packages/Modal/tsconfig.compile.json" }
   ]
 }

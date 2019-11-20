@@ -1,4 +1,5 @@
-import React, { createRef } from 'react'
+import { createRef } from 'react'
+import * as React from 'react'
 import { act } from 'react-dom/test-utils'
 import { Portal } from '@c4605/react-portal'
 import { Modal, useModal } from '../src/Modal'

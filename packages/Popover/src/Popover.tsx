@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Portal } from '@c4605/react-portal'
 import { SimpleJSON } from '@c4605/ts-types'
 

@@ -1,5 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import * as React from 'react'
+import * as ReactDOM from 'react-dom'
 import { SimpleJSON } from '@c4605/ts-types'
 import shallowEqual from 'shallowequal'
 
@@ -97,7 +97,11 @@ export class Portal extends React.PureComponent<PortalProps> {
             portal.style.setProperty(p, nextStyle[p])
           })
       } else {
-        portal.style.display = nextProps.visible ? null : 'none'
+        if (nextProps.visible) {
+          portal.style.removeProperty('display')
+        } else {
+          portal.style.display = 'none'
+        }
       }
     }
   }
