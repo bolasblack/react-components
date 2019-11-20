@@ -1,6 +1,6 @@
 {
   "name": "@c4605/react-doc-helpers",
-  "version": "0.2.0",
+  "version": "0.3.0-alpha.0",
   "license": "MIT",
   "private": true,
   "scripts": {
