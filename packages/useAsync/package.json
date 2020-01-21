@@ -1,0 +1,20 @@
+{
+  "name": "@c4/use-async",
+  "version": "0.1.0",
+  "repository": "https://github.com/bolasblack/react-components",
+  "author": "c4605 <bolasblack@gmail.com>",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "yarn compile",
+    "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "@types/react": "^16.8.0 || ^16.9.0",
+    "react": "^16.8.0 || ^16.9.0"
+  },
+  "devDependencies": {
+    "p-defer": "^3.0.0"
+  }
+}
