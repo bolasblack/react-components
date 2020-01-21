@@ -17,7 +17,7 @@ export const _DocumentElementInner: FunctionComponent<DocumentElementProps> = ({
   children,
 }) => (children || null) as ReactElement
 
-function mergeClassNames(classNames: string[]) {
+function mergeClassNames(classNames: string[]): string {
   const classNameSet = new Set(classNames.join(' ').split(' '))
   return Array.from(classNameSet)
     .filter(Boolean)
@@ -38,7 +38,7 @@ function reducePropsToState(
 
 function handleStateChangeOnClient(
   props: ReturnType<typeof reducePropsToState>,
-) {
+): void {
   const { documentElement } = document
   const { style } = props
 
