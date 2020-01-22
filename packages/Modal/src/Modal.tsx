@@ -1,10 +1,10 @@
 import {
+  FC,
   ReactNode,
-  FunctionComponent,
+  ReactElement,
   RefObject,
   useMemo,
   useState,
-  useCallback,
   useEffect,
 } from 'react'
 import * as React from 'react'
@@ -91,17 +91,21 @@ export interface ModalProps {
   bodyRef?: RefObject<HTMLDivElement> | ((el: HTMLDivElement | null) => any)
 }
 
-export const Modal: FunctionComponent<ModalProps> = function Modal({
-  children,
-  ...props
-}) {
+export const Modal: FC<ModalProps> = function Modal(props) {
+  const { visible, onVisibleChange } = props
+
+  const {
+    documentElementClassName,
+    documentElementClassNameWhenVisible,
+    documentElementClassNameWhenInvisible,
+  } = props
   useEffect(() => {
-    const classNames = [props.documentElementClassName]
-    if (props.visible && props.documentElementClassNameWhenVisible) {
-      classNames.push(props.documentElementClassNameWhenVisible)
+    const classNames = [documentElementClassName]
+    if (visible && documentElementClassNameWhenVisible) {
+      classNames.push(documentElementClassNameWhenVisible)
     }
-    if (!props.visible && props.documentElementClassNameWhenInvisible) {
-      classNames.push(props.documentElementClassNameWhenInvisible)
+    if (!visible && documentElementClassNameWhenInvisible) {
+      classNames.push(documentElementClassNameWhenInvisible)
     }
     const finalClassNames = classNames.join(' ').split(' ')
     document.documentElement.classList.add(...finalClassNames)
@@ -109,56 +113,60 @@ export const Modal: FunctionComponent<ModalProps> = function Modal({
       document.documentElement.classList.remove(...finalClassNames)
     }
   }, [
-    props.visible,
-    props.documentElementClassName,
-    props.documentElementClassNameWhenVisible,
-    props.documentElementClassNameWhenInvisible,
+    visible,
+    documentElementClassName,
+    documentElementClassNameWhenVisible,
+    documentElementClassNameWhenInvisible,
   ])
 
-  const backdrop = useMemo(
+  const { backdrop, backdropRef, backdropClassName } = props
+  const backdropElem = useMemo(
     () =>
-      !props.backdrop ? null : (
+      !backdrop ? null : (
         <div
-          ref={props.backdropRef}
-          className={props.backdropClassName}
+          ref={backdropRef}
+          className={backdropClassName}
           onClick={() => {
-            if (props.backdrop === 'static') return
-            props.onVisibleChange(false)
+            if (backdrop === 'static') return
+            onVisibleChange(false)
           }}
         />
       ),
-    [
-      props.backdrop,
-      props.backdropRef,
-      props.backdropClassName,
-      props.onVisibleChange,
-    ],
+    [backdrop, backdropRef, backdropClassName, onVisibleChange],
   )
 
+  const {
+    portalRef,
+    portalClassName,
+    partalParent,
+    bodyRef,
+    bodyClassName,
+    children,
+  } = props
   const portal = useMemo(
     () => (
       <Portal
-        ref={props.portalRef}
-        className={props.portalClassName}
-        visible={props.visible}
-        onVisibleChange={props.onVisibleChange}
-        parent={props.partalParent}
+        ref={portalRef}
+        className={portalClassName}
+        visible={visible}
+        onVisibleChange={onVisibleChange}
+        parent={partalParent}
       >
-        {backdrop}
-        <div ref={props.bodyRef} className={props.bodyClassName}>
+        {backdropElem}
+        <div ref={bodyRef} className={bodyClassName}>
           {children}
         </div>
       </Portal>
     ),
     [
-      props.portalRef,
-      props.portalClassName,
-      props.visible,
-      props.onVisibleChange,
-      props.partalParent,
-      backdrop,
-      props.bodyRef,
-      props.bodyClassName,
+      portalRef,
+      portalClassName,
+      visible,
+      onVisibleChange,
+      partalParent,
+      backdropElem,
+      bodyRef,
+      bodyClassName,
       children,
     ],
   )
@@ -183,19 +191,22 @@ export function useModal({
   ...props
 }: Partial<ModalProps> & {
   children?: (helpers: useModal.Helpers) => ReactNode
-}) {
+}): useModal.Return {
   const [visible, setVisible] = useState(initialVisible)
 
-  const helpers = {
-    visible,
-    setVisible,
-    show: useCallback(() => setVisible(true), [setVisible]),
-    hide: useCallback(() => setVisible(false), [setVisible]),
-  }
+  const helpers = useMemo(
+    () => ({
+      visible,
+      setVisible,
+      show: () => setVisible(true),
+      hide: () => setVisible(false),
+    }),
+    [visible],
+  )
 
   const renderedChildren = useMemo(
     () => typeof children === 'function' && children(helpers),
-    [visible, setVisible, children],
+    [children, helpers],
   )
 
   const instance = (
@@ -204,7 +215,7 @@ export function useModal({
     </Modal>
   )
 
-  return [instance, helpers] as [typeof instance, typeof helpers]
+  return [instance, helpers]
 }
 
 export namespace useModal {
@@ -214,4 +225,6 @@ export namespace useModal {
     show: () => void
     hide: () => void
   }
+
+  export type Return = [ReactElement<ModalProps>, Helpers]
 }

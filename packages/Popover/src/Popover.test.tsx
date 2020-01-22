@@ -93,7 +93,7 @@ describe('Popover', () => {
       openOn: PopoverProps['openOn']
       visible: boolean
       event: string
-    }) {
+    }): void {
       const { wrapper, triggerContainer } = render({ openOn: opts.openOn })
       expect(wrapper.find(Portal).prop('visible')).toBe(false)
       triggerContainer.simulate(opts.event)
@@ -155,7 +155,7 @@ describe('Popover', () => {
       closeOn: PopoverProps['closeOn']
       visible: boolean
       between: (wrappers: ReturnType<typeof render>) => void
-    }) {
+    }): void {
       const wrappers = render({ closeOn: opts.closeOn })
       const { wrapper, triggerContainer } = wrappers
       triggerContainer.simulate('mouseenter')
@@ -229,6 +229,7 @@ describe('Popover', () => {
   })
 })
 
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const render = (props: Partial<PopoverProps>) => {
   ;(document as any)['scrollingElement'] = document.documentElement
 

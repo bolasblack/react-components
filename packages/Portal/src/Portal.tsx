@@ -31,6 +31,7 @@ export class Portal extends React.PureComponent<PortalProps> {
     className: '',
     style: {},
     visible: true,
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     onVisibleChange() {},
     clickClose(event: MouseEvent) {
       /* istanbul ignore next */
@@ -40,21 +41,21 @@ export class Portal extends React.PureComponent<PortalProps> {
 
   portal = document.createElement('div')
 
-  componentDidMount() {
+  componentDidMount(): void {
     document.addEventListener('click', this._onClickDocument)
     this._updateNode(null, this.props)
   }
 
-  componentDidUpdate(prevProps: PortalProps) {
+  componentDidUpdate(prevProps: PortalProps): void {
     this._updateNode(prevProps, this.props)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     document.removeEventListener('click', this._onClickDocument)
     this._updateNode(this.props, null)
   }
 
-  render() {
+  render(): React.ReactNode {
     return ReactDOM.createPortal(this.props.children, this.portal)
   }
 
@@ -69,7 +70,7 @@ export class Portal extends React.PureComponent<PortalProps> {
   private _updateNode(
     prevProps: PortalProps | null,
     nextProps: PortalProps | null,
-  ) {
+  ): void {
     const { portal } = this
 
     if (!prevProps || !nextProps || prevProps.parent !== nextProps.parent) {
@@ -109,7 +110,7 @@ export class Portal extends React.PureComponent<PortalProps> {
   private _operateParent(
     props: PortalProps | null,
     operator: (parent: HTMLElement) => void,
-  ) {
+  ): void {
     if (!props) return
     if (typeof props.parent === 'function') {
       operator(props.parent())
@@ -118,7 +119,7 @@ export class Portal extends React.PureComponent<PortalProps> {
     }
   }
 
-  private _onClickDocument = (event: MouseEvent) => {
+  private _onClickDocument = (event: MouseEvent): void => {
     /* istanbul ignore next */
     if (!this.props.visible) return
     if (this.props.clickClose(event)) {

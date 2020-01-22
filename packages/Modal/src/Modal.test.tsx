@@ -108,7 +108,7 @@ describe('useModal', () => {
   const ModalContainer = (props: {
     hookArg: Parameters<typeof useModal>[0]
     helpersRef: React.RefObject<useModal.Helpers>
-  }) => {
+  }): useModal.Return[0] => {
     const [modal, helpers] = useModal(props.hookArg)
     ;(props.helpersRef as any).current = helpers
     return modal
@@ -130,7 +130,7 @@ describe('useModal', () => {
     )
 
     expect(wrapper).toMatchSnapshot()
-    let helpers = helpersRef.current!
+    const helpers = helpersRef.current!
     expect(helpers.visible).toBe(true)
     expect(wrapper.find(Modal).prop('onVisibleChange')).not.toBe(
       onVisibleChange,

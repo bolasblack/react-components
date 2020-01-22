@@ -3,7 +3,7 @@ import { mount, ReactWrapper } from 'enzyme'
 import { Portal, PortalProps } from './Portal'
 
 describe('Portal', () => {
-  let wrapper: ReactWrapper
+  let wrapper: ReactWrapper<PortalProps>
 
   afterEach(() => {
     try {
@@ -26,7 +26,10 @@ describe('Portal', () => {
   })
 
   describe('support `parent` prop', () => {
-    function assertParentPropWorks(wrapper: ReactWrapper, parent: HTMLElement) {
+    function assertParentPropWorks(
+      wrapper: ReactWrapper<PortalProps>,
+      parent: HTMLElement,
+    ): void {
       const { portal } = getPortal(wrapper)
       expect(portal.parentElement).toBe(parent)
       wrapper.unmount()
@@ -128,10 +131,11 @@ describe('Portal', () => {
   })
 })
 
-const getPortal = (wrapper: ReactWrapper<any>) =>
+const getPortal = (wrapper: ReactWrapper<any>): Portal =>
   wrapper
     .find(Portal)
     .at(0)
     .instance() as Portal
 
-const render = (props: Partial<PortalProps>) => mount(<Portal {...props} />)
+const render = (props: Partial<PortalProps>): ReactWrapper<PortalProps> =>
+  mount(<Portal {...props} />)
