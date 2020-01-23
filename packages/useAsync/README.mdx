@@ -1,0 +1,50 @@
+---
+name: useAsync
+---
+
+# @c4/use-async
+
+## Usage
+
+### useAsync
+
+```tsx
+import { useAsync } from '@c4/use-async'
+
+export const Component: FC<{ id: string }> = props => {
+  const [reqState, reRun] = useAsync(() => fetch(`/xxx/${props.id}`), [
+    props.id,
+  ])
+
+  return (
+    <>
+      {reqState.loading && <Spin />}
+      {reqState.error && <ErrorMessage error={reqState.error} />}
+      {reqState.value && <Content data={reqState.value} />}
+    </>
+  )
+}
+```
+
+### useAsyncFn
+
+```tsx
+import { useAsyncFn } from '@c4/use-async'
+
+export const Component: FC<{ id: string }> = props => {
+  const [reqState, reRun] = useAsyncFn(
+    (type: string) => fetch(`/xxx/${type}/${props.id}`),
+    [props.id],
+  )
+
+  useEffect(() => reRun('sometype'), [reRun])
+
+  return (
+    <>
+      {reqState.loading && <Spin />}
+      {reqState.error && <ErrorMessage error={reqState.error} />}
+      {reqState.value && <Content data={reqState.value} />}
+    </>
+  )
+}
+```
