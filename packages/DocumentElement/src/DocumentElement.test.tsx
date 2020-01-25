@@ -26,13 +26,8 @@ describe(DocumentElement.name, () => {
       'html-class',
     ])
     expect(document.documentElement.style.cssText).toBe(
-      'display: flex; width: 10px;',
+      'display: flex; width: 10px; --test-var: 20px;',
     )
-    // jsdom not support css variable
-    // https://github.com/jsdom/jsdom/issues/1895
-    // expect(document.documentElement.style.getPropertyValue('--test-var')).toBe(
-    //   '20px',
-    // )
     wrapper.unmount()
     expect(document.title).toBe('')
     expect(Array.from(document.documentElement.classList)).toEqual([])

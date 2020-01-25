@@ -72,9 +72,7 @@ describe('Portal', () => {
         },
       }),
     )
-    expect(portal.style.cssText).toBe('width: 10px;')
-    // wait https://github.com/jsdom/jsdom/issues/1895
-    // expect(portal.style.getPropertyValue('--css-variable')).toBe('#eaeaea')
+    expect(portal.style.cssText).toBe('width: 10px; --css-variable: #eaeaea;')
   })
 
   it('support `visible` prop', () => {
