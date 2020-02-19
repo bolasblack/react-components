@@ -16,5 +16,11 @@ module.exports = {
         project: './tsconfig.json',
       },
     },
+    {
+      files: ['**/*.spec.*', '**/*.test.*'],
+      rules: {
+        'react/no-find-dom-node': 'off',
+      },
+    },
   ],
 }

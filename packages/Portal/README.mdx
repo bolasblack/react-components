@@ -25,6 +25,8 @@ Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#cre
     const portalContentRef = useRef()
 
     const [visible, setVisible] = useState(false)
+    
+    const [renderInline, setRenderInline] = useInputValue(false, 'checked')
 
     const [closeOnClick, setCloseOnClick] = useInputValue(false, 'checked')
 
@@ -43,6 +45,16 @@ Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#cre
 
     return (
       <div>
+        <p>
+          <label>
+            renderInline
+            <input
+              type="checkbox"
+              checked={renderInline}
+              onChange={setRenderInline}
+            />
+          </label>
+        </p>
         <p>
           <label>
             closeOnClick
@@ -70,6 +82,7 @@ Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#cre
         </p>
         <DocumentElement style={visible ? { overflow: 'hidden' } : {}} />
         <Portal
+          parent={renderInline ? null : undefined}
           visible={visible}
           clickClose={clickClose}
           onVisibleChange={setVisible}

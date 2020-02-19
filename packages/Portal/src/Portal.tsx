@@ -4,8 +4,8 @@ import { SimpleJSON } from '@c4605/ts-types'
 import shallowEqual from 'shallowequal'
 
 export interface PortalProps {
-  /** Specify the parent element for portal */
-  parent: HTMLElement | (() => HTMLElement)
+  /** Specify the parent element for portal, if `null`, render children inline */
+  parent: null | HTMLElement | (() => HTMLElement)
   /** Children in portal */
   children?: React.ReactNode
 
@@ -39,77 +39,106 @@ export class Portal extends React.PureComponent<PortalProps> {
     },
   }
 
-  portal = document.createElement('div')
+  private _portalEl = document.createElement('div')
+
+  /**
+   * @deprecated
+   */
+  portal = this._portalEl
 
   componentDidMount(): void {
     document.addEventListener('click', this._onClickDocument)
-    this._updateNode(null, this.props)
+    this._updatePortalEl(null, this.props)
   }
 
   componentDidUpdate(prevProps: PortalProps): void {
-    this._updateNode(prevProps, this.props)
+    this._updatePortalEl(prevProps, this.props)
   }
 
   componentWillUnmount(): void {
     document.removeEventListener('click', this._onClickDocument)
-    this._updateNode(this.props, null)
+    this._updatePortalEl(this.props, null)
   }
 
   render(): React.ReactNode {
-    return ReactDOM.createPortal(this.props.children, this.portal)
+    if (this.props.parent) {
+      return ReactDOM.createPortal(this.props.children, this._portalEl)
+    }
+
+    return (
+      <div
+        className={this.props.className}
+        style={{
+          ...this._getDisplayStyle(this.props.visible),
+          ...this.props.style,
+        }}
+      >
+        {this.props.children}
+      </div>
+    )
   }
 
-  private _updateNode(
+  private _updatePortalEl(
     prevProps: PortalProps | null,
     nextProps: PortalProps,
   ): void
-  private _updateNode(
+  private _updatePortalEl(
     prevProps: PortalProps,
     nextProps: PortalProps | null,
   ): void
-  private _updateNode(
+  private _updatePortalEl(
     prevProps: PortalProps | null,
     nextProps: PortalProps | null,
   ): void {
-    const { portal } = this
+    const portalEl = this._portalEl
 
     if (!prevProps || !nextProps || prevProps.parent !== nextProps.parent) {
-      this._operateParent(prevProps, parent => parent.removeChild(this.portal))
-      this._operateParent(nextProps, parent => parent.appendChild(this.portal))
+      this._operateParent(prevProps, parent => parent?.removeChild(portalEl))
+      this._operateParent(nextProps, parent => parent?.appendChild(portalEl))
     }
 
     if (nextProps) {
       if (!prevProps || prevProps.className !== nextProps.className) {
-        portal.className = nextProps.className.trim() || ''
+        portalEl.className = nextProps.className.trim() || ''
       }
 
       const prevStyle = prevProps && prevProps.style
       const nextStyle = nextProps.style
       if (!shallowEqual(prevStyle, nextStyle)) {
-        portal.style.cssText = ''
+        portalEl.style.cssText = ''
         Object.assign(
-          portal.style,
-          { display: nextProps.visible ? null : 'none' },
+          portalEl.style,
+          this._getDisplayStyle(nextProps.visible),
           nextStyle,
         )
         Object.keys(nextStyle)
           .filter(p => p.startsWith('--'))
           .forEach(p => {
-            portal.style.setProperty(p, nextStyle[p])
+            portalEl.style.setProperty(p, nextStyle[p])
           })
       } else {
         if (nextProps.visible) {
-          portal.style.removeProperty('display')
+          portalEl.style.removeProperty('display')
         } else {
-          portal.style.display = 'none'
+          portalEl.style.display = 'none'
         }
       }
     }
   }
 
+  private _getDisplayStyle(
+    visible: boolean,
+  ): { display?: React.CSSProperties['display'] } {
+    if (visible) {
+      return {}
+    } else {
+      return { display: 'none' }
+    }
+  }
+
   private _operateParent(
     props: PortalProps | null,
-    operator: (parent: HTMLElement) => void,
+    operator: (parent: HTMLElement | null) => void,
   ): void {
     if (!props) return
     if (typeof props.parent === 'function') {

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Portal support \`parent\` prop as a function 1`] = `<div />`;
+
+exports[`Portal support \`parent\` prop as an element 1`] = `<div />`;
+
+exports[`Portal support \`parent\` prop as null 1`] = `
+<div>
+  <div
+    class=""
+  >
+    <div
+      id="testEl"
+    />
+  </div>
+</div>
+`;

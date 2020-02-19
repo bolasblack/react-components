@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { findDOMNode } from 'react-dom'
 import { mount, ReactWrapper } from 'enzyme'
 import { Portal, PortalProps } from './Portal'
 
@@ -17,11 +18,11 @@ describe('Portal', () => {
         <Portal className="portal" />
       </div>,
     )
-    const { portal } = getPortal(wrapper)
-    expect(portal.parentElement).toBe(document.body)
+    const portalEl = getPortalContainerEl(wrapper)
+    expect(portalEl.parentElement).toBe(document.body)
 
     wrapper.unmount()
-    expect(portal.parentElement).toBe(null)
+    expect(portalEl.parentElement).toBe(null)
     expect(document.querySelectorAll('.portal')).toHaveLength(0)
   })
 
@@ -30,10 +31,11 @@ describe('Portal', () => {
       wrapper: ReactWrapper<PortalProps>,
       parent: HTMLElement,
     ): void {
-      const { portal } = getPortal(wrapper)
-      expect(portal.parentElement).toBe(parent)
+      const portalEl = getPortalContainerEl(wrapper)
+      expect(portalEl.parentElement).toBe(parent)
+      expect(findDOMNode(wrapper.instance())).toMatchSnapshot()
       wrapper.unmount()
-      expect(portal.parentElement).toBe(null)
+      expect(portalEl.parentElement).toBe(null)
       expect(document.querySelectorAll('.portal')).toHaveLength(0)
     }
 
@@ -56,76 +58,113 @@ describe('Portal', () => {
       )
       assertParentPropWorks(wrapper, parent)
     })
+
+    it('as null', () => {
+      wrapper = mount(
+        <div>
+          <Portal parent={null}>
+            <div id="testEl" />
+          </Portal>
+        </div>,
+      )
+      expect(wrapper.find('#testEl')).toHaveLength(1)
+      expect(findDOMNode(wrapper.instance())).toMatchSnapshot()
+      wrapper.unmount()
+      expect(wrapper.find('#testEl')).toHaveLength(0)
+    })
   })
 
+  function assertInAllRenderMode(
+    asserts: (renderer: typeof render) => any,
+  ): void {
+    const parent = document.createElement('div')
+
+    asserts(props => render({ ...props }))
+    asserts(props => render({ ...props, parent }))
+    asserts(props => render({ ...props, parent: () => parent }))
+    asserts(props => render({ ...props, parent: null }))
+  }
+
   it('support `className` prop', () => {
-    const { portal } = getPortal(render({ className: 'test-portal' }))
-    expect(portal.className).toBe('test-portal')
+    assertInAllRenderMode(render => {
+      const portalEl = getPortalContainerEl(
+        render({ className: 'test-portal' }),
+      )
+      expect(portalEl.className).toBe('test-portal')
+    })
   })
 
   it('support `style` prop', () => {
-    const { portal } = getPortal(
-      render({
-        style: {
-          '--css-variable': '#eaeaea',
-          width: '10px',
-        },
-      }),
-    )
-    expect(portal.style.cssText).toBe('width: 10px; --css-variable: #eaeaea;')
+    assertInAllRenderMode(render => {
+      const portalEl = getPortalContainerEl(
+        render({
+          style: {
+            width: '10px',
+            '--css-variable': '#eaeaea',
+          },
+        }),
+      )
+      expect(portalEl.style.cssText).toBe(
+        'width: 10px; --css-variable: #eaeaea;',
+      )
+    })
   })
 
   it('support `visible` prop', () => {
-    wrapper = render({ visible: false })
-    const { portal } = getPortal(wrapper)
+    assertInAllRenderMode(render => {
+      wrapper = render({ visible: false })
+      const portalEl = getPortalContainerEl(wrapper)
 
-    expect(portal.style.display).toBe('none')
+      expect(portalEl.style.display).toBe('none')
 
-    wrapper.setProps({ visible: true })
-    expect(portal.style.display).toBe('')
+      wrapper.setProps({ visible: true })
+      expect(portalEl.style.display).toBe('')
 
-    wrapper.setProps({ visible: false })
-    expect(portal.style.display).toBe('none')
+      wrapper.setProps({ visible: false })
+      expect(portalEl.style.display).toBe('none')
+    })
   })
 
   it('support `clickClose` and `onVisibleChange` prop', () => {
-    let clickCloseReturn: boolean | undefined
-    const fakeClickEvent = new Event('click')
-    const clickClose = jest.fn(() => clickCloseReturn)
-    const onVisibleChange = jest.fn()
-    wrapper = render({ visible: false, clickClose, onVisibleChange })
-    const { portal } = getPortal(wrapper)
+    assertInAllRenderMode(render => {
+      let clickCloseReturn: boolean | undefined
+      const fakeClickEvent = new Event('click')
+      const clickClose = jest.fn(() => clickCloseReturn)
+      const onVisibleChange = jest.fn()
+      wrapper = render({ visible: false, clickClose, onVisibleChange })
+      const portalEl = getPortalContainerEl(wrapper)
 
-    document.dispatchEvent(fakeClickEvent)
-    expect(clickClose).not.toBeCalled()
-    expect(portal.style.display).toBe('none')
+      document.dispatchEvent(fakeClickEvent)
+      expect(clickClose).not.toBeCalled()
+      expect(portalEl.style.display).toBe('none')
 
-    wrapper.setProps({ visible: true })
+      wrapper.setProps({ visible: true })
 
-    document.dispatchEvent(fakeClickEvent)
-    expect(clickClose).toHaveBeenCalledTimes(1)
-    expect(clickClose).toHaveBeenCalledWith(fakeClickEvent)
-    expect(onVisibleChange).not.toBeCalled()
+      document.dispatchEvent(fakeClickEvent)
+      expect(clickClose).toHaveBeenCalledTimes(1)
+      expect(clickClose).toHaveBeenCalledWith(fakeClickEvent)
+      expect(onVisibleChange).not.toBeCalled()
 
-    clickCloseReturn = false
+      clickCloseReturn = false
 
-    document.dispatchEvent(fakeClickEvent)
-    expect(clickClose).toHaveBeenCalledTimes(2)
-    expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
-    expect(onVisibleChange).not.toBeCalled()
+      document.dispatchEvent(fakeClickEvent)
+      expect(clickClose).toHaveBeenCalledTimes(2)
+      expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
+      expect(onVisibleChange).not.toBeCalled()
 
-    clickCloseReturn = true
+      clickCloseReturn = true
 
-    document.dispatchEvent(fakeClickEvent)
-    expect(clickClose).toHaveBeenCalledTimes(3)
-    expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
-    expect(onVisibleChange).toHaveBeenCalledTimes(1)
-    expect(onVisibleChange).toHaveBeenCalledWith(false)
+      document.dispatchEvent(fakeClickEvent)
+      expect(clickClose).toHaveBeenCalledTimes(3)
+      expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
+      expect(onVisibleChange).toHaveBeenCalledTimes(1)
+      expect(onVisibleChange).toHaveBeenCalledWith(false)
 
-    wrapper.unmount()
-    document.dispatchEvent(fakeClickEvent)
-    expect(clickClose).toHaveBeenCalledTimes(3)
-    expect(onVisibleChange).toHaveBeenCalledTimes(1)
+      wrapper.unmount()
+      document.dispatchEvent(fakeClickEvent)
+      expect(clickClose).toHaveBeenCalledTimes(3)
+      expect(onVisibleChange).toHaveBeenCalledTimes(1)
+    })
   })
 })
 
@@ -134,6 +173,15 @@ const getPortal = (wrapper: ReactWrapper<any>): Portal =>
     .find(Portal)
     .at(0)
     .instance() as Portal
+
+const getPortalContainerEl = (wrapper: ReactWrapper<any>): HTMLDivElement => {
+  const portal = getPortal(wrapper)
+  if (portal.props.parent) {
+    return portal['_portalEl']
+  } else {
+    return findDOMNode(portal) as HTMLDivElement
+  }
+}
 
 const render = (props: Partial<PortalProps>): ReactWrapper<PortalProps> =>
   mount(<Portal {...props} />)
