@@ -56,7 +56,7 @@ Support both host visible state inside or [lift state up](https://reactjs.org/do
         value={closeOn}
         onChange={setCloseOn}
       >
-        {['hover', 'clickOutside', 'clickInside'].map(type =>
+        {['hover', 'click', 'clickOutside', 'clickInside'].map(type =>
           <option key={type} value={type}>{type}</option>
         )}
       </select>)}

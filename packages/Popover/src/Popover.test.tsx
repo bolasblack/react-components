@@ -117,6 +117,20 @@ describe('Popover', () => {
       },
     })
     assertPortal({
+      closeOn: 'click',
+      visible: true,
+      between({ wrapper, triggerContainer, contentContainer }) {
+        triggerContainer.simulate('mouseleave')
+        expect(wrapper.find(Portal).prop('visible')).toBe(true)
+        contentContainer.simulate('mouseleave')
+        expect(wrapper.find(Portal).prop('visible')).toBe(true)
+
+        const { clickClose } = wrapper.find(Portal).props()
+        expect(clickClose(mouseEvent(contentContainer.getDOMNode()))).toBe(true)
+        expect(clickClose(mouseEvent(document.body))).toBe(true)
+      },
+    })
+    assertPortal({
       closeOn: 'clickInside',
       visible: true,
       between({ wrapper, triggerContainer, contentContainer }) {

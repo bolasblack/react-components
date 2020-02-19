@@ -25,7 +25,7 @@ export interface PopoverProps {
   /** Popover open cause */
   openOn: 'hover' | 'click'
   /** Popover close cause */
-  closeOn: 'hover' | 'clickInside' | 'clickOutside'
+  closeOn: 'hover' | 'click' | 'clickInside' | 'clickOutside'
   /** Popover visiblity */
   visible?: boolean
   /** Callback when popover visiblity changed */
@@ -55,8 +55,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   static defaultProps = {
     triggerClassName: '',
     popoverClassName: '',
-    openOn: 'hover' as 'hover',
-    closeOn: 'hover' as 'hover',
+    openOn: 'hover' as const,
+    closeOn: 'hover' as const,
     disabled: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onVisibleChange: /* istanbul ignore next */ () => {},
@@ -140,6 +140,11 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     if (!this.contentContainerRef.current) return
     // istanbul ignore next
     if (!(event.target instanceof HTMLElement)) return
+
+    if (this.props.closeOn === 'click') {
+      return true
+    }
+
     const clickInside =
       this.triggerContainerRef.current.contains(event.target) ||
       this.contentContainerRef.current.contains(event.target)
@@ -148,6 +153,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     } else if (this.props.closeOn === 'clickOutside') {
       return !clickInside
     }
+
     // istanbul ignore next
     return
   }
