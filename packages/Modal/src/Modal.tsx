@@ -190,11 +190,11 @@ export function useModal({
   children,
   ...props
 }: Partial<ModalProps> & {
-  children?: (helpers: useModal.Helpers) => ReactNode
+  children?: (helpers: useModal.Controller) => ReactNode
 }): useModal.Return {
   const [visible, setVisible] = useState(initialVisible)
 
-  const helpers = useMemo(
+  const ctrl = useMemo(
     () => ({
       visible,
       setVisible,
@@ -205,8 +205,8 @@ export function useModal({
   )
 
   const renderedChildren = useMemo(
-    () => typeof children === 'function' && children(helpers),
-    [children, helpers],
+    () => typeof children === 'function' && children(ctrl),
+    [children, ctrl],
   )
 
   const instance = (
@@ -215,16 +215,19 @@ export function useModal({
     </Modal>
   )
 
-  return [instance, helpers]
+  return [instance, ctrl]
 }
 
 export namespace useModal {
-  export interface Helpers {
+  export interface Controller {
     visible: boolean
     setVisible: (visible: boolean) => void
     show: () => void
     hide: () => void
   }
 
-  export type Return = [ReactElement<ModalProps>, Helpers]
+  // legacy
+  export type Helpers = Controller
+
+  export type Return = [ReactElement<ModalProps>, Controller]
 }

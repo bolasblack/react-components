@@ -107,7 +107,7 @@ describe('Modal', () => {
 describe('useModal', () => {
   const ModalContainer = (props: {
     hookArg: Parameters<typeof useModal>[0]
-    helpersRef: React.RefObject<useModal.Helpers>
+    helpersRef: React.RefObject<useModal.Controller>
   }): useModal.Return[0] => {
     const [modal, helpers] = useModal(props.hookArg)
     ;(props.helpersRef as any).current = helpers
@@ -117,7 +117,7 @@ describe('useModal', () => {
   it('basicly works', () => {
     const onVisibleChange = jest.fn()
     const children = jest.fn(() => <div>hello</div>)
-    const helpersRef = React.createRef<useModal.Helpers>()
+    const helpersRef = React.createRef<useModal.Controller>()
     const wrapper = shallow(
       <ModalContainer
         helpersRef={helpersRef}
