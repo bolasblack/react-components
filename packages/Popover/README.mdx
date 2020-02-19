@@ -28,6 +28,7 @@ Support both host visible state inside or [lift state up](https://reactjs.org/do
     const [disappearDelay, setDisappearDelay] = useInputValue(0)
     const [openOn, setOpenOn] = useInputValue('hover')
     const [closeOn, setCloseOn] = useInputValue('hover')
+    const [renderInline, setRenderInline] = useInputValue(false, 'checked')
 
     return (<>
       {customField('appearDelay (ms)', <input
@@ -42,6 +43,16 @@ Support both host visible state inside or [lift state up](https://reactjs.org/do
         value={disappearDelay}
         onChange={setDisappearDelay}
       />)}
+      <p>
+        <label>
+          renderInline
+          <input
+            type="checkbox"
+            checked={renderInline}
+            onChange={setRenderInline}
+          />
+        </label>
+      </p>
       {customField('openOn', <select
         key="openOn"
         value={openOn}
@@ -74,6 +85,7 @@ Support both host visible state inside or [lift state up](https://reactjs.org/do
           trigger={() =>
             <p style={{ background: '#ddd' }}>Trigger</p>
           }
+          inline={renderInline}
           content={() => (
             <p
               style={{

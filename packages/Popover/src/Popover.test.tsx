@@ -11,9 +11,6 @@ describe('Popover', () => {
     expect(wrapper.find('.trigger')).toHaveLength(1)
     expect(wrapper.find('.content')).toHaveLength(0)
     expect(wrapper.find(Portal)).toHaveLength(1)
-    expect(wrapper.find(Portal).props()).toMatchObject({
-      parent: Popover.popoverContainer,
-    })
   })
 
   it('support `triggerClassName` prop', () => {
@@ -239,6 +236,22 @@ describe('Popover', () => {
       expect(content).not.toHaveBeenCalled()
       expect(popoverStyle).not.toHaveBeenCalled()
       expect(onVisibleChange).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('support `portal` prop', () => {
+    it('is enabled by default', () => {
+      const { wrapper } = render({})
+      expect(wrapper.find(Portal).props()).toMatchObject({
+        parent: Popover.popoverContainer,
+      })
+    })
+
+    it('can be disabled', () => {
+      const { wrapper } = render({ inline: true })
+      expect(wrapper.find(Portal).props()).toMatchObject({
+        parent: null,
+      })
     })
   })
 })

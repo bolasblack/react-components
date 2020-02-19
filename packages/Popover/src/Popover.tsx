@@ -32,6 +32,8 @@ export interface PopoverProps {
   onVisibleChange: (visible: boolean) => void
   /** If set to true, popover won't be shown, popoverStyle, content, onVisibleChange won't be called */
   disabled: boolean
+  /** Set to true to render content inline */
+  inline: boolean
 }
 
 export interface PopoverState extends PopoverVisibleInfo {}
@@ -58,6 +60,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     openOn: 'hover' as const,
     closeOn: 'hover' as const,
     disabled: false,
+    inline: false,
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     onVisibleChange: /* istanbul ignore next */ () => {},
     popoverStyle: (info: PopoverVisibleInfo): PopoverStyle => ({
@@ -81,11 +84,6 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   private contentContainerRef = React.createRef<HTMLDivElement>()
 
   render(): JSX.Element {
-    if (!popoverContainer) {
-      popoverContainer = document.createElement('div')
-      document.body.appendChild(popoverContainer)
-    }
-
     return (
       <>
         <div
@@ -98,9 +96,9 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
           {this.props.trigger()}
         </div>
         <Portal
-          parent={popoverContainer}
           className={`Popover__container ${this.props.popoverClassName}`}
           style={this.popoverStyle()}
+          parent={this.getPopoverParent()}
           clickClose={this.clickClose}
           visible={this.visible}
           onVisibleChange={this.changeVisible}
@@ -116,6 +114,17 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
         </Portal>
       </>
     )
+  }
+
+  private getPopoverParent(): null | HTMLDivElement {
+    if (this.props.inline) return null
+
+    if (!popoverContainer) {
+      popoverContainer = document.createElement('div')
+      document.body.appendChild(popoverContainer)
+    }
+
+    return popoverContainer
   }
 
   private popoverStyle(): undefined | PopoverStyle {
