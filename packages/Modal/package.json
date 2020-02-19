@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "bili": "^4.8.1",
-    "rollup-plugin-typescript2": "^0.25.0"
+    "rollup-plugin-typescript2": "^0.26.0"
   },
   "peerDependencies": {
     "@types/react": "^16.8.0 || ^16.9.0",
