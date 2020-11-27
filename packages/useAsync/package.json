@@ -10,7 +10,7 @@
     "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json"
   },
   "peerDependencies": {
-    "@types/react": "^16.8.0 || ^16.9.0",
+    "@types/react": "^16.8.0 || ^16.9.0 || ^17.0.0",
     "react": "^16.8.0 || ^16.9.0"
   },
   "devDependencies": {
