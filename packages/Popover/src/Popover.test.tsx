@@ -184,7 +184,12 @@ describe('Popover', () => {
     })
     expect(wrapper.find(Portal).prop('visible')).toBe(true)
     triggerContainer.simulate('mouseleave')
-    expect(onVisibleChange).toHaveBeenCalledWith(false)
+    expect(onVisibleChange).toHaveBeenCalledWith(
+      false,
+      expect.objectContaining({
+        event: expect.objectContaining({ target: expect.anything() }),
+      }),
+    )
     expect(wrapper.find(Portal).prop('visible')).toBe(true)
   })
 

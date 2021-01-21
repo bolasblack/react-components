@@ -16,10 +16,13 @@ export interface PortalProps {
 
   /** The visibility of portal */
   visible: boolean
-  /** Will be call when the visibility need to be changed */
-  onVisibleChange: (visible: boolean) => void
+  /** Will be call when the visibility needs to be changed */
+  onVisibleChange: (visible: boolean, reason: { event?: Event }) => void
 
-  /** Hide portal when function return true */
+  /**
+   * Hide portal when function return true
+   * @deprecated Use `onVisibleChange` instead
+   */
   clickClose: (event: MouseEvent) => void | boolean
 }
 
@@ -152,7 +155,7 @@ export class Portal extends React.PureComponent<PortalProps> {
     /* istanbul ignore next */
     if (!this.props.visible) return
     if (this.props.clickClose(event)) {
-      this.props.onVisibleChange(false)
+      this.props.onVisibleChange(false, { event })
     }
   }
 }

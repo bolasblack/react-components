@@ -65,7 +65,12 @@ describe('Modal', () => {
 
       modalWrapper.find('.' + defaultProps.backdropClassName!).simulate('click')
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
-      expect(onVisibleChange).toHaveBeenLastCalledWith(false)
+      expect(onVisibleChange).toHaveBeenLastCalledWith(
+        false,
+        expect.objectContaining({
+          event: expect.objectContaining({ target: expect.anything() }),
+        }),
+      )
     })
 
     it('support `"static"`', () => {

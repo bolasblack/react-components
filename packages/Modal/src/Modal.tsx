@@ -126,9 +126,9 @@ export const Modal: FC<ModalProps> = function Modal(props) {
         <div
           ref={backdropRef}
           className={backdropClassName}
-          onClick={() => {
+          onClick={(event: React.MouseEvent) => {
             if (backdrop === 'static') return
-            onVisibleChange(false)
+            onVisibleChange(false, { event: event.nativeEvent })
           }}
         />
       ),

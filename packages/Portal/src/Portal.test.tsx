@@ -158,7 +158,12 @@ describe('Portal', () => {
       expect(clickClose).toHaveBeenCalledTimes(3)
       expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
-      expect(onVisibleChange).toHaveBeenCalledWith(false)
+      expect(onVisibleChange).toHaveBeenCalledWith(
+        false,
+        expect.objectContaining({
+          event: fakeClickEvent,
+        }),
+      )
 
       wrapper.unmount()
       document.dispatchEvent(fakeClickEvent)

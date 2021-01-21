@@ -11,6 +11,10 @@ export interface PopoverVisibleInfo {
 
 export type PopoverStyle = React.CSSProperties & SimpleJSON
 
+export interface PopoverVisibleChangeReason {
+  event?: Event
+}
+
 export interface PopoverProps {
   /** Trigger element renderer */
   trigger: () => React.ReactNode
@@ -28,8 +32,11 @@ export interface PopoverProps {
   closeOn: 'hover' | 'click' | 'clickInside' | 'clickOutside'
   /** Popover visiblity */
   visible?: boolean
-  /** Callback when popover visiblity changed */
-  onVisibleChange: (visible: boolean) => void
+  /** Callback when popover visiblity needs to be changed */
+  onVisibleChange: (
+    visible: boolean,
+    reason: PopoverVisibleChangeReason,
+  ) => void
   /** If set to true, popover won't be shown, popoverStyle, content, onVisibleChange won't be called */
   disabled: boolean
   /** Set to true to render content inline */
@@ -180,13 +187,16 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     }
   }
 
-  private changeVisible = (visible: boolean): void => {
+  private changeVisible = (
+    visible: boolean,
+    reason: PopoverVisibleChangeReason,
+  ): void => {
     // istanbul ignore next
     visible = this.props.disabled ? false : visible
     if (this.visibleDelegated) {
       // istanbul ignore next
       if (this.visible === visible) return
-      this.props.onVisibleChange(visible)
+      this.props.onVisibleChange(visible, reason)
     } else {
       this.setState({ visible })
     }
@@ -204,7 +214,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     }
   }
 
-  private onTriggerClick = (): void => {
+  private onTriggerClick = (event: React.MouseEvent): void => {
     if (this.props.disabled) return
     if (this.props.openOn !== 'click') return
     // istanbul ignore next
@@ -217,10 +227,10 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
         document.scrollingElement,
       ),
     )
-    this.changeVisible(true)
+    this.changeVisible(true, { event: event.nativeEvent })
   }
 
-  private onMouseEnter = (): void => {
+  private onMouseEnter = (event: React.MouseEvent): void => {
     if (this.props.disabled) return
     if (this.props.openOn !== 'hover') return
     // istanbul ignore next
@@ -233,13 +243,13 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
         document.scrollingElement,
       ),
     )
-    this.changeVisible(true)
+    this.changeVisible(true, { event: event.nativeEvent })
   }
 
-  private onMouseLeave = (): void => {
+  private onMouseLeave = (event: React.MouseEvent): void => {
     // istanbul ignore next
     if (this.props.disabled) return
     if (this.props.closeOn !== 'hover') return
-    this.changeVisible(false)
+    this.changeVisible(false, { event: event.nativeEvent })
   }
 }
