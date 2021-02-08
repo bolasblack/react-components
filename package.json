@@ -74,7 +74,7 @@
     "jest": "^26.0.0",
     "jest-cli": "^26.0.0",
     "lint-staged": "^10.0.1",
-    "marked": "^1.0.0",
+    "marked": "^2.0.0",
     "patch-package": "^6.2.0",
     "postinstall-postinstall": "^2.0.0",
     "prettier": "^1.19.1",
