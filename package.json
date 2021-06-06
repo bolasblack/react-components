@@ -55,7 +55,7 @@
     "@c4605/toolconfs": "^5.1.0",
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@testing-library/react-hooks": "^3.2.1",
+    "@testing-library/react-hooks": "^7.0.0",
     "@types/enzyme": "^3.10.4",
     "@types/jest": "^25.0.0",
     "@types/node": "^13.1.8",
