@@ -158,8 +158,9 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     if (
       !(event.target instanceof HTMLElement) &&
       !(event.target instanceof SVGElement)
-    )
+    ) {
       return
+    }
 
     if (this.props.closeOn === 'click') {
       return true
