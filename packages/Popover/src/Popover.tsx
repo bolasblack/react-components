@@ -155,7 +155,11 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     // istanbul ignore next
     if (!this.contentContainerRef.current) return
     // istanbul ignore next
-    if (!(event.target instanceof HTMLElement)) return
+    if (
+      !(event.target instanceof HTMLElement) &&
+      !(event.target instanceof SVGElement)
+    )
+      return
 
     if (this.props.closeOn === 'click') {
       return true
