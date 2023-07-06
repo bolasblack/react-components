@@ -87,7 +87,7 @@
     "ts-jest": "^29.0.0",
     "ts-loader": "^6.2.1",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.5"
+    "typescript": "^5.0.0"
   },
   "resolutions": {
     "**/@types/react": "^16.8.6",
