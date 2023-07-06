@@ -82,7 +82,7 @@
     "react-dom": "^18.0.0",
     "react-test-renderer": "^18.0.0",
     "sass": "^1.25.0",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^13.0.0",
     "style-loader": "^3.0.0",
     "ts-jest": "^29.0.0",
     "ts-loader": "^9.0.0",
