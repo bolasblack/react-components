@@ -7817,10 +7817,10 @@ getpass@^0.1.1:
   dependencies:
     assert-plus "^1.0.0"
 
-git-hook-pure@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/git-hook-pure/-/git-hook-pure-2.0.0.tgz#047d8422debe2988a086dd90ce82bcdaaab261d2"
-  integrity sha512-uXIiQpu46fpN0aLmo2tw3gAsoOE5Zow9x9wn6lrPMwboYg94VGVEwOcaJTbL1C0X/4Cc1K55EUNPzw225HU9bQ==
+git-hook-pure@^3.0.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/git-hook-pure/-/git-hook-pure-3.2.1.tgz#1a63648ac91efabcbfda0f06ec615435676ef13d"
+  integrity sha512-EWWBXLnZUxTvC6abOkkgDEMeJcfmA1OdmGXJxfJOclRbJHdg3ACP/YO6wh7uyxjpa83d6Z0v3PAvD4Oym9tORg==
 
 git-raw-commits@2.0.0:
   version "2.0.0"
