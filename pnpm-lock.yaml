@@ -118,31 +118,31 @@ importers:
 
   packages/DocHelpers:
     specifiers:
-      '@c4605/ts-types': ^0.2.2
+      '@c4605/ts-types': ^0.3.0
     dependencies:
-      '@c4605/ts-types': 0.2.2
+      '@c4605/ts-types': 0.3.0
 
   packages/DocumentElement:
     specifiers:
-      '@c4605/ts-types': ^0.2.2
+      '@c4605/ts-types': ^0.3.0
       '@types/react-side-effect': ^1.1.1
       react-side-effect: ^2.1.0
     dependencies:
-      '@c4605/ts-types': 0.2.2
+      '@c4605/ts-types': 0.3.0
       '@types/react-side-effect': 1.1.1
       react-side-effect: 2.1.0
 
   packages/Modal:
     specifiers:
       '@c4605/react-portal': ^0.5.0
-      '@c4605/ts-types': ^0.2.2
+      '@c4605/ts-types': ^0.3.0
       '@types/shallowequal': ^1.1.1
       bili: ^5.0.0
       rollup-plugin-typescript2: ^0.35.0
       shallowequal: ^1.1.0
     dependencies:
       '@c4605/react-portal': link:../Portal
-      '@c4605/ts-types': 0.2.2
+      '@c4605/ts-types': 0.3.0
       '@types/shallowequal': 1.1.1
       shallowequal: 1.1.0
     devDependencies:
@@ -152,18 +152,18 @@ importers:
   packages/Popover:
     specifiers:
       '@c4605/react-portal': ^0.5.0
-      '@c4605/ts-types': ^0.2.2
+      '@c4605/ts-types': ^0.3.0
     dependencies:
       '@c4605/react-portal': link:../Portal
-      '@c4605/ts-types': 0.2.2
+      '@c4605/ts-types': 0.3.0
 
   packages/Portal:
     specifiers:
-      '@c4605/ts-types': ^0.2.2
+      '@c4605/ts-types': ^0.3.0
       '@types/shallowequal': ^1.1.1
       shallowequal: ^1.1.0
     dependencies:
-      '@c4605/ts-types': 0.2.2
+      '@c4605/ts-types': 0.3.0
       '@types/shallowequal': 1.1.1
       shallowequal: 1.1.0
 
@@ -4816,10 +4816,8 @@ packages:
       prettier: 3.0.0
     dev: false
 
-  /@c4605/ts-types/0.2.2:
-    resolution: {integrity: sha512-Lrx0O0Tj0yAOAByWF6/u+uUo4xmXr2gT3ow/FqzTuIxQNg+RBsaB4WhDnJ/SHjTQzNCu3rGTM0UJHYZ+V9BFdA==}
-    peerDependencies:
-      typescript: ^3.4.2
+  /@c4605/ts-types/0.3.0:
+    resolution: {integrity: sha512-Dtr/0TfOaE9hQ0imVL4uY5em4Ec7eRqA+5EOWO0nyE7JtNKNX2pRv9DoNFZu+RDSLlJiomyRbF46SbEIRxKbEw==}
     dev: false
 
   /@commitlint/cli/17.6.6:
@@ -8839,6 +8837,7 @@ packages:
 
   /bindings/1.5.0:
     resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
+    requiresBuild: true
     dependencies:
       file-uri-to-path: 1.0.0
     dev: false
@@ -13354,6 +13353,7 @@ packages:
 
   /file-uri-to-path/1.0.0:
     resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -19311,6 +19311,7 @@ packages:
 
   /nan/2.17.0:
     resolution: {integrity: sha512-2ZTgtl0nJsO0KQCjEpxcIr5D+Yv90plTitZt9JBfQvVJDS5seMl3FOvsh3+9CoYWXf/1l5OaZzzF6nDm4cagaQ==}
+    requiresBuild: true
     dev: false
     optional: true
 
