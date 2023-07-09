@@ -2,8 +2,7 @@
   "packages": [
     "packages/*"
   ],
-  "npmClient": "yarn",
-  "useWorkspaces": true,
+  "npmClient": "pnpm",
   "version": "independent",
   "ignoreChanges": [
     "**/*.test.ts",
@@ -17,5 +16,6 @@
     "version": {
       "message": "chore(release): bump version"
     }
-  }
+  },
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json"
 }

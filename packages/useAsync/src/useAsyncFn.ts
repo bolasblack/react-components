@@ -34,10 +34,10 @@ export function useAsyncFn<Result = any, Args extends any[] = any[]>(
         }
         markStateChanged()
         return state
-      } catch (error) {
+      } catch (error: any) {
         const state = { error, loading: false, promise } as const
         if (callId === lastCallIdRef.current) {
-          stateRef.current = { error, loading: false, promise }
+          stateRef.current = { error: error, loading: false, promise }
         }
         markStateChanged()
         return state

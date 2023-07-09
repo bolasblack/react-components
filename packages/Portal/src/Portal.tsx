@@ -4,67 +4,66 @@ import { SimpleJSON } from '@c4605/ts-types'
 import shallowEqual from 'shallowequal'
 
 export interface PortalProps {
-  /** Specify the parent element for portal, if `null`, render children inline */
-  parent: null | HTMLElement | (() => HTMLElement)
+  portalContainerRef?: React.Ref<HTMLElement>
+
+  /**
+   * Specify the element to listen the click-outside event,
+   *
+   * if omitted, use the `document.documentElement`
+   */
+  baseElement?: HTMLElement
+  /**
+   * Specify the parent element for portal,
+   *
+   * * if `null`, render children inline
+   * * if omitted, use the `document.body`
+   */
+  parent?: null | HTMLElement | (() => HTMLElement)
   /** Children in portal */
   children?: React.ReactNode
 
   /** Specify portal class name */
-  className: string
+  className?: string
   /** Specify portal style */
-  style: React.CSSProperties & SimpleJSON
+  style?: React.CSSProperties & SimpleJSON
 
   /** The visibility of portal */
-  visible: boolean
+  visible?: boolean
   /** Will be call when the visibility needs to be changed */
-  onVisibleChange: (visible: boolean, reason: { event?: Event }) => void
-
-  /**
-   * Hide portal when function return true
-   * @deprecated Use `onVisibleChange` instead
-   */
-  clickClose: (event: MouseEvent) => void | boolean
+  onVisibleChange?: (visible: boolean, reason: { event?: Event }) => void
 }
 
 export class Portal extends React.PureComponent<PortalProps> {
   static displayName = 'Portal'
 
-  static defaultProps = {
-    parent: () => document.body,
-    className: '',
-    style: {},
-    visible: true,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    onVisibleChange() {},
-    clickClose(event: MouseEvent) {
-      /* istanbul ignore next */
-      return event.button && event.button !== 0
-    },
-  }
-
   private _portalEl = document.createElement('div')
 
-  /**
-   * @deprecated
-   */
-  portal = this._portalEl
-
   componentDidMount(): void {
-    document.addEventListener('click', this._onClickDocument)
-    this._updatePortalEl(null, this.props)
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;(this.props.baseElement ?? document.documentElement).addEventListener(
+      'click',
+      this._onClickDocument,
+    )
+    this._assignRef(this.props.portalContainerRef, this._portalEl)
+    this._updatePortalEl(this._portalEl, null, this.props)
   }
 
   componentDidUpdate(prevProps: PortalProps): void {
-    this._updatePortalEl(prevProps, this.props)
+    this._updatePortalEl(this._portalEl, prevProps, this.props)
   }
 
   componentWillUnmount(): void {
-    document.removeEventListener('click', this._onClickDocument)
-    this._updatePortalEl(this.props, null)
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;(this.props.baseElement ?? document.documentElement).removeEventListener(
+      'click',
+      this._onClickDocument,
+    )
+    this._updatePortalEl(this._portalEl, this.props, null)
+    this._assignRef(this.props.portalContainerRef, null)
   }
 
   render(): React.ReactNode {
-    if (this.props.parent) {
+    if (this._getParent(this.props)) {
       return ReactDOM.createPortal(this.props.children, this._portalEl)
     }
 
@@ -82,19 +81,20 @@ export class Portal extends React.PureComponent<PortalProps> {
   }
 
   private _updatePortalEl(
+    portalEl: HTMLElement,
     prevProps: PortalProps | null,
     nextProps: PortalProps,
   ): void
   private _updatePortalEl(
+    portalEl: HTMLElement,
     prevProps: PortalProps,
     nextProps: PortalProps | null,
   ): void
   private _updatePortalEl(
+    portalEl: HTMLElement,
     prevProps: PortalProps | null,
     nextProps: PortalProps | null,
   ): void {
-    const portalEl = this._portalEl
-
     if (!prevProps || !nextProps || prevProps.parent !== nextProps.parent) {
       this._operateParent(prevProps, parent => parent?.removeChild(portalEl))
       this._operateParent(nextProps, parent => parent?.appendChild(portalEl))
@@ -102,11 +102,11 @@ export class Portal extends React.PureComponent<PortalProps> {
 
     if (nextProps) {
       if (!prevProps || prevProps.className !== nextProps.className) {
-        portalEl.className = nextProps.className.trim() || ''
+        portalEl.className = nextProps.className?.trim() || ''
       }
 
-      const prevStyle = prevProps && prevProps.style
-      const nextStyle = nextProps.style
+      const prevStyle = (prevProps && prevProps.style) ?? {}
+      const nextStyle = nextProps.style ?? {}
       if (!shallowEqual(prevStyle, nextStyle)) {
         portalEl.style.cssText = ''
         Object.assign(
@@ -129,13 +129,37 @@ export class Portal extends React.PureComponent<PortalProps> {
     }
   }
 
-  private _getDisplayStyle(
-    visible: boolean,
-  ): { display?: React.CSSProperties['display'] } {
+  private _assignRef(
+    ref: React.Ref<HTMLElement> | undefined,
+    el: HTMLElement | null,
+  ): void {
+    if (ref == null) return
+
+    if (typeof ref === 'function') {
+      ref(el)
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi
+      ;(ref as any).current = el
+    }
+  }
+
+  private _getDisplayStyle(visible: undefined | boolean): {
+    display?: React.CSSProperties['display']
+  } {
     if (visible) {
       return {}
     } else {
       return { display: 'none' }
+    }
+  }
+
+  private _getParent(props: PortalProps): HTMLElement | null {
+    if (props.parent === undefined) {
+      return document.body
+    } else if (typeof props.parent === 'function') {
+      return props.parent()
+    } else {
+      return props.parent
     }
   }
 
@@ -144,18 +168,12 @@ export class Portal extends React.PureComponent<PortalProps> {
     operator: (parent: HTMLElement | null) => void,
   ): void {
     if (!props) return
-    if (typeof props.parent === 'function') {
-      operator(props.parent())
-    } else {
-      operator(props.parent)
-    }
+    operator(this._getParent(props))
   }
 
   private _onClickDocument = (event: MouseEvent): void => {
     /* istanbul ignore next */
     if (!this.props.visible) return
-    if (this.props.clickClose(event)) {
-      this.props.onVisibleChange(false, { event })
-    }
+    this.props.onVisibleChange?.(false, { event })
   }
 }

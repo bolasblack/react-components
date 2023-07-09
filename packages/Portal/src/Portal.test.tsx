@@ -1,192 +1,167 @@
 import * as React from 'react'
-import { findDOMNode } from 'react-dom'
-import { mount, ReactWrapper } from 'enzyme'
+import { render, act } from '@testing-library/react'
+import user from '@testing-library/user-event'
 import { Portal, PortalProps } from './Portal'
+import { createRef } from 'react'
 
 describe('Portal', () => {
-  let wrapper: ReactWrapper<PortalProps>
+  it('basically works', async () => {
+    const res = render(<Portal className="portal" />)
 
-  afterEach(() => {
-    try {
-      wrapper.unmount()
-    } catch {}
-  })
+    expect(document.body.querySelector('.portal')).not.toBeFalsy()
 
-  it('basicly works', () => {
-    wrapper = mount(
-      <div>
-        <Portal className="portal" />
-      </div>,
-    )
-    const portalEl = getPortalContainerEl(wrapper)
-    expect(portalEl.parentElement).toBe(document.body)
+    res.unmount()
 
-    wrapper.unmount()
-    expect(portalEl.parentElement).toBe(null)
-    expect(document.querySelectorAll('.portal')).toHaveLength(0)
+    expect(document.body.querySelector('.portal')).toBeFalsy()
+    expect(res.container.innerHTML).toBe('')
   })
 
   describe('support `parent` prop', () => {
     function assertParentPropWorks(
-      wrapper: ReactWrapper<PortalProps>,
-      parent: HTMLElement,
+      renderModal: (props: Partial<PortalProps>) => JSX.Element,
+      parent: null | HTMLElement,
     ): void {
-      const portalEl = getPortalContainerEl(wrapper)
-      expect(portalEl.parentElement).toBe(parent)
-      expect(findDOMNode(wrapper.instance())).toMatchSnapshot()
-      wrapper.unmount()
-      expect(portalEl.parentElement).toBe(null)
-      expect(document.querySelectorAll('.portal')).toHaveLength(0)
+      const res = render(renderModal({ visible: true }))
+      expect(parent).toMatchSnapshot()
+      expect(res.container).toMatchSnapshot()
+
+      res.rerender(renderModal({ visible: false }))
+      expect(parent).toMatchSnapshot()
+      expect(res.container).toMatchSnapshot()
+
+      res.unmount()
+      expect(parent).toMatchSnapshot()
+      expect(res.container).toMatchSnapshot()
     }
 
     it('as an element', () => {
       const parent = document.createElement('div')
-      wrapper = mount(
-        <div>
-          <Portal parent={parent} />
-        </div>,
-      )
-      assertParentPropWorks(wrapper, parent)
+      assertParentPropWorks(p => <Portal {...p} parent={parent} />, parent)
     })
 
     it('as a function', () => {
       const parent = document.createElement('div')
-      wrapper = mount(
-        <div>
-          <Portal parent={() => parent} />
-        </div>,
+      assertParentPropWorks(
+        p => <Portal {...p} parent={() => parent} />,
+        parent,
       )
-      assertParentPropWorks(wrapper, parent)
     })
 
     it('as null', () => {
-      wrapper = mount(
-        <div>
-          <Portal parent={null}>
+      assertParentPropWorks(
+        p => (
+          <Portal {...p} parent={null}>
             <div id="testEl" />
           </Portal>
-        </div>,
+        ),
+        null,
       )
-      expect(wrapper.find('#testEl')).toHaveLength(1)
-      expect(findDOMNode(wrapper.instance())).toMatchSnapshot()
-      wrapper.unmount()
-      expect(wrapper.find('#testEl')).toHaveLength(0)
     })
   })
 
-  function assertInAllRenderMode(
-    asserts: (renderer: typeof render) => any,
-  ): void {
+  async function assertInAllRenderMode(
+    asserts: (
+      getProps: (props: Partial<PortalProps>) => Partial<PortalProps>,
+      containerRef: React.RefObject<HTMLElement>,
+    ) => any,
+  ): Promise<void> {
     const parent = document.createElement('div')
+    const containerRef = createRef<HTMLElement>()
 
-    asserts(props => render({ ...props }))
-    asserts(props => render({ ...props, parent }))
-    asserts(props => render({ ...props, parent: () => parent }))
-    asserts(props => render({ ...props, parent: null }))
+    const wrappedAsserts = (
+      overrideProps: Partial<PortalProps>,
+    ): Promise<void> =>
+      asserts(
+        props => ({
+          ...props,
+          ...overrideProps,
+          portalContainerRef: containerRef,
+        }),
+        containerRef,
+      )
+
+    await wrappedAsserts({})
+    await wrappedAsserts({ parent })
+    await wrappedAsserts({ parent: () => parent })
+    await wrappedAsserts({ parent: null })
   }
 
-  it('support `className` prop', () => {
-    assertInAllRenderMode(render => {
-      const portalEl = getPortalContainerEl(
-        render({ className: 'test-portal' }),
-      )
-      expect(portalEl.className).toBe('test-portal')
+  it('support `className` prop', async () => {
+    await assertInAllRenderMode((getProps, containerRef) => {
+      render(renderPortal(getProps({ className: 'test-portal' })))
+      expect(containerRef.current!.className).toBe('test-portal')
     })
   })
 
-  it('support `style` prop', () => {
-    assertInAllRenderMode(render => {
-      const portalEl = getPortalContainerEl(
-        render({
-          style: {
-            width: '10px',
-            '--css-variable': '#eaeaea',
-          },
-        }),
+  it('support `style` prop', async () => {
+    await assertInAllRenderMode((getProps, containerRef) => {
+      render(
+        renderPortal(
+          getProps({
+            style: {
+              width: '10px',
+              '--css-variable': '#eaeaea',
+            },
+          }),
+        ),
       )
-      expect(portalEl.style.cssText).toBe(
-        'width: 10px; --css-variable: #eaeaea;',
+      expect(containerRef.current!.style.cssText).toBe(
+        'display: none; width: 10px; --css-variable: #eaeaea;',
       )
     })
   })
 
-  it('support `visible` prop', () => {
-    assertInAllRenderMode(render => {
-      wrapper = render({ visible: false })
-      const portalEl = getPortalContainerEl(wrapper)
+  it('support `visible` prop', async () => {
+    await assertInAllRenderMode((getProps, containerRef) => {
+      const res = render(renderPortal(getProps({ visible: false })))
 
-      expect(portalEl.style.display).toBe('none')
+      expect(containerRef.current!.style.display).toBe('none')
 
-      wrapper.setProps({ visible: true })
-      expect(portalEl.style.display).toBe('')
+      res.rerender(renderPortal(getProps({ visible: true })))
+      expect(containerRef.current!.style.display).toBe('')
 
-      wrapper.setProps({ visible: false })
-      expect(portalEl.style.display).toBe('none')
+      res.rerender(renderPortal(getProps({ visible: false })))
+      expect(containerRef.current!.style.display).toBe('none')
     })
   })
 
-  it('support `clickClose` and `onVisibleChange` prop', () => {
-    assertInAllRenderMode(render => {
-      let clickCloseReturn: boolean | undefined
-      const fakeClickEvent = new Event('click')
-      const clickClose = jest.fn(() => clickCloseReturn)
+  it('support `onVisibleChange` prop', async () => {
+    await assertInAllRenderMode(async getProps => {
       const onVisibleChange = jest.fn()
-      wrapper = render({ visible: false, clickClose, onVisibleChange })
-      const portalEl = getPortalContainerEl(wrapper)
+      const baseElement = document.createElement('div')
+      const clickBaseElement = async (): Promise<void> => {
+        await act(() => user.click(baseElement))
+      }
 
-      document.dispatchEvent(fakeClickEvent)
-      expect(clickClose).not.toBeCalled()
-      expect(portalEl.style.display).toBe('none')
+      const res = render(
+        renderPortal(
+          getProps({ visible: false, baseElement, onVisibleChange }),
+        ),
+        { baseElement },
+      )
 
-      wrapper.setProps({ visible: true })
+      await clickBaseElement()
+      expect(onVisibleChange).toHaveBeenCalledTimes(0)
 
-      document.dispatchEvent(fakeClickEvent)
-      expect(clickClose).toHaveBeenCalledTimes(1)
-      expect(clickClose).toHaveBeenCalledWith(fakeClickEvent)
-      expect(onVisibleChange).not.toBeCalled()
-
-      clickCloseReturn = false
-
-      document.dispatchEvent(fakeClickEvent)
-      expect(clickClose).toHaveBeenCalledTimes(2)
-      expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
-      expect(onVisibleChange).not.toBeCalled()
-
-      clickCloseReturn = true
-
-      document.dispatchEvent(fakeClickEvent)
-      expect(clickClose).toHaveBeenCalledTimes(3)
-      expect(clickClose).toHaveBeenLastCalledWith(fakeClickEvent)
+      res.rerender(
+        renderPortal(getProps({ visible: true, baseElement, onVisibleChange })),
+      )
+      await clickBaseElement()
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
       expect(onVisibleChange).toHaveBeenCalledWith(
         false,
         expect.objectContaining({
-          event: fakeClickEvent,
+          event: expect.any(MouseEvent),
         }),
       )
 
-      wrapper.unmount()
-      document.dispatchEvent(fakeClickEvent)
-      expect(clickClose).toHaveBeenCalledTimes(3)
+      res.unmount()
+      await clickBaseElement()
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
     })
   })
 })
 
-const getPortal = (wrapper: ReactWrapper<any>): Portal =>
-  wrapper
-    .find(Portal)
-    .at(0)
-    .instance() as Portal
-
-const getPortalContainerEl = (wrapper: ReactWrapper<any>): HTMLDivElement => {
-  const portal = getPortal(wrapper)
-  if (portal.props.parent) {
-    return portal['_portalEl']
-  } else {
-    return findDOMNode(portal) as HTMLDivElement
-  }
-}
-
-const render = (props: Partial<PortalProps>): ReactWrapper<PortalProps> =>
-  mount(<Portal {...props} />)
+const renderPortal = (props: Partial<PortalProps>): JSX.Element => (
+  <Portal {...props} />
+)

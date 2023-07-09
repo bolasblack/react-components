@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { mount, ReactWrapper } from 'enzyme'
+import { render, RenderResult } from '@testing-library/react'
 import { DocumentElement } from './DocumentElement'
 
 describe(DocumentElement.name, () => {
-  let wrapper: ReactWrapper
+  let wrapper: RenderResult
 
   afterEach(() => {
     try {
@@ -12,7 +12,7 @@ describe(DocumentElement.name, () => {
   })
 
   it('works', () => {
-    wrapper = mount(
+    wrapper = render(
       <DocumentElement
         className="html-class"
         style={{
@@ -35,7 +35,7 @@ describe(DocumentElement.name, () => {
   })
 
   it('support nesting', () => {
-    wrapper = mount(
+    wrapper = render(
       <DocumentElement
         className="html-class-1"
         style={{ display: 'flex', width: '10px' }}

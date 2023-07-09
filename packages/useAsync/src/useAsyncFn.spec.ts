@@ -1,16 +1,16 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-floating-promises */
 
 import { renderHook, act } from '@testing-library/react-hooks'
-import pDefer from 'p-defer'
 import { useAsyncFn } from './useAsyncFn'
+import { defer } from './utils'
 
 describe('useAsyncFn', () => {
-  let defer: pDefer.DeferredPromise<string>
+  let deferred: defer.Deferred<string>
   let asyncFn: jest.Mock<Promise<string>, any[]>
 
   beforeEach(() => {
-    defer = pDefer<string>()
-    asyncFn = jest.fn((..._args: any[]) => defer.promise)
+    deferred = defer<string>()
+    asyncFn = jest.fn((..._args: any[]) => deferred.promise)
   })
 
   it('return success state after promise resolved', async () => {
@@ -31,7 +31,7 @@ describe('useAsyncFn', () => {
       expect(res.result.current[1](1, 2, 3)).resolves.toEqual({
         loading: false,
         value: deferValue,
-        promise: defer.promise,
+        promise: deferred.promise,
       })
     })
     expect(asyncFn).toBeCalledTimes(1)
@@ -39,21 +39,21 @@ describe('useAsyncFn', () => {
     expect(res.result.current).toEqual([
       <useAsyncFn.State<string>>{
         loading: true,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
     expect(res.result.current[1]).toBe(latestReRunFn)
     latestReRunFn = res.result.current[1]
 
-    defer.resolve(deferValue)
+    deferred.resolve(deferValue)
     await res.waitForNextUpdate()
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsyncFn.State<string>>{
         loading: false,
         value: deferValue,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
@@ -76,18 +76,18 @@ describe('useAsyncFn', () => {
       expect(res.result.current[1]()).resolves.toEqual({
         loading: false,
         error: fakeError,
-        promise: defer.promise,
+        promise: deferred.promise,
       })
     })
 
-    defer.reject(fakeError)
+    deferred.reject(fakeError)
     await res.waitForNextUpdate()
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsyncFn.State<string>>{
         loading: false,
         error: fakeError,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
@@ -95,11 +95,11 @@ describe('useAsyncFn', () => {
 
   it('support promise finished before mounted', async () => {
     const deferValue = 'a'
-    defer.resolve(deferValue)
+    deferred.resolve(deferValue)
 
     const initialState = {
       loading: true,
-      promise: defer.promise,
+      promise: deferred.promise,
     } as const
 
     const res = renderHook(() => useAsyncFn(asyncFn, [], initialState))
@@ -113,7 +113,7 @@ describe('useAsyncFn', () => {
     expect(res.result.current).toEqual([
       <useAsyncFn.State<string>>{
         loading: false,
-        promise: defer.promise,
+        promise: deferred.promise,
         value: deferValue,
       },
       expect.any(Function),

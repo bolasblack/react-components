@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basically works 1`] = `
+<body>
+  <div>
+    <div
+      class="Popover__trigger test-trigger-class"
+    >
+      <div
+        class="trigger"
+      />
+    </div>
+  </div>
+  <div>
+    <div
+      class="Popover__container test-popover-class"
+      style="position: absolute; top: 0px; left: 0px; display: block; visibility: visible; transform: translateX(-50%);"
+    >
+      <div
+        class="Popover__content"
+      >
+        <div
+          class="content"
+        />
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`can be disabled 1`] = `
+<body>
+  <div />
+  <div>
+    <div
+      class="Popover__trigger "
+    >
+      <div
+        class="trigger"
+      />
+    </div>
+    <div
+      class="Popover__container "
+      style="display: block; position: absolute; top: 60px; left: 30px; visibility: hidden; transform: translateX(-50%);"
+    >
+      <div
+        class="Popover__content"
+      />
+    </div>
+  </div>
+</body>
+`;
+
+exports[`is enabled by default 1`] = `
+<body>
+  <div>
+    <div
+      class="Popover__container"
+      style="display: block; position: absolute; top: 60px; left: 30px; visibility: hidden; transform: translateX(-50%);"
+    >
+      <div
+        class="Popover__content"
+      />
+    </div>
+  </div>
+  <div>
+    <div
+      class="Popover__trigger "
+    >
+      <div
+        class="trigger"
+      />
+    </div>
+  </div>
+</body>
+`;

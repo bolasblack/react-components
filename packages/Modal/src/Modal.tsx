@@ -2,10 +2,10 @@ import {
   FC,
   ReactNode,
   ReactElement,
-  RefObject,
   useMemo,
   useState,
   useEffect,
+  Ref,
 } from 'react'
 import * as React from 'react'
 import { Portal, PortalProps } from '@c4605/react-portal'
@@ -44,7 +44,11 @@ export interface ModalProps {
   /**
    * Modal [portal](/portal-readme) ref
    */
-  portalRef?: RefObject<Portal> | ((el: Portal | null) => any)
+  portalRef?: Ref<Portal>
+  /**
+   * Modal [portal](/portal-readme)'s container ref
+   */
+  portalContainerRef?: Ref<HTMLElement>
 
   /**
    * Specify the parent element of portal
@@ -78,7 +82,7 @@ export interface ModalProps {
   /**
    * Modal backdrop element ref
    */
-  backdropRef?: RefObject<HTMLDivElement> | ((el: HTMLDivElement | null) => any)
+  backdropRef?: Ref<HTMLDivElement>
 
   /**
    * Modal body element class name
@@ -88,7 +92,7 @@ export interface ModalProps {
   /**
    * Modal body element ref
    */
-  bodyRef?: RefObject<HTMLDivElement> | ((el: HTMLDivElement | null) => any)
+  bodyRef?: Ref<HTMLDivElement>
 }
 
 export const Modal: FC<ModalProps> = function Modal(props) {
@@ -128,7 +132,7 @@ export const Modal: FC<ModalProps> = function Modal(props) {
           className={backdropClassName}
           onClick={(event: React.MouseEvent) => {
             if (backdrop === 'static') return
-            onVisibleChange(false, { event: event.nativeEvent })
+            onVisibleChange?.(false, { event: event.nativeEvent })
           }}
         />
       ),
@@ -137,6 +141,7 @@ export const Modal: FC<ModalProps> = function Modal(props) {
 
   const {
     portalRef,
+    portalContainerRef,
     portalClassName,
     partalParent,
     bodyRef,
@@ -147,6 +152,7 @@ export const Modal: FC<ModalProps> = function Modal(props) {
     () => (
       <Portal
         ref={portalRef}
+        portalContainerRef={portalContainerRef}
         className={portalClassName}
         visible={visible}
         onVisibleChange={onVisibleChange}
@@ -160,6 +166,7 @@ export const Modal: FC<ModalProps> = function Modal(props) {
     ),
     [
       portalRef,
+      portalContainerRef,
       portalClassName,
       visible,
       onVisibleChange,
@@ -189,7 +196,7 @@ export function useModal({
   visible: initialVisible = false,
   children,
   ...props
-}: Partial<ModalProps> & {
+}: Partial<Omit<ModalProps, 'children'>> & {
   children?: (helpers: useModal.Controller) => ReactNode
 }): useModal.Return {
   const [visible, setVisible] = useState(initialVisible)

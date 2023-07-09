@@ -43,7 +43,12 @@ export interface PopoverProps {
   inline: boolean
 }
 
-export interface PopoverState extends PopoverVisibleInfo {}
+export interface PopoverState {
+  popoverTop: number
+  popoverLeft: number
+  triggerContainer: HTMLDivElement | null
+  contentContainer: HTMLDivElement | null
+}
 
 let popoverContainer: HTMLDivElement | null = null
 
@@ -52,7 +57,7 @@ let popoverContainer: HTMLDivElement | null = null
  *
  * If supplied `visible` prop, Popover will follow the
  * [State Up](https://reactjs.org/docs/lifting-state-up.html) pattern, and when
- * need change visible state, will callback `onVisibleChange(expectedVisibleState)`
+ * need change visible state, will call `onVisibleChange(expectedVisibleState)`
  */
 export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   static displayName = 'Popover'
@@ -81,14 +86,11 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   }
 
   readonly state: PopoverState = {
-    visible: false,
     popoverTop: 0,
     popoverLeft: 0,
+    triggerContainer: null,
+    contentContainer: null,
   }
-
-  private triggerContainerRef = React.createRef<HTMLDivElement>()
-
-  private contentContainerRef = React.createRef<HTMLDivElement>()
 
   render(): JSX.Element {
     return (
@@ -106,7 +108,6 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
           className={`Popover__container ${this.props.popoverClassName}`}
           style={this.popoverStyle()}
           parent={this.getPopoverParent()}
-          clickClose={this.clickClose}
           visible={this.visible}
           onVisibleChange={this.changeVisible}
         >
@@ -121,6 +122,13 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
         </Portal>
       </>
     )
+  }
+
+  private triggerContainerRef = (el: HTMLDivElement | null): void => {
+    this.setState({ triggerContainer: el })
+  }
+  private contentContainerRef = (el: HTMLDivElement | null): void => {
+    this.setState({ contentContainer: el })
   }
 
   private getPopoverParent(): null | HTMLDivElement {
@@ -139,11 +147,11 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     // istanbul ignore next
     if (!document.scrollingElement) return
     // istanbul ignore next
-    if (!this.triggerContainerRef.current) return
+    if (!this.state.triggerContainer) return
     return this.props.popoverStyle({
       visible: this.visible,
       ...this.getPositionInfo(
-        this.triggerContainerRef.current,
+        this.state.triggerContainer,
         document.scrollingElement,
       ),
     })
@@ -151,9 +159,9 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
 
   private clickClose = (event: MouseEvent): undefined | boolean => {
     // istanbul ignore next
-    if (!this.triggerContainerRef.current) return
+    if (!this.state.triggerContainer) return
     // istanbul ignore next
-    if (!this.contentContainerRef.current) return
+    if (!this.state.contentContainer) return
     // istanbul ignore next
     if (
       !(event.target instanceof HTMLElement) &&
@@ -167,8 +175,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     }
 
     const clickInside =
-      this.triggerContainerRef.current.contains(event.target) ||
-      this.contentContainerRef.current.contains(event.target)
+      this.state.triggerContainer.contains(event.target) ||
+      this.state.contentContainer.contains(event.target)
     if (this.props.closeOn === 'clickInside') {
       return clickInside
     } else if (this.props.closeOn === 'clickOutside') {
@@ -179,32 +187,28 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     return
   }
 
-  private get visibleDelegated(): boolean {
-    return 'visible' in this.props
-  }
-
   private get visible(): boolean {
     if (this.props.disabled) return false
-    if (this.visibleDelegated) {
-      return !!this.props.visible
-    } else {
-      return this.state.visible
-    }
+    return !!this.props.visible
   }
 
   private changeVisible = (
     visible: boolean,
     reason: PopoverVisibleChangeReason,
   ): void => {
+    if (
+      visible === false &&
+      reason?.event instanceof MouseEvent &&
+      !this.clickClose(reason.event)
+    ) {
+      return
+    }
+
     // istanbul ignore next
     visible = this.props.disabled ? false : visible
-    if (this.visibleDelegated) {
-      // istanbul ignore next
-      if (this.visible === visible) return
-      this.props.onVisibleChange(visible, reason)
-    } else {
-      this.setState({ visible })
-    }
+    // istanbul ignore next
+    if (this.visible === visible) return
+    this.props.onVisibleChange(visible, reason)
   }
 
   private getPositionInfo(
@@ -225,10 +229,10 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     // istanbul ignore next
     if (!document.scrollingElement) return
     // istanbul ignore next
-    if (!this.triggerContainerRef.current) return
+    if (!this.state.triggerContainer) return
     this.setState(
       this.getPositionInfo(
-        this.triggerContainerRef.current,
+        this.state.triggerContainer,
         document.scrollingElement,
       ),
     )
@@ -241,10 +245,10 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     // istanbul ignore next
     if (!document.scrollingElement) return
     // istanbul ignore next
-    if (!this.triggerContainerRef.current) return
+    if (!this.state.triggerContainer) return
     this.setState(
       this.getPositionInfo(
-        this.triggerContainerRef.current,
+        this.state.triggerContainer,
         document.scrollingElement,
       ),
     )

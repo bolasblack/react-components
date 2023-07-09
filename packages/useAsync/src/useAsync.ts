@@ -57,6 +57,6 @@ export namespace useAsync {
 
   export type AsyncFn<
     Result = any,
-    Args extends any[] = any[]
+    Args extends any[] = any[],
   > = useAsyncFn.AsyncFn<Result, Args>
 }

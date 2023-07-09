@@ -1,16 +1,15 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-floating-promises */
-
 import { renderHook, act } from '@testing-library/react-hooks'
-import pDefer from 'p-defer'
 import { useAsync } from './useAsync'
+import { defer } from './utils'
 
 describe('useAsync', () => {
-  let defer: pDefer.DeferredPromise<string>
+  let deferred: defer.Deferred<string>
   let asyncFn: jest.Mock<Promise<string>, any[]>
 
-  beforeEach(() => {
-    defer = pDefer<string>()
-    asyncFn = jest.fn((..._args: any[]) => defer.promise)
+  beforeEach(async () => {
+    deferred = defer<string>()
+    asyncFn = jest.fn((..._args: any[]) => deferred.promise)
   })
 
   it('return success state after promise resolved', async () => {
@@ -22,20 +21,20 @@ describe('useAsync', () => {
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
         loading: true,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
     latestReRunFn = res.result.current[1]
 
-    defer.resolve(deferValue)
+    deferred.resolve(deferValue)
     await res.waitForNextUpdate()
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
         loading: false,
         value: deferValue,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
@@ -50,19 +49,19 @@ describe('useAsync', () => {
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
         loading: true,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
 
-    defer.reject(fakeError)
+    deferred.reject(fakeError)
     await res.waitForNextUpdate()
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
         loading: false,
         error: fakeError,
-        promise: defer.promise,
+        promise: deferred.promise,
       },
       expect.any(Function),
     ])
@@ -70,11 +69,11 @@ describe('useAsync', () => {
 
   it('support promise finished before mounted', async () => {
     const deferValue = 'a'
-    defer.resolve(deferValue)
+    deferred.resolve(deferValue)
 
     const initialState = {
       loading: true,
-      promise: defer.promise,
+      promise: deferred.promise,
     } as const
 
     const res = renderHook(() => useAsync(asyncFn, [], initialState))
@@ -88,7 +87,7 @@ describe('useAsync', () => {
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
         loading: false,
-        promise: defer.promise,
+        promise: deferred.promise,
         value: deferValue,
       },
       expect.any(Function),

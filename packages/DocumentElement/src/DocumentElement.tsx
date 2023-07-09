@@ -19,9 +19,7 @@ export const _DocumentElementInner: FunctionComponent<DocumentElementProps> = ({
 
 function mergeClassNames(classNames: string[]): string {
   const classNameSet = new Set(classNames.join(' ').split(' '))
-  return Array.from(classNameSet)
-    .filter(Boolean)
-    .join(' ')
+  return Array.from(classNameSet).filter(Boolean).join(' ')
 }
 
 function reducePropsToState(
