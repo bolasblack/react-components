@@ -5,9 +5,11 @@
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
   "main": "lib/index.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "scripts": {
-    "prepublish": "yarn compile",
-    "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json"
+    "prepublish": "pnpm compile",
+    "compile": "rm -rf lib && tsup"
   },
   "peerDependencies": {
     "@types/react": "^16.8.0 || ^16.9.0 || ^18.0.0",

@@ -13,11 +13,11 @@
   "scripts": {
     "postinstall": "patch-package",
     "lint": "eslint \"packages/**/src/**/*.{js,jsx,ts,tsx}\"",
-    "compile": "tsc -b ./tsconfig.compile.json",
+    "compile": "lerna run compile",
     "test": "pnpm lint && pnpm compile && NODE_ENV=test jest --no-cache 'packages/.*/src'",
     "release": "lerna version --sign-git-tag --conventional-commits --create-release github",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build",
+    "storybook:build": "pnpm compile && storybook build",
     "storybook:publish": "./scripts/publish_storybook.sh"
   },
   "prettier": "@c4605/toolconfs/prettierrc",
@@ -115,6 +115,7 @@
     "prop-types": "^15.8.1",
     "storybook": "^7.0.26",
     "trim-right": "^1.0.1",
+    "tsup": "^7.1.0",
     "vite": "^4.4.2"
   }
 }

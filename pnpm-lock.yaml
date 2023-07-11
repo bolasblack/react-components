@@ -69,6 +69,7 @@ importers:
       ts-jest: ^29.0.0
       ts-loader: ^9.0.0
       tslint: ^5.20.1
+      tsup: ^7.1.0
       typescript: ^5.1.6
       vite: ^4.4.2
     dependencies:
@@ -132,6 +133,7 @@ importers:
       prop-types: 15.8.1
       storybook: 7.0.26
       trim-right: 1.0.1
+      tsup: 7.1.0_typescript@5.1.6
       vite: 4.4.2_bqlequn4uid6geddbsqnbhydwq
 
   packages/DocumentElement:
@@ -147,11 +149,8 @@ importers:
   packages/Modal:
     specifiers:
       '@c4605/react-portal': ^0.5.0
-      tsup: ^7.1.0
     dependencies:
       '@c4605/react-portal': link:../Portal
-    devDependencies:
-      tsup: 7.1.0
 
   packages/Popover:
     specifiers:
@@ -4465,7 +4464,7 @@ packages:
       chalk: 4.1.2
       collect-v8-coverage: 1.0.0
       exit: 0.1.2
-      glob: 7.1.6
+      glob: 7.2.3
       graceful-fs: 4.2.11
       istanbul-lib-coverage: 3.2.0
       istanbul-lib-instrument: 5.2.1
@@ -6730,20 +6729,12 @@ packages:
     resolution: {integrity: sha512-7UvmKalWRt1wgjL1RrGxoSJW/0QZFIegpeGvZG9kjp8vrRu55XTHbwnqq2GpXm9uLbcuhxm3IqX9OB4MZR1b2A==}
     dev: true
 
-  /anymatch/3.1.1:
-    resolution: {integrity: sha512-mM8522psRCqzV+6LhomX5wgp25YVibjh8Wj23I5RPkPppSVSjyKD2A2mBJmWGa+KN7f2D6LNh9jkBCeyLktzjg==}
-    engines: {node: '>= 8'}
-    dependencies:
-      normalize-path: 3.0.0
-      picomatch: 2.3.1
-
   /anymatch/3.1.3:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
-    dev: true
 
   /app-root-dir/1.0.2:
     resolution: {integrity: sha512-jlpIfsOoNoafl92Sz//64uQHGSyMrD2vYG5d8o2a4qGvyNCvXur7bzIsWtAC/6flI2RYAp3kv8rsfBtaLm7w0g==}
@@ -7431,7 +7422,7 @@ packages:
     resolution: {integrity: sha512-4QYCEWOcK3OJrxwvyyAOxFuhpvOVCYkr33LPfFNBjAD/w3sEzWsp2BUOkI4l9bHvWioAd0rc6NlHUOEaWkTeqg==}
     engines: {node: '>= 8.10.0'}
     dependencies:
-      anymatch: 3.1.1
+      anymatch: 3.1.3
       braces: 3.0.2
       glob-parent: 5.1.2
       is-binary-path: 2.1.0
@@ -10335,7 +10326,7 @@ packages:
       '@jest/types': 29.6.1
       '@types/graceful-fs': 4.1.6
       '@types/node': 18.16.19
-      anymatch: 3.1.1
+      anymatch: 3.1.3
       fb-watchman: 2.0.1
       graceful-fs: 4.2.11
       jest-regex-util: 29.4.3
@@ -10496,7 +10487,7 @@ packages:
       chalk: 4.1.2
       cjs-module-lexer: 1.2.3
       collect-v8-coverage: 1.0.0
-      glob: 7.1.6
+      glob: 7.2.3
       graceful-fs: 4.2.11
       jest-haste-map: 29.6.0
       jest-message-util: 29.6.1
@@ -14116,7 +14107,7 @@ packages:
       typescript: 5.1.6
     dev: false
 
-  /tsup/7.1.0:
+  /tsup/7.1.0_typescript@5.1.6:
     resolution: {integrity: sha512-mazl/GRAk70j8S43/AbSYXGgvRP54oQeX8Un4iZxzATHt0roW0t6HYDVZIXMw0ZQIpvr1nFMniIVnN5186lW7w==}
     engines: {node: '>=16.14'}
     hasBin: true
@@ -14146,6 +14137,7 @@ packages:
       source-map: 0.8.0-beta.0
       sucrase: 3.32.0
       tree-kill: 1.2.2
+      typescript: 5.1.6
     transitivePeerDependencies:
       - supports-color
       - ts-node

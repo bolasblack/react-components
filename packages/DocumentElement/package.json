@@ -5,9 +5,11 @@
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
   "main": "lib/DocumentElement.js",
+  "module": "lib/DocumentElement.esm.js",
+  "types": "lib/DocumentElement.d.ts",
   "scripts": {
-    "prepublish": "yarn compile",
-    "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json"
+    "prepublish": "pnpm compile",
+    "compile": "rm -rf lib && tsup"
   },
   "dependencies": {
     "@c4605/ts-types": "^0.3.0",
