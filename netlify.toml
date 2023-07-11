@@ -2,6 +2,7 @@
   base = ""
   publish = "storybook-static"
   command = "pnpm storybook:build"
+  environment = { NODE_VERSION = "18.16.0" }
 
 [[redirects]]
   from = "/*"
