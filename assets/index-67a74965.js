@@ -1,0 +1,2 @@
+import{g as o}from"./_commonjsHelpers-042e6b4d.js";var y=function(t,r,a,n){var e=a?a.call(n,t,r):void 0;if(e!==void 0)return!!e;if(t===r)return!0;if(typeof t!="object"||!t||typeof r!="object"||!r)return!1;var s=Object.keys(t),v=Object.keys(r);if(s.length!==v.length)return!1;for(var h=Object.prototype.hasOwnProperty.bind(r),f=0;f<s.length;f++){var l=s[f];if(!h(l))return!1;var u=t[l],i=r[l];if(e=a?a.call(n,u,i,l):void 0,e===!1||e===void 0&&u!==i)return!1}return!0};const p=o(y);export{p as s};
+//# sourceMappingURL=index-67a74965.js.map
