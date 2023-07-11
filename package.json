@@ -3,7 +3,7 @@
   "description": "Some useful React components",
   "main": null,
   "repository": "https://github.com/bolasblack/react-components",
-  "packageManager": "pnpm@7.14.2",
+  "packageManager": "pnpm@7.33.3",
   "author": "c4605 <bolasblack@gmail.com>",
   "license": "MIT",
   "private": true,
