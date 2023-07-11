@@ -3,6 +3,11 @@ import * as ReactDOM from 'react-dom'
 import { SimpleJSON } from '@c4605/ts-types'
 import shallowEqual from 'shallowequal'
 
+export type OnVisibleChangeCallback = (
+  visible: boolean,
+  reason: { event?: Event },
+) => void
+
 export interface PortalProps {
   portalContainerRef?: React.Ref<HTMLElement>
 
@@ -30,7 +35,7 @@ export interface PortalProps {
   /** The visibility of portal */
   visible?: boolean
   /** Will be call when the visibility needs to be changed */
-  onVisibleChange?: (visible: boolean, reason: { event?: Event }) => void
+  onVisibleChange?: OnVisibleChangeCallback
 }
 
 export class Portal extends React.PureComponent<PortalProps> {

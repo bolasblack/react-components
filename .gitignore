@@ -4,6 +4,7 @@ lib
 es
 types
 .docz
+storybook-static
 gh-pages
 coverage
 .envrc

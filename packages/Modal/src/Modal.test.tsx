@@ -1,10 +1,10 @@
-import { createRef } from 'react'
 import * as React from 'react'
+import { createRef } from 'react'
 import { act, Simulate } from 'react-dom/test-utils'
-import { Modal, useModal, ModalProps } from '../src/Modal'
 import { render } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { renderHook } from '@testing-library/react-hooks'
+import { Modal, useModal, ModalProps } from './Modal'
 
 const defaultProps = Modal.defaultProps!
 

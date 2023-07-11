@@ -1,50 +1,31 @@
----
-name: useAsync
----
-
 # @c4/use-async
+
+import { Canvas, Meta } from '@storybook/blocks'
+import * as useAsyncStories from './src/useAsync.stories'
+import * as useAsyncFnStories from './src/useAsyncFn.stories'
+
+<Meta title="Library/use-async" />
 
 ## Usage
 
-### useAsync
+### `useAsync`
 
-```tsx
-import { useAsync } from '@c4/use-async'
+A hook to load data/do asynchronous operations.
 
-export const Component: FC<{ id: string }> = props => {
-  const [reqState, reRun] = useAsync(() => fetch(`/xxx/${props.id}`), [
-    props.id,
-  ])
+Will call function once component mounted, once deps changed:
 
-  return (
-    <>
-      {reqState.loading && <Spin />}
-      {reqState.error && <ErrorMessage error={reqState.error} />}
-      {reqState.value && <Content data={reqState.value} />}
-    </>
-  )
-}
-```
+- will re-call function;
+- will re-generate `reRun` function.
 
-### useAsyncFn
+<Canvas of={useAsyncStories.BasicUsage} />
 
-```tsx
-import { useAsyncFn } from '@c4/use-async'
+### `useAsyncFn`
 
-export const Component: FC<{ id: string }> = props => {
-  const [reqState, reRun] = useAsyncFn(
-    (type: string) => fetch(`/xxx/${type}/${props.id}`),
-    [props.id],
-  )
+A hook to load data/do asynchronous operations.
 
-  useEffect(() => reRun('sometype'), [reRun])
+Will **not** call function automatically, once deps changed:
 
-  return (
-    <>
-      {reqState.loading && <Spin />}
-      {reqState.error && <ErrorMessage error={reqState.error} />}
-      {reqState.value && <Content data={reqState.value} />}
-    </>
-  )
-}
-```
+- will **not** re-call function;
+- will re-generate `reRun` function.
+
+<Canvas of={useAsyncFnStories.BasicUsage} />

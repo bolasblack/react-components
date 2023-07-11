@@ -1,3 +1,4 @@
+import * as React from 'react'
 import {
   FC,
   ReactNode,
@@ -7,20 +8,19 @@ import {
   useEffect,
   Ref,
 } from 'react'
-import * as React from 'react'
-import { Portal, PortalProps } from '@c4605/react-portal'
-import './Modal.scss'
+import { Portal, OnVisibleChangeCallback } from '@c4605/react-portal'
+import cssText from './Modal.css'
 
 export interface ModalProps {
   /**
    * The visibility of modal
    */
-  visible: PortalProps['visible']
+  visible: boolean
 
   /**
    * Will be call when the visibility need to be changed
    */
-  onVisibleChange: PortalProps['onVisibleChange']
+  onVisibleChange: OnVisibleChangeCallback
 
   /**
    * Backdrop style
@@ -98,6 +98,15 @@ export interface ModalProps {
 export const Modal: FC<ModalProps> = function Modal(props) {
   const { visible, onVisibleChange } = props
 
+  useEffect(() => {
+    const el = document.createElement('style')
+    el.textContent = cssText
+    document.head.appendChild(el)
+    return () => {
+      document.head.removeChild(el)
+    }
+  }, [])
+
   const {
     documentElementClassName,
     documentElementClassNameWhenVisible,
@@ -155,7 +164,6 @@ export const Modal: FC<ModalProps> = function Modal(props) {
         portalContainerRef={portalContainerRef}
         className={portalClassName}
         visible={visible}
-        onVisibleChange={onVisibleChange}
         parent={partalParent}
       >
         {backdropElem}
@@ -169,7 +177,6 @@ export const Modal: FC<ModalProps> = function Modal(props) {
       portalContainerRef,
       portalClassName,
       visible,
-      onVisibleChange,
       partalParent,
       backdropElem,
       bodyRef,

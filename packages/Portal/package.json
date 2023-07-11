@@ -19,5 +19,8 @@
     "@types/react-dom": "^16.8.0 || ^16.9.0 || ^18.0.0",
     "react": "^16.8.0 || ^16.9.0 || ^18.0.0",
     "react-dom": "^16.8.0 || ^16.9.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@c4605/react-document-element": "^0.3.2"
   }
 }

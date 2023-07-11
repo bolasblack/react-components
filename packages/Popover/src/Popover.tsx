@@ -199,6 +199,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     if (
       visible === false &&
       reason?.event instanceof MouseEvent &&
+      reason.event.type === 'click' &&
       !this.clickClose(reason.event)
     ) {
       return

@@ -13,8 +13,8 @@ fi
 $PAGES_GIT fetch origin
 $PAGES_GIT reset --hard
 
-yarn
-DOCZ_DEST=$PAGES_WORK_TREE DOCZ_BASE="/react-components" yarn docz:build
+pnpm install
+pnpm storybook:build --output-dir $PAGES_WORK_TREE
 
 if [ -n "$($PAGES_GIT status -s)" ]; then
   $PAGES_GIT add -A

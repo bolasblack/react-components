@@ -1,7 +1,7 @@
 [build]
   base = ""
-  publish = ".docz/dist"
-  command = "yarn compile && yarn docz:build"
+  publish = "storybook-static"
+  command = "pnpm storybook:build"
 
 [[redirects]]
   from = "/*"

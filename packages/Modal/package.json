@@ -9,17 +9,13 @@
   "types": "./lib/Modal.d.ts",
   "scripts": {
     "prepublish": "yarn compile",
-    "compile": "rm -rf lib *.tsbuildinfo && tsc -b ./tsconfig.compile.json && bili"
+    "compile": "rm -rf lib *.tsbuildinfo && tsup"
   },
   "dependencies": {
-    "@c4605/react-portal": "^0.5.0",
-    "@c4605/ts-types": "^0.3.0",
-    "@types/shallowequal": "^1.1.1",
-    "shallowequal": "^1.1.0"
+    "@c4605/react-portal": "^0.5.0"
   },
   "devDependencies": {
-    "bili": "^5.0.0",
-    "rollup-plugin-typescript2": "^0.35.0"
+    "tsup": "^7.1.0"
   },
   "peerDependencies": {
     "@types/react": "^16.8.0 || ^16.9.0 || ^18.0.0",

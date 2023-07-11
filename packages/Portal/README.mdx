@@ -1,124 +1,16 @@
----
-name: Portal
----
-
 # @c4605/react-portal
 
-import { useState, useRef } from 'react'
-import { Playground, Props } from 'docz'
-import { Portal } from './src/Portal'
-import { DocumentElement } from '../DocumentElement'
-import { useInputValue } from '../DocHelpers/useInputValue'
+import { Canvas, Meta } from '@storybook/blocks'
+import * as PortalStories from './src/Portal.stories'
 
 ## Introduction
 
 Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#createportal) replacement. Make most `React.createPortal` use case more easier.
 
-## Properties
+<Meta of={PortalStories} />
 
-<Props of={Portal} />
+## Basic Usage
 
-## Usage
+<Canvas of={PortalStories.BasicUsage} />
 
-<Playground>
-  {() => {
-    const portalContentRef = useRef()
-
-    const [visible, setVisible] = useState(false)
-    
-    const [renderInline, setRenderInline] = useInputValue(false, 'checked')
-
-    const [closeOnClick, setCloseOnClick] = useInputValue(false, 'checked')
-
-    const [closeOnOutsideClick, setCloseOnOutsideClick] = useInputValue(false, 'checked')
-
-    const clickClose = event => {
-      if (!(event.target instanceof HTMLElement)) return
-      if (!portalContentRef.current) return
-      if (closeOnClick) {
-        return portalContentRef.current.contains(event.target)
-      } else if (closeOnOutsideClick) {
-        return !portalContentRef.current.contains(event.target)
-      }
-      return
-    }
-
-    return (
-      <div>
-        <p>
-          <label>
-            renderInline
-            <input
-              type="checkbox"
-              checked={renderInline}
-              onChange={setRenderInline}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            closeOnClick
-            <input
-              type="checkbox"
-              checked={closeOnClick}
-              onChange={setCloseOnClick}
-            />
-          </label>
-        </p>
-        <p>
-          <label>
-            closeOnOutsideClick
-            <input
-              type="checkbox"
-              checked={closeOnOutsideClick}
-              onChange={setCloseOnOutsideClick}
-            />
-          </label>
-        </p>
-        <p>
-          <button type="button" onClick={() => setVisible(true)}>
-            Show Portal
-          </button>
-        </p>
-        <DocumentElement style={visible ? { overflow: 'hidden' } : {}} />
-        <Portal
-          parent={renderInline ? null : undefined}
-          visible={visible}
-          clickClose={clickClose}
-          onVisibleChange={setVisible}
-        >
-          <div
-            style={{
-              position: 'fixed',
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0,
-              background: '#00000050',
-            }}
-          >
-            <div
-              ref={portalContentRef}
-              style={{
-                position: 'absolute',
-                top: '50%',
-                left: '50%',
-                transform: 'translate(-50%, -50%)',
-                minWidth: '300px',
-                minHeight: '300px',
-                background: '#fff',
-              }}
-            >
-              <p>Portal content</p>
-              <p>
-                <button type="button" onClick={() => setVisible(false)}>
-                  Close Portal
-                </button>
-              </p>
-            </div>
-          </div>
-        </Portal>
-      </div>
-    )
-  }}
-</Playground>
+<code>{JSON.stringify(PortalStories)}</code>

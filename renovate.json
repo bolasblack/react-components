@@ -1,5 +1,4 @@
 {
   "extends": ["github>bolasblack/js-toolconfs:renovate"],
-  "ignoreDeps": ["docz", "docz-theme-default"],
   "baseBranches": ["develop"]
 }

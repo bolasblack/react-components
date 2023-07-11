@@ -1,12 +1,7 @@
----
-name: DocumentElement
----
-
 # @c4605/react-document-element
 
-import { useState } from 'react'
-import { Playground, Props } from 'docz'
-import { DocumentElement, _DocumentElementInner } from './src/DocumentElement'
+import { Canvas, Meta } from '@storybook/blocks'
+import * as DocumentElementStories from './src/DocumentElement.stories'
 
 ## Introduction
 
@@ -27,32 +22,8 @@ Inspired by [React Document Title](https://github.com/gaearon/react-document-tit
 
 ## Properties
 
-<Props of={_DocumentElementInner} />
+<Meta of={DocumentElementStories} />
 
-## Usage
+## Basic Usage
 
-<Playground>
-  {() => {
-    const [color, changeColor] = useState('blue')
-
-    return (
-      <DocumentElement
-        className="root-class-name"
-        style={{ '--font-color': 'black' }}
-      >
-        <DocumentElement style={{ '--font-color': color }} />
-        <label>
-          Choose text color:
-          <select value={color} onChange={e => changeColor(e.target.value)}>
-            {['green', 'blue', 'yellow'].map(color => (
-              <option key={color} value={color}>
-                {color}
-              </option>
-            ))}
-          </select>
-        </label>
-        <div style={{ color: 'var(--font-color)' }}>Some text</div>
-      </DocumentElement>
-    )
-  }}
-</Playground>
+<Canvas of={DocumentElementStories.BasicUsage} />

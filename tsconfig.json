@@ -4,6 +4,6 @@
     "target": "es2018",
     "jsx": "react"
   },
-  "include": ["configs", "packages/*/src"],
+  "include": ["configs", "packages/*/src", "packages/*/*.config.ts"],
   "exclude": ["node_modules"]
 }

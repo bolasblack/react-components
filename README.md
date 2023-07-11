@@ -3,7 +3,7 @@
 Some useful react components.
 
 - [DocumentElement](https://react-components.c4605.com/document-element-readme) ([README.mdx](./packages/DocumentElement/README.mdx)): Provides a declarative way to specify `document.documentElement` attributes in a single-page app.
-- [Portal](https://react-components.c4605.com/portal-readme) ([README.mdx](./packages/Portal/README.mdx)): Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#createportal) replacement. Make most `React.createPortal` use case more easier.
+- [Portal](https://react-components.c4605.com/portal-readme) ([README.mdx](./packages/Portal/README.mdx)): Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#createportal) replacement. Make most `React.createPortal` use case easier.
 - [Popover](https://react-components.c4605.com/popover-readme) ([README.mdx](./packages/Popover/README.mdx)): Powerful and highly customizable popover component, can adapt to most use case.
 - [Modal](https://react-components.c4605.com/modal-readme) ([README.mdx](./packages/Modal/README.mdx)): A simple modal component. Provide react hook `useModal`.
 
@@ -11,24 +11,24 @@ Some useful react components.
 
 * https://react-components.c4605.com/
 * or read `README.mdx` in `packages/`;
-* or execute `yarn && yarn docz:dev` to generate [docz](https://github.com/pedronauck/docz).
+* or execute `pnpm install && pnpm storybook` to run a [storybook](https://storybook.js.org/) server.
 
 ## Unit test
 
 ### Run unit test
 
 ```
-yarn test
+pnpm test
 ```
 
 ### Run unit test in watch mode
 
 1. Install [watchman](https://facebook.github.io/watchman/)
-1. `yarn test --watch`
+1. `pnpm test --watch`
 
 ## Release
 
-1. `cp .direnv.example .direnv`
-1. Edit `.direnv`
+1. `cp .envrc.example .envrc`
+1. Edit `.envrc`
 1. Install [direnv](https://direnv.net/)
 1. `direnv allow`
