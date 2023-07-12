@@ -25,7 +25,7 @@ importers:
       '@storybook/blocks': ^7.0.26
       '@storybook/react': ^7.0.26
       '@storybook/react-vite': ^7.0.26
-      '@storybook/testing-library': ^0.0.14-next.2
+      '@storybook/testing-library': ^0.2.0
       '@testing-library/react': ^14.0.0
       '@testing-library/react-hooks': ^8.0.0
       '@testing-library/user-event': ^14.4.3
@@ -119,7 +119,7 @@ importers:
       '@storybook/blocks': 7.0.26_biqbaboplfbrettd7655fr4n2y
       '@storybook/react': 7.0.26_i4rjfizg7pnsmg7p6yi76gfzdq
       '@storybook/react-vite': 7.0.26_dhhknpot5wyhjutmawem54bx5u
-      '@storybook/testing-library': 0.0.14-next.2
+      '@storybook/testing-library': 0.2.0
       '@typescript-eslint/eslint-plugin': 6.0.0_uwybw7dvpccomx24ub7bwo4yva
       '@typescript-eslint/experimental-utils': 5.61.0_iqf7tbmerllfqanu4l3d6aqdn4
       '@typescript-eslint/parser': 6.0.0_iqf7tbmerllfqanu4l3d6aqdn4
@@ -5933,13 +5933,11 @@ packages:
       - supports-color
     dev: true
 
-  /@storybook/testing-library/0.0.14-next.2:
-    resolution: {integrity: sha512-i/SLSGm0o978ELok/SB4Qg1sZ3zr+KuuCkzyFqcCD0r/yf+bG35aQGkFqqxfSAdDxuQom0NO02FE+qys5Eapdg==}
+  /@storybook/testing-library/0.2.0:
+    resolution: {integrity: sha512-Ff6jNnrsosmDshgCf0Eb5Cz7IA34p/1Ps5N3Kp3598kfXpBSccSkQQvVFUXC3kIHw/isIXWPqntZuKqnWUz7Gw==}
     dependencies:
-      '@storybook/client-logger': 7.0.26
-      '@storybook/instrumenter': 7.0.26
-      '@testing-library/dom': 8.20.1
-      '@testing-library/user-event': 13.5.0_szfc7t2zqsdonxwckqxkjn2the
+      '@testing-library/dom': 9.3.1
+      '@testing-library/user-event': 14.4.3_@testing-library+dom@9.3.1
       ts-dedent: 2.2.0
     dev: true
 
@@ -5966,20 +5964,6 @@ packages:
       file-system-cache: 2.3.0
     dev: true
 
-  /@testing-library/dom/8.20.1:
-    resolution: {integrity: sha512-/DiOQ5xBxgdYRC8LNk7U+RWat0S3qRLeIw3ZIkMQ9kkVlRmwD/Eg8k8CqIpD6GW7u20JIUOfMKbxtiLutpjQ4g==}
-    engines: {node: '>=12'}
-    dependencies:
-      '@babel/code-frame': 7.22.5
-      '@babel/runtime': 7.22.6
-      '@types/aria-query': 5.0.1
-      aria-query: 5.1.3
-      chalk: 4.1.2
-      dom-accessibility-api: 0.5.16
-      lz-string: 1.5.0
-      pretty-format: 27.5.1
-    dev: true
-
   /@testing-library/dom/9.3.1:
     resolution: {integrity: sha512-0DGPd9AR3+iDTjGoMpxIkAsUihHZ3Ai6CneU6bRRrffXMgzCdlNk43jTrD2/5LT6CBb3MWTP8v510JzYtahD2w==}
     engines: {node: '>=14'}
@@ -5992,7 +5976,6 @@ packages:
       dom-accessibility-api: 0.5.16
       lz-string: 1.5.0
       pretty-format: 27.5.1
-    dev: false
 
   /@testing-library/react-hooks/8.0.1_jwg6f5fwfrf3ccemh54bxicewe:
     resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
@@ -6032,22 +6015,21 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@testing-library/user-event/13.5.0_szfc7t2zqsdonxwckqxkjn2the:
-    resolution: {integrity: sha512-5Kwtbo3Y/NowpkbRuSepbyMFkZmHgD+vPzYB/RJ4oxt5Gj/avFFBYjhw27cqSVPVw/3a67NK1PbiIr9k4Gwmdg==}
-    engines: {node: '>=10', npm: '>=6'}
-    peerDependencies:
-      '@testing-library/dom': '>=7.21.4'
-    dependencies:
-      '@babel/runtime': 7.22.6
-      '@testing-library/dom': 8.20.1
-    dev: true
-
   /@testing-library/user-event/14.4.3:
     resolution: {integrity: sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
       '@testing-library/dom': '>=7.21.4'
     dev: false
+
+  /@testing-library/user-event/14.4.3_@testing-library+dom@9.3.1:
+    resolution: {integrity: sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      '@testing-library/dom': '>=7.21.4'
+    dependencies:
+      '@testing-library/dom': 9.3.1
+    dev: true
 
   /@tootallnate/once/2.0.0:
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
@@ -10324,7 +10306,7 @@ packages:
       chalk: 4.1.2
       diff-sequences: 29.4.3
       jest-get-type: 29.4.3
-      pretty-format: 29.6.0
+      pretty-format: 29.6.1
 
   /jest-docblock/29.4.3:
     resolution: {integrity: sha512-fzdTftThczeSD9nZ3fzA/4KkHtnmllawWrXO69vtI+L9WjEIuXWs4AmyME7lN5hU7dB0sHhuPfcKofRsUb/2Fg==}
@@ -12532,6 +12514,7 @@ packages:
       '@jest/schemas': 29.6.0
       ansi-styles: 5.2.0
       react-is: 18.2.0
+    dev: false
 
   /pretty-format/29.6.1:
     resolution: {integrity: sha512-7jRj+yXO0W7e4/tSJKoR7HRIHLPPjtNaUGG2xxKQnGvPNRkgWcQ0AZX6P4KBRJN4FcTBWb3sa7DVUJmocYuoog==}
@@ -12540,7 +12523,6 @@ packages:
       '@jest/schemas': 29.6.0
       ansi-styles: 5.2.0
       react-is: 18.2.0
-    dev: false
 
   /pretty-hrtime/1.0.3:
     resolution: {integrity: sha512-66hKPCr+72mlfiSjlEB1+45IjXSqvVAIy6mocupoww4tBFE9R9IhwwUGoI4G++Tc9Aq+2rxOt0RFU6gPcrte0A==}
