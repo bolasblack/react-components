@@ -117,5 +117,10 @@
     "trim-right": "^1.0.1",
     "tsup": "^7.1.0",
     "vite": "^4.4.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "lerna@7.1.1": "patches/lerna@7.1.1.patch"
+    }
   }
 }

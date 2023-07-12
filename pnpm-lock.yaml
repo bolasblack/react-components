@@ -11,6 +11,11 @@ overrides:
   react-dom: ^18.0.0
   react-test-renderer: ^18.0.0
 
+patchedDependencies:
+  lerna@7.1.1:
+    hash: p7xtpvp4rchtexwkagfqgdn5wu
+    path: patches/lerna@7.1.1.patch
+
 importers:
 
   .:
@@ -183,7 +188,7 @@ importers:
         version: 0.6.12(eslint@8.44.0)(typescript@5.1.6)
       lerna:
         specifier: ^7.0.0
-        version: 7.1.1
+        version: 7.1.1(patch_hash=p7xtpvp4rchtexwkagfqgdn5wu)
       prop-types:
         specifier: ^15.8.1
         version: 15.8.1
@@ -11128,7 +11133,7 @@ packages:
     hasBin: true
     dev: false
 
-  /lerna@7.1.1:
+  /lerna@7.1.1(patch_hash=p7xtpvp4rchtexwkagfqgdn5wu):
     resolution: {integrity: sha512-rjivAl3bYu2+lWOi90vy0tYFgwBYPMiNkR/DuEWZC08wle5dsbOZ/SlXeLk9+kzbF89Bt5P6p+qF78A2tJsWPA==}
     engines: {node: ^14.17.0 || >=16.0.0}
     hasBin: true
@@ -11215,6 +11220,7 @@ packages:
       - encoding
       - supports-color
     dev: true
+    patched: true
 
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}
