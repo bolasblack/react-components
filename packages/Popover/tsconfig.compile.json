@@ -1,9 +1,0 @@
-{
-  "extends": "../../configs/tsconfig.compile",
-  "compilerOptions": {
-    "rootDir": "./src",
-    "outDir": "./lib"
-  },
-  "include": ["./src"],
-  "references": [{ "path": "../Portal/tsconfig.compile.json" }]
-}
