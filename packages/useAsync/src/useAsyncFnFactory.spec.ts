@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-floating-promises */
-
 import { renderHook, act } from '@testing-library/react-hooks'
-import { useAsyncFn } from './useAsyncFn'
-import { defer } from './utils'
+import { useAsyncFnFactory } from './useAsyncFnFactory'
+import { defer, sleep } from './utils'
 
 describe('useAsyncFn', () => {
   let deferred: defer.Deferred<string>
@@ -15,12 +13,12 @@ describe('useAsyncFn', () => {
 
   it('return success state after promise resolved', async () => {
     const deferValue = 'a'
-    const res = renderHook(() => useAsyncFn(asyncFn, []))
-    let latestReRunFn: useAsyncFn.AsyncFn | null = null
+    const res = renderHook(() => useAsyncFnFactory(() => asyncFn, []))
+    let latestReRunFn: useAsyncFnFactory.AsyncFn | null = null
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
-      <useAsyncFn.State<string>>{
+      <useAsyncFnFactory.State<string>>{
         loading: false,
       },
       expect.any(Function),
@@ -28,7 +26,7 @@ describe('useAsyncFn', () => {
     latestReRunFn = res.result.current[1]
 
     act(() => {
-      expect(res.result.current[1](1, 2, 3)).resolves.toEqual({
+      void expect(res.result.current[1](1, 2, 3)).resolves.toEqual({
         loading: false,
         value: deferValue,
         promise: deferred.promise,
@@ -37,7 +35,7 @@ describe('useAsyncFn', () => {
     expect(asyncFn).toBeCalledTimes(1)
     expect(asyncFn).toBeCalledWith(1, 2, 3)
     expect(res.result.current).toEqual([
-      <useAsyncFn.State<string>>{
+      <useAsyncFnFactory.State<string>>{
         loading: true,
         promise: deferred.promise,
       },
@@ -46,11 +44,13 @@ describe('useAsyncFn', () => {
     expect(res.result.current[1]).toBe(latestReRunFn)
     latestReRunFn = res.result.current[1]
 
-    deferred.resolve(deferValue)
-    await res.waitForNextUpdate()
+    await act(async () => {
+      deferred.resolve(deferValue)
+      await deferred.promise
+    })
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsyncFn.State<string>>{
+      <useAsyncFnFactory.State<string>>{
         loading: false,
         value: deferValue,
         promise: deferred.promise,
@@ -62,18 +62,18 @@ describe('useAsyncFn', () => {
 
   it('return error state after promise rejected', async () => {
     const fakeError = new Error()
-    const res = renderHook(() => useAsyncFn(asyncFn, []))
+    const res = renderHook(() => useAsyncFnFactory(() => asyncFn, []))
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
-      <useAsyncFn.State<string>>{
+      <useAsyncFnFactory.State<string>>{
         loading: false,
       },
       expect.any(Function),
     ])
 
     act(() => {
-      expect(res.result.current[1]()).resolves.toEqual({
+      void expect(res.result.current[1]()).resolves.toEqual({
         loading: false,
         error: fakeError,
         promise: deferred.promise,
@@ -84,7 +84,7 @@ describe('useAsyncFn', () => {
     await res.waitForNextUpdate()
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsyncFn.State<string>>{
+      <useAsyncFnFactory.State<string>>{
         loading: false,
         error: fakeError,
         promise: deferred.promise,
@@ -102,7 +102,9 @@ describe('useAsyncFn', () => {
       promise: deferred.promise,
     } as const
 
-    const res = renderHook(() => useAsyncFn(asyncFn, [], initialState))
+    const res = renderHook(() =>
+      useAsyncFnFactory(() => asyncFn, [], initialState),
+    )
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current[0]).toBe(initialState)
@@ -111,7 +113,7 @@ describe('useAsyncFn', () => {
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
-      <useAsyncFn.State<string>>{
+      <useAsyncFnFactory.State<string>>{
         loading: false,
         promise: deferred.promise,
         value: deferValue,
@@ -122,16 +124,17 @@ describe('useAsyncFn', () => {
 
   it('regenerate rerun function when deps changed', async () => {
     const res = renderHook(
-      (props: { some: number }) => useAsyncFn(asyncFn, [props.some]),
+      (props: { some: number }) =>
+        useAsyncFnFactory(() => () => asyncFn(), [props.some]),
       { initialProps: { some: 0 } },
     )
     const [initialState, initialReRun] = res.result.current
 
-    act(() => void res.rerender({ some: 0 }))
+    act(() => res.rerender({ some: 0 }))
     expect(res.result.current[0]).toBe(initialState)
     expect(res.result.current[1]).toBe(initialReRun)
 
-    act(() => void res.rerender({ some: 1 }))
+    act(() => res.rerender({ some: 1 }))
     expect(res.result.current[0]).toBe(initialState)
     expect(res.result.current[1]).not.toBe(initialReRun)
   })
@@ -139,33 +142,44 @@ describe('useAsyncFn', () => {
   it('handle async race condition safely', async () => {
     let resolvedTimes = 0
     const asyncFn = jest.fn(
-      (val: string, timeout: number) =>
-        new Promise(resolve => {
-          setTimeout(() => {
-            resolve(val)
-            resolvedTimes++
-          }, timeout)
-        }),
+      async (val: string, timeoutPromise: Promise<void>) => {
+        await timeoutPromise
+        resolvedTimes++
+        return val
+      },
     )
 
     const res = renderHook(
-      (props: { some: number }) => useAsyncFn(asyncFn, [props.some]),
+      (props: { some: number }) =>
+        useAsyncFnFactory(() => asyncFn, [props.some]),
       { initialProps: { some: 0 } },
     )
 
-    act(() => {
-      res.result.current[1]('a', 100)
-      res.result.current[1]('b', 10)
+    // deferA will never resolve
+    const deferA = defer<void>()
+    act(() => void res.result.current[1]('a', deferA.promise))
+    const deferB = defer<void>()
+    act(() => void res.result.current[1]('b', deferB.promise))
+    const deferC = defer<void>()
+    act(() => void res.result.current[1]('c', deferC.promise))
+
+    await sleep(10)
+    await act(() => {
+      deferC.resolve()
+      return deferC.promise
     })
 
-    await res.waitForNextUpdate()
-    await res.waitForNextUpdate()
+    await sleep(10)
+    await act(() => {
+      deferB.resolve()
+      return deferB.promise
+    })
 
     expect(resolvedTimes).toBe(2)
     expect(res.result.current[0]).toEqual(
       expect.objectContaining({
         loading: false,
-        value: 'b',
+        value: 'c',
       }),
     )
   })

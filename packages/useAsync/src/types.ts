@@ -1,27 +1,37 @@
-export interface AsyncState$Idle {
-  promise?: undefined
-  loading: false
-  error?: undefined
-  value?: undefined
-}
+export type AsyncState<T> =
+  | AsyncState.Idle
+  | AsyncState.Loading<T>
+  | AsyncState.Success<T>
+  | AsyncState.Failed<T>
 
-export interface AsyncState$Loading<T> {
-  promise: Promise<T>
-  loading: true
-  error?: undefined
-  value?: undefined
-}
+export namespace AsyncState {
+  export type Settled<T> = Success<T> | Failed<T>
 
-export interface AsyncState$Error<T> {
-  promise: Promise<T>
-  loading: false
-  error: Error
-  value?: undefined
-}
+  export interface Idle {
+    readonly promise?: undefined
+    readonly loading: false
+    readonly error?: undefined
+    readonly value?: undefined
+  }
 
-export interface AsyncState$Success<T> {
-  promise: Promise<T>
-  loading: false
-  error?: undefined
-  value: T
+  export interface Loading<T> {
+    readonly promise: Promise<T>
+    readonly loading: true
+    readonly error?: undefined
+    readonly value?: undefined
+  }
+
+  export interface Failed<T> {
+    readonly promise: Promise<T>
+    readonly loading: false
+    readonly error: unknown
+    readonly value?: undefined
+  }
+
+  export interface Success<T> {
+    readonly promise: Promise<T>
+    readonly loading: false
+    readonly error?: undefined
+    readonly value: T
+  }
 }

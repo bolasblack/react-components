@@ -6,6 +6,6 @@ export default generateConfig({
     'src/types.ts',
     'src/utils.ts',
     'useAsync.ts',
-    'useAsyncFn.ts',
+    'useAsyncFnFactory.ts',
   ],
 })

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useRef } from 'react'
 import { Meta, StoryFn } from '@storybook/react'
-import { useAsyncFn } from './useAsyncFn'
+import { useAsyncFnFactory } from './useAsyncFnFactory'
 
 export default {
-  title: 'Library/use-async/useAsyncFn',
+  title: 'Library/use-async/useAsyncFnFactory',
 } satisfies Meta
 
 export const BasicUsage: StoryFn = () => {
@@ -13,24 +13,27 @@ export const BasicUsage: StoryFn = () => {
     reject: (error: Error) => void
   }>(null)
 
-  const [reqState, reRun] = useAsyncFn(async (timeWhenClick?: string) => {
-    return new Promise<string>((resolve, reject) => {
-      callbacksRef.current = {
-        resolve() {
-          if (timeWhenClick == null) {
-            resolve(
-              `Current time: ${new Date().toString()}, issued after initialized`,
-            )
-          } else {
-            resolve(
-              `Current time: ${new Date().toString()}, issued when clicked at ${timeWhenClick}`,
-            )
-          }
-        },
-        reject,
-      }
-    })
-  }, [])
+  const [reqState, reRun] = useAsyncFnFactory(
+    () => async (timeWhenClick?: string) => {
+      return new Promise<string>((resolve, reject) => {
+        callbacksRef.current = {
+          resolve() {
+            if (timeWhenClick == null) {
+              resolve(
+                `Current time: ${new Date().toString()}, issued after initialized`,
+              )
+            } else {
+              resolve(
+                `Current time: ${new Date().toString()}, issued when clicked at ${timeWhenClick}`,
+              )
+            }
+          },
+          reject,
+        }
+      })
+    },
+    [],
+  )
 
   return (
     <>
@@ -52,8 +55,10 @@ export const BasicUsage: StoryFn = () => {
 
       <p>
         {reqState.loading && <span>Loading...</span>}
-        {reqState.error && (
-          <span style={{ color: 'red' }}>{reqState.error.message}</span>
+        {(reqState.error as any) && (
+          <span style={{ color: 'red' }}>
+            {(reqState.error as any).message}
+          </span>
         )}
         {reqState.value && (
           <span style={{ color: 'green' }}>{reqState.value}</span>

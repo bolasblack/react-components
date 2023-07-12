@@ -2,7 +2,7 @@
 
 import { Canvas, Meta } from '@storybook/blocks'
 import * as useAsyncStories from './src/useAsync.stories'
-import * as useAsyncFnStories from './src/useAsyncFn.stories'
+import * as useAsyncFnFactoryStories from './src/useAsyncFnFactory.stories'
 
 <Meta title="Library/use-async" />
 
@@ -19,13 +19,13 @@ Will call function once component mounted, once deps changed:
 
 <Canvas of={useAsyncStories.BasicUsage} />
 
-### `useAsyncFn`
+### `useAsyncFnFactory`
 
 A hook to load data/do asynchronous operations.
 
 Will **not** call function automatically, once deps changed:
 
 - will **not** re-call function;
-- will re-generate `reRun` function.
+- will call `fnFactory` to try re-generate async fn.
 
-<Canvas of={useAsyncFnStories.BasicUsage} />
+<Canvas of={useAsyncFnFactoryStories.BasicUsage} />

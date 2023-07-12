@@ -52,8 +52,10 @@ export const BasicUsage: StoryFn = () => {
 
       <p>
         {reqState.loading && <span>Loading...</span>}
-        {reqState.error && (
-          <span style={{ color: 'red' }}>{reqState.error.message}</span>
+        {(reqState.error as any) && (
+          <span style={{ color: 'red' }}>
+            {(reqState.error as any).message}
+          </span>
         )}
         {reqState.value && (
           <span style={{ color: 'green' }}>{reqState.value}</span>

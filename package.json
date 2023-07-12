@@ -31,7 +31,7 @@
       "^.+\\.tsx?$": "ts-jest"
     },
     "moduleNameMapper": {
-      "\\.(css|less|scss)$": "identity-obj-proxy"
+      "\\.(css|less|scss)$": "<rootDir>/configs/mockInlineStyleModule.ts"
     },
     "testMatch": [
       "**/?(*.)+(spec|test).ts?(x)"

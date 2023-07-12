@@ -1,7 +1,6 @@
-/* eslint-disable @typescript-eslint/consistent-type-assertions, @typescript-eslint/no-floating-promises */
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useAsync } from './useAsync'
-import { defer } from './utils'
+import { defer, sleep } from './utils'
 
 describe('useAsync', () => {
   let deferred: defer.Deferred<string>
@@ -71,19 +70,17 @@ describe('useAsync', () => {
     const deferValue = 'a'
     deferred.resolve(deferValue)
 
-    const initialState = {
+    const res = renderHook(() => useAsync(asyncFn, []))
+
+    expect(asyncFn).toBeCalledTimes(1)
+    expect(res.result.current[0]).toStrictEqual({
       loading: true,
       promise: deferred.promise,
-    } as const
-
-    const res = renderHook(() => useAsync(asyncFn, [], initialState))
-
-    expect(asyncFn).toBeCalledTimes(0)
-    expect(res.result.current[0]).toBe(initialState)
+    })
 
     await res.waitForNextUpdate()
 
-    expect(asyncFn).toBeCalledTimes(0)
+    expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
         loading: false,
@@ -136,15 +133,16 @@ describe('useAsync', () => {
   })
 
   it('handle async race condition safely', async () => {
+    let calledTimes = 0
     let resolvedTimes = 0
+    const deferA = defer<void>() // will never be resolved
     const asyncFn = jest.fn(
-      (val = 'a', timeout = 100) =>
-        new Promise(resolve => {
-          setTimeout(() => {
-            resolve(val)
-            resolvedTimes++
-          }, timeout)
-        }),
+      async (val = 'a', timeoutPromise = deferA.promise) => {
+        calledTimes++
+        await timeoutPromise
+        resolvedTimes++
+        return val
+      },
     )
 
     const res = renderHook(
@@ -152,16 +150,26 @@ describe('useAsync', () => {
       { initialProps: { some: 0 } },
     )
 
-    act(() => {
-      res.result.current[1]('b', 50)
-      res.result.current[1]('c', 10)
+    const deferB = defer<void>()
+    act(() => void res.result.current[1]('b', deferB.promise))
+
+    const deferC = defer<void>()
+    act(() => void res.result.current[1]('c', deferC.promise))
+
+    await sleep(10)
+    await act(() => {
+      deferC.resolve()
+      return deferC.promise
     })
 
-    await res.waitForNextUpdate()
-    await res.waitForNextUpdate()
-    await res.waitForNextUpdate()
+    await sleep(10)
+    await act(() => {
+      deferB.resolve()
+      return deferB.promise
+    })
 
-    expect(resolvedTimes).toBe(3)
+    expect(calledTimes).toBe(3)
+    expect(resolvedTimes).toBe(2)
     expect(res.result.current[0]).toEqual(
       expect.objectContaining({
         loading: false,
