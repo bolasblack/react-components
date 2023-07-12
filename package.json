@@ -15,7 +15,7 @@
     "lint": "eslint \"packages/**/src/**/*.{js,jsx,ts,tsx}\"",
     "compile": "lerna run compile",
     "test": "pnpm lint && pnpm compile && NODE_ENV=test jest --no-cache 'packages/.*/src'",
-    "release": "lerna version --sign-git-tag --conventional-commits --create-release github",
+    "release": "lerna version --sign-git-tag --conventional-commits",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "pnpm compile && storybook build",
     "storybook:publish": "./scripts/publish_storybook.sh"
