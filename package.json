@@ -116,7 +116,7 @@
     "storybook": "^7.0.26",
     "trim-right": "^1.0.1",
     "tsup": "^7.1.0",
-    "vite": "^4.4.2"
+    "vite": "^5.0.0"
   },
   "pnpm": {
     "patchedDependencies": {
