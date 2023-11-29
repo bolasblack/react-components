@@ -96,8 +96,8 @@ importers:
         specifier: ^13.0.0
         version: 13.2.3
       marked:
-        specifier: ^5.0.0
-        version: 5.1.0
+        specifier: ^11.0.0
+        version: 11.0.0
       patch-package:
         specifier: ^8.0.0
         version: 8.0.0
@@ -11569,8 +11569,8 @@ packages:
       react: 18.2.0
     dev: true
 
-  /marked@5.1.0:
-    resolution: {integrity: sha512-z3/nBe7aTI8JDszlYLk7dDVNpngjw0o1ZJtrA9kIfkkHcIF+xH7mO23aISl4WxP83elU+MFROgahqdpd05lMEQ==}
+  /marked@11.0.0:
+    resolution: {integrity: sha512-2GsW34uXaFEGTQ/+3rCnNC6vUYTAgFuDLGl70v/aWinA5mIJtTrrFAmfbLOfVvgPyxXuDVL9He/7reCK+6j3Sw==}
     engines: {node: '>= 18'}
     hasBin: true
     dev: false
