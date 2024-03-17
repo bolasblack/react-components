@@ -211,13 +211,13 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@types/react':
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.14
       '@types/react-side-effect':
         specifier: ^1.1.1
         version: 1.1.1
       react:
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.0
       react-side-effect:
         specifier: ^2.1.0
@@ -229,10 +229,10 @@ importers:
         specifier: ^0.5.0
         version: link:../Portal
       '@types/react':
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.14
       react:
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.0
 
   packages/Popover:
@@ -244,10 +244,10 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@types/react':
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.14
       react:
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.0
 
   packages/Portal:
@@ -256,19 +256,19 @@ importers:
         specifier: ^0.3.0
         version: 0.3.0
       '@types/react':
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.14
       '@types/react-dom':
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.6
       '@types/shallowequal':
         specifier: ^1.1.1
         version: 1.1.1
       react:
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.0
       react-dom:
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.0(react@18.2.0)
       shallowequal:
         specifier: ^1.1.0
@@ -281,10 +281,10 @@ importers:
   packages/useAsync:
     dependencies:
       '@types/react':
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.14
       react:
-        specifier: ^16.8.0 || ^16.9.0 || ^18.0.0
+        specifier: ^18.0.0
         version: 18.2.0
 
 packages:
@@ -3960,7 +3960,7 @@ packages:
   /@emotion/use-insertion-effect-with-fallbacks@1.0.1(react@18.2.0):
     resolution: {integrity: sha512-jT/qyKZ9rzLErtrjGgdkMBn2OP8wl0G3sQlBb3YPryvKHsjvINUhVaPFfP+fpBcOkmrVOVEEHQFJ7nbj2TH2gw==}
     peerDependencies:
-      react: '>=16.8.0'
+      react: ^18.0.0
     dependencies:
       react: 18.2.0
     dev: true
@@ -4761,7 +4761,7 @@ packages:
   /@mdx-js/react@2.3.0(react@18.2.0):
     resolution: {integrity: sha512-zQH//gdOmuu7nt2oJR29vFhDv88oGPmVw6BggmrHeMI+xgEkp1B2dX9/bMBSYtK0dyLX/aOmesKS09g222K1/g==}
     peerDependencies:
-      react: '>=16'
+      react: ^18.0.0
     dependencies:
       '@types/mdx': 2.0.5
       '@types/react': 18.2.14
@@ -5174,8 +5174,8 @@ packages:
   /@storybook/addon-actions@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-vVoqE0Zw0g1PPnGfho8vRwjpXhQCpRNBQ/2U83/CSodHWL/MBYENG0XMby90TC72M26gNmEh0dn1YCUXvLdiew==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5205,8 +5205,8 @@ packages:
   /@storybook/addon-backgrounds@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-sjTkOnSsVBBl1GruVVsNKWEuLCbKjkNun1mzIklfYAiHz9hTZIhe9MA2SGZoDozMUDIXQqSoMDEc3rnDtfqsnQ==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5230,8 +5230,8 @@ packages:
   /@storybook/addon-controls@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-mp1WuOYCPvR33orHn0XPABY5roF9Le8HnZwTpvfkrRMeMqLnYLnkCTZqY3JN/IOVlyQuYdqodP5CPDHNDLmvVg==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5259,8 +5259,8 @@ packages:
   /@storybook/addon-docs@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-C8DOwfmPBWDUS1IJbyJxykgVVHVzSSL+JFh3FwtF0hsqwjlNW4OvGDFbz0oAxyxs4V46xVcvh4E95e3GkW36BQ==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@babel/core': 7.22.8
       '@babel/plugin-transform-react-jsx': 7.22.5(@babel/core@7.22.8)
@@ -5293,8 +5293,8 @@ packages:
   /@storybook/addon-essentials@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-r+IOtxbIqlCKO8fDgLppubYm+GEW3ZDxjPwXMQdDGem9ENpz0QLKb49r89+UYqnnaYjuYKjDNUOqy0gX2HfUXQ==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@storybook/addon-actions': 7.0.26(react-dom@18.2.0)(react@18.2.0)
       '@storybook/addon-backgrounds': 7.0.26(react-dom@18.2.0)(react@18.2.0)
@@ -5328,8 +5328,8 @@ packages:
   /@storybook/addon-interactions@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-trIbPFLdxF6XgGORhx8eSGmGZ/4/AekJyFluf2lgutGi4TPL5Xzrx3o1kTFPVdLAPplBuDIlVI4HSGHHH2zeTw==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5359,8 +5359,8 @@ packages:
   /@storybook/addon-links@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-og+8AUAUpHsT+MVjhdQmRNJw9RUkHn5FFoou003b9V4UlPPNDYTo/tNEqOhUXn2l/ESAROJlR/q/8Qjdes24pA==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5384,8 +5384,8 @@ packages:
   /@storybook/addon-measure@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-iAnI6q3GB8uSydK+S4m4ANpy0GpMpHhmU0oBtu6OmyyzHUH1RJ7/fGfBnzx6YT+rIOlqSFocxYGn74ylsp33Wg==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5406,8 +5406,8 @@ packages:
   /@storybook/addon-outline@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-oL7D0IWO0M6hMw5cWEC6JdKXlGadlVIdhIrVN+0gdFxuxCHTGpebQ02DCvyfls29UssEOxPaO1XMdu9tDlctbg==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5429,8 +5429,8 @@ packages:
   /@storybook/addon-toolbars@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-DrwqcWuCLjaTNFtAYUxO2VaLrr2ibhB3ZQwW7J6a4YFCJaV49wempGPq3BzTWvrPUtMxGp7J3ZusdH9jBgCzjA==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5449,8 +5449,8 @@ packages:
   /@storybook/addon-viewport@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-veAYxnR11sojXC7tlnBZ/USiafhWCsZNvjxmywl/XCh3MeDGFFDb2NN1s/7irAYXfNMOhgPGZED19BN9cQ8QRQ==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     peerDependenciesMeta:
       react:
         optional: true
@@ -5473,8 +5473,8 @@ packages:
   /@storybook/blocks@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-VNYB6Y1Ocja8HVg4Bm1w7LvqRSEc9aLVD8BnI8BInHvekvxhaxTkfpA18qds7d8+RmerrJqAUhGx0jkIB/cvwA==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@storybook/channels': 7.0.26
       '@storybook/client-logger': 7.0.26
@@ -5673,8 +5673,8 @@ packages:
   /@storybook/components@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-n0TVWEF4Bc9JAyEIaN0PqwglbaYYRcPVG7ka+5wgGmBiuDlWI1SXd4EXxv2u0mVibHvtkHvOn6/GaZ1vG45p6g==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.26
       '@storybook/csf': 0.1.1
@@ -5852,8 +5852,8 @@ packages:
   /@storybook/manager-api@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-/2p6lU7r30qMXob/UnzRL9yq7XjoE+YQXv1KhrcePfMBARbelYw9RYhYT/AkXGtb9/Fa95uG3lNvoDLC1IQfMQ==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@storybook/channels': 7.0.26
       '@storybook/client-logger': 7.0.26
@@ -5922,8 +5922,8 @@ packages:
   /@storybook/react-dom-shim@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-heobG4IovYAD9fo7qmUHylCSQjDd1eXDCOaTiy+XVKobHAJgkz1gKqbaFSP6KLkPE4cKyScku2K9mY0tcKIhMw==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -5933,8 +5933,8 @@ packages:
     resolution: {integrity: sha512-yDkZAvlJ9RcXSuGZy8NdDhI394P7CRme7x6VtpgCi+iPaVW9A5laK7zOe1ewYnAcbKH6g7EJWQWDz2+PqAGiFw==}
     engines: {node: '>=16'}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
       vite: ^3.0.0 || ^4.0.0
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.2.1(typescript@5.1.6)(vite@4.4.2)
@@ -5960,8 +5960,8 @@ packages:
     resolution: {integrity: sha512-+YK/1vF2Pd/PX7Ss5yPCIh9hee7iMVbu86gdjV9n9r6G244jQ7HLtdA01JKfq92/UgoysSWUjUECrxrUvcsh5w==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
       typescript: '*'
     peerDependenciesMeta:
       typescript:
@@ -5999,8 +5999,8 @@ packages:
   /@storybook/router@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-OfLittKxdahsgKsmQFoBX9q5tN/aqKMhhc/WbW88UPAQCUcEuazB0CwM+LI9YXY+n5L+vpLI4lGlgaqvPy4hHw==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@storybook/client-logger': 7.0.26
       memoizerific: 1.11.3
@@ -6037,8 +6037,8 @@ packages:
   /@storybook/theming@7.0.26(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-7hxpT2yq+xZonSsEZHOF+HDHx6GE0qlys3EQ63K9XCJ8VeBnq9M5zHvMK9iXl90093ufxpvWsfDWgtja2zvmTw==}
     peerDependencies:
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1(react@18.2.0)
       '@storybook/client-logger': 7.0.26
@@ -6074,10 +6074,10 @@ packages:
     resolution: {integrity: sha512-Aqhl2IVmLt8IovEVarNDFuJDVWVvhnr9/GCU6UUnrYXwgDFF9h2L2o2P9KBni1AST5sT6riAyoukFLyjQUgD/g==}
     engines: {node: '>=12'}
     peerDependencies:
-      '@types/react': ^16.9.0 || ^17.0.0
-      react: ^16.9.0 || ^17.0.0
-      react-dom: ^16.9.0 || ^17.0.0
-      react-test-renderer: ^16.9.0 || ^17.0.0
+      '@types/react': ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
+      react-test-renderer: ^18.0.0
     peerDependenciesMeta:
       '@types/react':
         optional: true
@@ -11564,7 +11564,7 @@ packages:
     resolution: {integrity: sha512-9HrdzBAo0+sFz9ZYAGT5fB8ilzTW+q6lPocRxrIesMO+aB40V9MgFfbfMXxlGjf22OpRy+IXlvVaQenicdpgbg==}
     engines: {node: '>= 10'}
     peerDependencies:
-      react: '>= 0.14.0'
+      react: ^18.0.0
     dependencies:
       react: 18.2.0
     dev: true
@@ -12993,8 +12993,8 @@ packages:
   /react-colorful@5.6.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-1exovf0uGTGyq5mXQT0zgQ80uvj2PCwvF8zY1RN9/vbJVSjSo3fsB/4L3ObbF7u70NduSiK4xu4Y6q1MHoUGEw==}
     peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -13030,7 +13030,7 @@ packages:
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.0.0
     dependencies:
       loose-envify: 1.4.0
       react: 18.2.0
@@ -13039,8 +13039,8 @@ packages:
   /react-element-to-jsx-string@15.0.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-UDg4lXB6BzlobN60P8fHWVPX3Kyw8ORrTeBtClmIlGdkOOE+GYQSFvmEU5iLLpwp/6v42DINwNcwOhOLfQ//FQ==}
     peerDependencies:
-      react: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
-      react-dom: ^0.14.8 || ^15.0.1 || ^16.0.0 || ^17.0.1 || ^18.0.0
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@base2/pretty-print-object': 1.0.1
       is-plain-object: 5.0.0
@@ -13053,7 +13053,7 @@ packages:
     resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
     engines: {node: '>=10', npm: '>=6'}
     peerDependencies:
-      react: '>=16.13.1'
+      react: ^18.0.0
     dependencies:
       '@babel/runtime': 7.22.6
       react: 18.2.0
@@ -13062,7 +13062,7 @@ packages:
   /react-inspector@6.0.2(react@18.2.0):
     resolution: {integrity: sha512-x+b7LxhmHXjHoU/VrFAzw5iutsILRoYyDq97EDYdFpPLcvqtEzk4ZSZSQjnFPbr5T57tLXnHcqFYoN1pI6u8uQ==}
     peerDependencies:
-      react: ^16.8.4 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
     dependencies:
       react: 18.2.0
     dev: true
@@ -13088,7 +13088,7 @@ packages:
   /react-shallow-renderer@16.15.0(react@18.2.0):
     resolution: {integrity: sha512-oScf2FqQ9LFVQgA73vr86xl2NaOIX73rh+YFqcOp68CWj56tSfgtGKrEbyhCj0rSijyG9M1CYprTh39fBi5hzA==}
     peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0
+      react: ^18.0.0
     dependencies:
       object-assign: 4.1.1
       react: 18.2.0
@@ -13098,7 +13098,7 @@ packages:
   /react-side-effect@2.1.0(react@18.2.0):
     resolution: {integrity: sha512-IgmcegOSi5SNX+2Snh1vqmF0Vg/CbkycU9XZbOHJlZ6kMzTmi3yc254oB1WCkgA7OQtIAoLmcSFuHTc/tlcqXg==}
     peerDependencies:
-      react: ^16.3.0
+      react: ^18.0.0
     dependencies:
       react: 18.2.0
     dev: false
@@ -13106,7 +13106,7 @@ packages:
   /react-test-renderer@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-JWD+aQ0lh2gvh4NM3bBM42Kx+XybOxCpgYK7F8ugAlpaTSnWsX+39Z4XkOykGZAHrjwwTZT3x3KxswVWxHPUqA==}
     peerDependencies:
-      react: ^18.2.0
+      react: ^18.0.0
     dependencies:
       react: 18.2.0
       react-is: 18.2.0
@@ -14774,8 +14774,8 @@ packages:
   /use-resize-observer@9.1.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-R25VqO9Wb3asSD4eqtcxk8sJalvIOYBqS8MNZlpDSQ4l4xMQxC/J7Id9HoTqPq8FwULIn0PVW+OAqF2dyYbjow==}
     peerDependencies:
-      react: 16.8.0 - 18
-      react-dom: 16.8.0 - 18
+      react: ^18.0.0
+      react-dom: ^18.0.0
     dependencies:
       '@juggle/resize-observer': 3.4.0
       react: 18.2.0
