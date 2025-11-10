@@ -14,7 +14,7 @@ export function useAsyncFnFactory<Result = any, Args extends any[] = any[]>(
   initialState: useAsyncFnFactory.State<Result> = { loading: false },
 ): useAsyncFnFactory.Controller<Result, Args> {
   const stateRef = useRef(initialState)
-  const [, rerenderComponent] = useState(Date.now())
+  const [, rerenderComponent] = useState(0)
 
   const handlePromiseCallId = useRef(0)
   const handlePromise = useCallback(
@@ -27,7 +27,7 @@ export function useAsyncFnFactory<Result = any, Args extends any[] = any[]>(
         const isStillTheLastBeCall = callId === handlePromiseCallId.current
         if (isStillTheLastBeCall) {
           stateRef.current = newState
-          rerenderComponent(Date.now())
+          rerenderComponent(v => v + 1)
           return newState
         }
 
@@ -69,7 +69,7 @@ export function useAsyncFnFactory<Result = any, Args extends any[] = any[]>(
       const promise = fn(...args)
 
       stateRef.current = { loading: true, promise }
-      rerenderComponent(Date.now())
+      rerenderComponent(v => v + 1)
 
       return handlePromise(promise)
     },
