@@ -1,20 +1,22 @@
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import { useAsyncFnFactory } from './useAsyncFnFactory'
 import { defer, sleep } from './utils'
 
 describe('useAsyncFn', () => {
   let deferred: defer.Deferred<string>
-  let asyncFn: jest.Mock<Promise<string>, any[]>
+  let asyncFn: ReturnType<typeof vi.fn<(...args: any[]) => Promise<string>>>
 
   beforeEach(() => {
     deferred = defer<string>()
-    asyncFn = jest.fn((..._args: any[]) => deferred.promise)
+    asyncFn = vi.fn((..._args: any[]) => deferred.promise)
   })
 
   it('return success state after promise resolved', async () => {
     const deferValue = 'a'
     const res = renderHook(() => useAsyncFnFactory(() => asyncFn, []))
     let latestReRunFn: useAsyncFnFactory.AsyncFn | null = null
+    let rerunPromise: Promise<useAsyncFnFactory.State<string>> | null = null
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
@@ -26,11 +28,7 @@ describe('useAsyncFn', () => {
     latestReRunFn = res.result.current[1]
 
     act(() => {
-      void expect(res.result.current[1](1, 2, 3)).resolves.toEqual({
-        loading: false,
-        value: deferValue,
-        promise: deferred.promise,
-      })
+      rerunPromise = res.result.current[1](1, 2, 3)
     })
     expect(asyncFn).toBeCalledTimes(1)
     expect(asyncFn).toBeCalledWith(1, 2, 3)
@@ -57,12 +55,19 @@ describe('useAsyncFn', () => {
       },
       expect.any(Function),
     ])
+    expect(rerunPromise).not.toBeNull()
+    await expect(rerunPromise).resolves.toEqual({
+      loading: false,
+      value: deferValue,
+      promise: deferred.promise,
+    })
     expect(res.result.current[1]).toBe(latestReRunFn)
   })
 
   it('return error state after promise rejected', async () => {
     const fakeError = new Error()
     const res = renderHook(() => useAsyncFnFactory(() => asyncFn, []))
+    let rerunPromise: Promise<useAsyncFnFactory.State<string>> | null = null
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
@@ -73,15 +78,11 @@ describe('useAsyncFn', () => {
     ])
 
     act(() => {
-      void expect(res.result.current[1]()).resolves.toEqual({
-        loading: false,
-        error: fakeError,
-        promise: deferred.promise,
-      })
+      rerunPromise = res.result.current[1]()
     })
 
     deferred.reject(fakeError)
-    await res.waitForNextUpdate()
+    await waitFor(() => expect(res.result.current[0].loading).toBe(false))
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsyncFnFactory.State<string>>{
@@ -91,6 +92,12 @@ describe('useAsyncFn', () => {
       },
       expect.any(Function),
     ])
+    expect(rerunPromise).not.toBeNull()
+    await expect(rerunPromise).resolves.toEqual({
+      loading: false,
+      error: fakeError,
+      promise: deferred.promise,
+    })
   })
 
   it('support promise finished before mounted', async () => {
@@ -109,7 +116,7 @@ describe('useAsyncFn', () => {
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current[0]).toBe(initialState)
 
-    await res.waitForNextUpdate()
+    await waitFor(() => expect(res.result.current[0].loading).toBe(false))
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
@@ -141,7 +148,7 @@ describe('useAsyncFn', () => {
 
   it('handle async race condition safely', async () => {
     let resolvedTimes = 0
-    const asyncFn = jest.fn(
+    const asyncFn = vi.fn(
       async (val: string, timeoutPromise: Promise<void>) => {
         await timeoutPromise
         resolvedTimes++

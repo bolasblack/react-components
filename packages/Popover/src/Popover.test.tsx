@@ -9,6 +9,7 @@ import {
 import { Simulate } from 'react-dom/test-utils'
 import { describe } from 'node:test'
 import userEvent from '@testing-library/user-event'
+import { vi } from 'vitest'
 
 describe('Popover', () => {
   it('basically works', () => {
@@ -23,7 +24,7 @@ describe('Popover', () => {
   it('support `popoverStyle` prop', async () => {
     const popoverStyleReturnDataKey = '--test-key'
     const popoverStyleReturnDataValue = Date.now()
-    const popoverStyle = jest.fn(
+    const popoverStyle = vi.fn(
       (): PopoverStyle =>
         ({ [popoverStyleReturnDataKey]: popoverStyleReturnDataValue }) as any,
     )
@@ -114,7 +115,7 @@ describe('Popover', () => {
       visible: boolean
       event: keyof typeof Simulate
     }): Promise<void> {
-      const onVisibleChange = jest.fn()
+      const onVisibleChange = vi.fn()
       const { triggerContainer } = renderComp({
         openOn: opts.openOn,
         onVisibleChange,
@@ -259,7 +260,7 @@ describe('Popover', () => {
 
     type StepCallback<T = void> = (
       renderRes: ReturnType<typeof renderComp>,
-      context: { onVisibleChange: jest.Mock },
+      context: { onVisibleChange: any },
     ) => T
 
     async function assertPopover(
@@ -272,7 +273,7 @@ describe('Popover', () => {
         final: StepCallback
       }>,
     ): Promise<void> {
-      const onVisibleChange = jest.fn(props.onVisibleChange)
+      const onVisibleChange = vi.fn(props.onVisibleChange)
       const renderRes = renderComp({
         visible: false,
         ...props,
@@ -298,9 +299,9 @@ describe('Popover', () => {
   })
 
   it('support `disabled` prop', async () => {
-    const onVisibleChange = jest.fn()
-    const popoverStyle = jest.fn((a: any) => a)
-    const content = jest.fn(() => <div className="content" />)
+    const onVisibleChange = vi.fn()
+    const popoverStyle = vi.fn((a: any) => a)
+    const content = vi.fn(() => <div className="content" />)
     const { getEl, wrapper, triggerContainer } = renderComp({
       openOn: 'hover',
       disabled: true,
@@ -339,7 +340,14 @@ describe('Popover', () => {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const renderComp = (defaultProps: Partial<PopoverProps>) => {
   // eslint-disable-next-line @typescript-eslint/no-extra-semi
-  ;(document as any)['scrollingElement'] = document.documentElement
+  // In happy-dom, scrollingElement is read-only, so we skip setting it
+  if (!(document as any)['scrollingElement']) {
+    try {
+      ;(document as any)['scrollingElement'] = document.documentElement
+    } catch {
+      // Ignore if we can't set it (happy-dom environment)
+    }
+  }
 
   const getEl = (props: Partial<PopoverProps>): JSX.Element => (
     <Popover

@@ -1,14 +1,15 @@
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
 import { useAsync } from './useAsync'
 import { defer, sleep } from './utils'
 
 describe('useAsync', () => {
   let deferred: defer.Deferred<string>
-  let asyncFn: jest.Mock<Promise<string>, any[]>
+  let asyncFn: ReturnType<typeof vi.fn<(...args: any[]) => Promise<string>>>
 
   beforeEach(async () => {
     deferred = defer<string>()
-    asyncFn = jest.fn((..._args: any[]) => deferred.promise)
+    asyncFn = vi.fn((..._args: any[]) => deferred.promise)
   })
 
   it('return success state after promise resolved', async () => {
@@ -27,7 +28,7 @@ describe('useAsync', () => {
     latestReRunFn = res.result.current[1]
 
     deferred.resolve(deferValue)
-    await res.waitForNextUpdate()
+    await waitFor(() => expect(res.result.current[0].loading).toBe(false))
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
@@ -54,7 +55,7 @@ describe('useAsync', () => {
     ])
 
     deferred.reject(fakeError)
-    await res.waitForNextUpdate()
+    await waitFor(() => expect(res.result.current[0].loading).toBe(false))
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
       <useAsync.State<string>>{
@@ -78,7 +79,7 @@ describe('useAsync', () => {
       promise: deferred.promise,
     })
 
-    await res.waitForNextUpdate()
+    await waitFor(() => expect(res.result.current[0].loading).toBe(false))
 
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
@@ -93,7 +94,7 @@ describe('useAsync', () => {
 
   it('rerun when deps changed', async () => {
     let resolvedTimes = 0
-    const asyncFn = jest.fn(
+    const asyncFn = vi.fn(
       () =>
         new Promise(resolve => {
           resolve(resolvedTimes++)
@@ -104,7 +105,7 @@ describe('useAsync', () => {
       (props: { some: number }) => useAsync(asyncFn, [props.some]),
       { initialProps: { some: 0 } },
     )
-    await res.waitForNextUpdate()
+    await waitFor(() => expect(res.result.current[0].loading).toBe(false))
 
     const [initialState, initialReRun] = res.result.current
     expect(asyncFn).toBeCalledTimes(1)
@@ -121,7 +122,10 @@ describe('useAsync', () => {
     expect(res.result.current[1]).toBe(initialReRun)
 
     res.rerender({ some: 1 })
-    await res.waitForValueToChange(() => res.result.current[0].loading)
+    await waitFor(() => {
+      expect(res.result.current[0].loading).toBe(false)
+      expect(res.result.current[0].value).toBe(1)
+    })
     expect(asyncFn).toBeCalledTimes(2)
     expect(res.result.current[0]).toEqual(
       expect.objectContaining({
@@ -136,7 +140,7 @@ describe('useAsync', () => {
     let calledTimes = 0
     let resolvedTimes = 0
     const deferA = defer<void>() // will never be resolved
-    const asyncFn = jest.fn(
+    const asyncFn = vi.fn(
       async (val = 'a', timeoutPromise = deferA.promise) => {
         calledTimes++
         await timeoutPromise

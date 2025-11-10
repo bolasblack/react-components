@@ -3,6 +3,7 @@ import { render, act } from '@testing-library/react'
 import user from '@testing-library/user-event'
 import { Portal, PortalProps } from './Portal'
 import { createRef } from 'react'
+import { vi } from 'vitest'
 
 describe('Portal', () => {
   it('basically works', async () => {
@@ -127,7 +128,7 @@ describe('Portal', () => {
 
   it('support `onVisibleChange` prop', async () => {
     await assertInAllRenderMode(async getProps => {
-      const onVisibleChange = jest.fn()
+      const onVisibleChange = vi.fn()
       const baseElement = document.createElement('div')
       const clickBaseElement = async (): Promise<void> => {
         await act(() => user.click(baseElement))

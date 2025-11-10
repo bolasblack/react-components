@@ -13,3 +13,5 @@ coverage
 *.tsbuildinfo
 *.log
 *.tgz
+
+.claude/settings.*.json

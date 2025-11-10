@@ -2,8 +2,9 @@
   "extends": "@c4605/toolconfs/tsconfig-esModule",
   "compilerOptions": {
     "target": "es2018",
-    "jsx": "react"
+    "jsx": "react",
+    "types": ["vitest/globals"]
   },
-  "include": ["configs", "packages/*/src", "packages/*/*.config.ts"],
+  "include": ["configs", "packages/*/src", "packages/*/*.config.ts", "vitest.config.ts"],
   "exclude": ["node_modules"]
 }

@@ -3,14 +3,15 @@ import { createRef } from 'react'
 import { act, Simulate } from 'react-dom/test-utils'
 import { render } from '@testing-library/react'
 import user from '@testing-library/user-event'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
+import { vi } from 'vitest'
 import { Modal, useModal, ModalProps } from './Modal'
 
 const defaultProps = Modal.defaultProps!
 
 describe('Modal', () => {
   it('basicly works', () => {
-    const onVisibleChange = jest.fn()
+    const onVisibleChange = vi.fn()
     const portalContainerRef = createRef<HTMLElement>()
 
     const html = document.documentElement
@@ -47,7 +48,7 @@ describe('Modal', () => {
   describe('props.backdrop', () => {
     it('support `"clickHide"`', () => {
       const portalContainerRef = createRef<HTMLElement>()
-      const onVisibleChange = jest.fn()
+      const onVisibleChange = vi.fn()
 
       const modalWrapper = render(
         <Modal
@@ -79,7 +80,7 @@ describe('Modal', () => {
 
     it('support `"static"`', async () => {
       const portalContainerRef = createRef<HTMLElement>()
-      const onVisibleChange = jest.fn()
+      const onVisibleChange = vi.fn()
 
       const modalWrapper = render(
         <Modal
@@ -108,7 +109,7 @@ describe('Modal', () => {
       render(
         <Modal
           visible={false}
-          onVisibleChange={jest.fn()}
+          onVisibleChange={vi.fn()}
           backdrop={false}
           portalContainerRef={portalContainerRef}
         />,
@@ -121,7 +122,7 @@ describe('Modal', () => {
 
 describe('useModal', () => {
   it('basicly works', () => {
-    const onVisibleChange = jest.fn()
+    const onVisibleChange = vi.fn()
     const { result } = renderHook(() =>
       useModal({
         visible: true,
