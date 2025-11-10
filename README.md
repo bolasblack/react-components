@@ -2,10 +2,15 @@
 
 Some useful react components.
 
-- [DocumentElement](https://react-components.c4605.com/document-element-readme) ([README.mdx](./packages/DocumentElement/README.mdx)): Provides a declarative way to specify `document.documentElement` attributes in a single-page app.
+## Components
+
 - [Portal](https://react-components.c4605.com/portal-readme) ([README.mdx](./packages/Portal/README.mdx)): Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#createportal) replacement. Make most `React.createPortal` use case easier.
 - [Popover](https://react-components.c4605.com/popover-readme) ([README.mdx](./packages/Popover/README.mdx)): Powerful and highly customizable popover component, can adapt to most use case.
 - [Modal](https://react-components.c4605.com/modal-readme) ([README.mdx](./packages/Modal/README.mdx)): A simple modal component. Provide react hook `useModal`.
+
+## Deprecated Components
+
+- [DocumentElement](https://react-components.c4605.com/document-element-readme) ([README.mdx](./packages/DocumentElement/README.mdx)): ⚠️ **DEPRECATED** - Provides a declarative way to specify `document.documentElement` attributes in a single-page app. Please use [react-helmet-async](https://github.com/staylor/react-helmet-async) instead.
 
 ## Documention
 
