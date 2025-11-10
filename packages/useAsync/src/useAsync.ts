@@ -13,7 +13,6 @@ export function useAsync<Result = any, Args extends any[] = any[]>(
     () =>
       (...args) =>
         fn(...args),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     deps,
     isFirstTimeRenderRef.current ? { loading: true, promise: fn() } : undefined,
   ) as useAsync.Controller<Result, Args | []>

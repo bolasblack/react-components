@@ -19,10 +19,10 @@ describe('useAsync', () => {
 
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsync.State<string>>{
+      {
         loading: true,
         promise: deferred.promise,
-      },
+      } as useAsync.State<string>,
       expect.any(Function),
     ])
     latestReRunFn = res.result.current[1]
@@ -31,11 +31,11 @@ describe('useAsync', () => {
     await waitFor(() => expect(res.result.current[0].loading).toBe(false))
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsync.State<string>>{
+      {
         loading: false,
         value: deferValue,
         promise: deferred.promise,
-      },
+      } as useAsync.State<string>,
       expect.any(Function),
     ])
     expect(res.result.current[1]).toBe(latestReRunFn)
@@ -47,10 +47,10 @@ describe('useAsync', () => {
 
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsync.State<string>>{
+      {
         loading: true,
         promise: deferred.promise,
-      },
+      } as useAsync.State<string>,
       expect.any(Function),
     ])
 
@@ -58,11 +58,11 @@ describe('useAsync', () => {
     await waitFor(() => expect(res.result.current[0].loading).toBe(false))
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsync.State<string>>{
+      {
         loading: false,
         error: fakeError,
         promise: deferred.promise,
-      },
+      } as useAsync.State<string>,
       expect.any(Function),
     ])
   })
@@ -83,11 +83,11 @@ describe('useAsync', () => {
 
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsync.State<string>>{
+      {
         loading: false,
         promise: deferred.promise,
         value: deferValue,
-      },
+      } as useAsync.State<string>,
       expect.any(Function),
     ])
   })

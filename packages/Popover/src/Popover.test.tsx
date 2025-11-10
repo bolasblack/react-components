@@ -339,7 +339,6 @@ describe('Popover', () => {
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const renderComp = (defaultProps: Partial<PopoverProps>) => {
-  // eslint-disable-next-line @typescript-eslint/no-extra-semi
   // In happy-dom, scrollingElement is read-only, so we skip setting it
   if (!(document as any)['scrollingElement']) {
     try {

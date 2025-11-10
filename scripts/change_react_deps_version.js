@@ -16,9 +16,7 @@ function updateVersion(version, pkgs) {
   const reactResolutionKeys = Object.keys(pkgs.resolutions).filter(
     dep =>
       !dep.includes('@types') &&
-      (/\/react$/.test(dep) ||
-        /\/react-dom$/.test(dep) ||
-        /\/react-test-renderer$/.test(dep)),
+      (/\/react$/.test(dep) || /\/react-dom$/.test(dep)),
   )
 
   reactResolutionKeys.forEach(key => {

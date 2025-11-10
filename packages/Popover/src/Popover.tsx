@@ -73,7 +73,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     closeOn: 'hover' as const,
     disabled: false,
     inline: false,
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+
     onVisibleChange: /* istanbul ignore next */ () => {},
     popoverStyle: (info: PopoverVisibleInfo): PopoverStyle => ({
       position: 'absolute',

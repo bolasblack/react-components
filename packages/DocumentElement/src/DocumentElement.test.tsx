@@ -8,7 +8,9 @@ describe(DocumentElement.name, () => {
   afterEach(() => {
     try {
       wrapper.unmount()
-    } catch {}
+    } catch {
+      // Ignore unmount errors
+    }
   })
 
   it('works', () => {

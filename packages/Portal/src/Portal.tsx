@@ -44,7 +44,6 @@ export class Portal extends React.PureComponent<PortalProps> {
   private _portalEl = document.createElement('div')
 
   componentDidMount(): void {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;(this.props.baseElement ?? document.documentElement).addEventListener(
       'click',
       this._onClickDocument,
@@ -58,7 +57,6 @@ export class Portal extends React.PureComponent<PortalProps> {
   }
 
   componentWillUnmount(): void {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;(this.props.baseElement ?? document.documentElement).removeEventListener(
       'click',
       this._onClickDocument,
@@ -143,7 +141,6 @@ export class Portal extends React.PureComponent<PortalProps> {
     if (typeof ref === 'function') {
       ref(el)
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;(ref as any).current = el
     }
   }

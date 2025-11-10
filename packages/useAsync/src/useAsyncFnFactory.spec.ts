@@ -20,9 +20,9 @@ describe('useAsyncFn', () => {
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
-      <useAsyncFnFactory.State<string>>{
+      {
         loading: false,
-      },
+      } as useAsyncFnFactory.State<string>,
       expect.any(Function),
     ])
     latestReRunFn = res.result.current[1]
@@ -33,10 +33,10 @@ describe('useAsyncFn', () => {
     expect(asyncFn).toBeCalledTimes(1)
     expect(asyncFn).toBeCalledWith(1, 2, 3)
     expect(res.result.current).toEqual([
-      <useAsyncFnFactory.State<string>>{
+      {
         loading: true,
         promise: deferred.promise,
-      },
+      } as useAsyncFnFactory.State<string>,
       expect.any(Function),
     ])
     expect(res.result.current[1]).toBe(latestReRunFn)
@@ -48,11 +48,11 @@ describe('useAsyncFn', () => {
     })
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsyncFnFactory.State<string>>{
+      {
         loading: false,
         value: deferValue,
         promise: deferred.promise,
-      },
+      } as useAsyncFnFactory.State<string>,
       expect.any(Function),
     ])
     expect(rerunPromise).not.toBeNull()
@@ -71,9 +71,9 @@ describe('useAsyncFn', () => {
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
-      <useAsyncFnFactory.State<string>>{
+      {
         loading: false,
-      },
+      } as useAsyncFnFactory.State<string>,
       expect.any(Function),
     ])
 
@@ -85,11 +85,11 @@ describe('useAsyncFn', () => {
     await waitFor(() => expect(res.result.current[0].loading).toBe(false))
     expect(asyncFn).toBeCalledTimes(1)
     expect(res.result.current).toEqual([
-      <useAsyncFnFactory.State<string>>{
+      {
         loading: false,
         error: fakeError,
         promise: deferred.promise,
-      },
+      } as useAsyncFnFactory.State<string>,
       expect.any(Function),
     ])
     expect(rerunPromise).not.toBeNull()
@@ -120,11 +120,11 @@ describe('useAsyncFn', () => {
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current).toEqual([
-      <useAsyncFnFactory.State<string>>{
+      {
         loading: false,
         promise: deferred.promise,
         value: deferValue,
-      },
+      } as useAsyncFnFactory.State<string>,
       expect.any(Function),
     ])
   })

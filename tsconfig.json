@@ -1,10 +1,29 @@
 {
-  "extends": "@c4605/toolconfs/tsconfig-esModule",
   "compilerOptions": {
+    "module": "esnext",
+    "sourceMap": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+
+    "esModuleInterop": true,
+
     "target": "es2018",
     "jsx": "react",
     "types": ["vitest/globals"]
   },
-  "include": ["configs", "packages/*/src", "packages/*/*.config.ts", "vitest.config.ts"],
+  "include": [
+    "configs",
+    "typings",
+    "packages/*/src",
+    "packages/*/*.config.ts",
+    "vitest.config.ts"
+  ],
   "exclude": ["node_modules"]
 }
