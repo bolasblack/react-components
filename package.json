@@ -20,8 +20,7 @@
     "test:coverage": "vitest run --coverage",
     "release": "lerna version --sign-git-tag --conventional-commits",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "pnpm compile && storybook build",
-    "storybook:publish": "./scripts/publish_storybook.sh"
+    "storybook:build": "pnpm compile && storybook build"
   },
   "dependencies": {
     "@c4605/react-portal": "^0.5.0",

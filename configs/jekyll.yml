@@ -1,4 +1,0 @@
-include:
-  {{ #MO_DATA__EXCLUDES }}
-  - "{{ . }}"
-  {{ /MO_DATA__EXCLUDES }}
