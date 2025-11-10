@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { useState } from 'react'
 import { Meta, StoryFn } from '@storybook/react'
-import { DocumentElement } from './DocumentElement'
+import { DocumentElement, DocumentElementProps } from './DocumentElement'
 
 export default {
   title: 'Components/DocumentElement',
   component: DocumentElement,
-} satisfies Meta<typeof DocumentElement>
+} satisfies Meta<DocumentElementProps>
 
 export const BasicUsage: StoryFn = () => {
   const [color, changeColor] = useState('blue')

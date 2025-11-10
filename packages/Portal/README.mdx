@@ -1,13 +1,17 @@
 # @c4605/react-portal
 
-import { Canvas, Meta } from '@storybook/blocks'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import * as PortalStories from './src/Portal.stories'
+
+<Meta of={PortalStories} />
 
 ## Introduction
 
 Strong enough [`React.createPortal`](https://reactjs.org/docs/react-dom.html#createportal) replacement. Make most `React.createPortal` use case more easier.
 
-<Meta of={PortalStories} />
+## Props
+
+<ArgTypes of={PortalStories} />
 
 ## Basic Usage
 

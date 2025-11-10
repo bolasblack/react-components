@@ -1,1 +1,4 @@
-declare module '@storybook/addon-storyshots'
+declare module '*.css?inline' {
+  const content: string
+  export default content
+}

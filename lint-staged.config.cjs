@@ -22,17 +22,7 @@ const prettier = wrap(filenames => {
   return ['pnpm prettier --write ' + cliFileNames]
 })
 
-const eslint = wrap(filenames => {
-  if (!filenames.length) return []
-
-  const cliFileNames = fileNamesToCliArg(
-    filenames.filter(f => !f.includes('eslint')),
-  )
-
-  return ['pnpm eslint ' + cliFileNames]
-})
-
-const js = eslint(prettier(finish))
+const js = prettier(finish)
 const css = prettier(finish)
 const md = prettier(finish)
 

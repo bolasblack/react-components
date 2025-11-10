@@ -9,7 +9,7 @@ import {
   Ref,
 } from 'react'
 import { Portal, OnVisibleChangeCallback } from '@c4605/react-portal'
-import cssText from './Modal.css'
+import cssText from './Modal.css?inline'
 
 export interface ModalProps {
   /**

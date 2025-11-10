@@ -1,7 +1,9 @@
 # @c4605/react-document-element
 
-import { Canvas, Meta } from '@storybook/blocks'
+import { Canvas, Meta, ArgTypes } from '@storybook/addon-docs/blocks'
 import * as DocumentElementStories from './src/DocumentElement.stories'
+
+<Meta of={DocumentElementStories} />
 
 ## Introduction
 
@@ -19,10 +21,6 @@ Inspired by [React Document Title](https://github.com/gaearon/react-document-tit
 - Supports arbitrary levels of nesting, so you can set app-wide and page-specific
   class name or style to `document.documentElement`;
 - Works just as well with isomorphic apps.
-
-## Properties
-
-<Meta of={DocumentElementStories} />
 
 ## Basic Usage
 

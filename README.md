@@ -9,9 +9,9 @@ Some useful react components.
 
 ## Documention
 
-* https://react-components.c4605.com/
-* or read `README.mdx` in `packages/`;
-* or execute `pnpm install && pnpm storybook` to run a [storybook](https://storybook.js.org/) server.
+- https://react-components.c4605.com/
+- or read `README.mdx` in `packages/`;
+- or execute `pnpm install && pnpm storybook` to run a [storybook](https://storybook.js.org/) server.
 
 ## Unit test
 
@@ -23,8 +23,7 @@ pnpm test
 
 ### Run unit test in watch mode
 
-1. Install [watchman](https://facebook.github.io/watchman/)
-1. `pnpm test --watch`
+1. `pnpm test:watch`
 
 ## Release
 

@@ -188,7 +188,17 @@ export default [
     },
   },
 
-  // Storybook config
+  // Storybook config files
+  {
+    files: ['.storybook/**/*.{ts,js}'],
+    languageOptions: {
+      globals: {
+        ...globals.nodejs,
+      },
+    },
+  },
+
+  // Storybook stories
   {
     files: ['**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)'],
     plugins: {

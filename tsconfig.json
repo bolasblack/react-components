@@ -3,7 +3,7 @@
     "module": "esnext",
     "sourceMap": true,
     "strict": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
@@ -11,6 +11,7 @@
     "noUncheckedIndexedAccess": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noEmit": true,
 
     "esModuleInterop": true,
 
@@ -21,6 +22,7 @@
   "include": [
     "configs",
     "typings",
+    ".storybook/**/*",
     "packages/*/src",
     "packages/*/*.config.ts",
     "vitest.config.ts"
