@@ -2,7 +2,7 @@
   base = ""
   publish = "storybook-static"
   command = "corepack enable && pnpm storybook:build"
-  environment = { NODE_VERSION = "18.16.0" }
+  environment = { NODE_VERSION = "24.11.0" }
 
 [[redirects]]
   from = "/*"
