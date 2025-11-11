@@ -1,17 +1,28 @@
 # @c4/use-effect-reducer
 
-<style>{`.sbdocs .markdown-only { display: none !important; }`}</style>
-
-<div className="markdown-only">
-  <p>
-    查看中文文档请点击 <a href="./README.zh.mdx">README.zh.mdx</a>.
-  </p>
-</div>
-
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import * as DogFetcherStories from './src/useEffectReducer.stories'
 
 <Meta title="Library/use-effect-reducer" name="README" />
+
+<style>{`.sbdocs .markdown-only { display: none !important; }`}</style>
+
+<div className="markdown-only">
+  <h3>
+    For better reading experience, please visit
+    <a
+      target="_blank"
+      href="https://react-components.c4605.com/?path=/docs/library-use-effect-reducer--readme"
+    >
+      Storybook
+    </a>
+    .
+  </h3>
+
+  <h3>
+    查看中文文档请点击 <a href="./README.zh.mdx">README.zh.mdx</a>.
+  </h3>
+</div>
 
 `useEffectReducer` takes its primary inspiration from [Elm's TEA](https://guide.elm-lang.org/architecture/): `update : Model -> Msg -> ( Model, Cmd Msg )`. Reducers stay pure while returning both the next state and a description of the side effects to run. This hook brings that pattern to React—reducers output `[state, effect]`, and an interpreter inside the hook coordinates effect execution, lifecycles, and cancellation.
 

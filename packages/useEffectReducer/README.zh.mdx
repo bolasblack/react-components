@@ -1,17 +1,28 @@
 # @c4/use-effect-reducer（中文版）
 
-<style>{`.sbdocs .markdown-only { display: none !important; }`}</style>
-
-<div className="markdown-only">
-  <p>
-    Looking for English? Switch to <a href="./README.mdx">README.mdx</a>.
-  </p>
-</div>
-
 import { Meta, Source } from '@storybook/addon-docs/blocks'
 import * as DogFetcherStories from './src/useEffectReducer.stories'
 
 <Meta title="Library/use-effect-reducer" name="README (zh)" />
+
+<style>{`.sbdocs .markdown-only { display: none !important; }`}</style>
+
+<div className="markdown-only">
+  <h3>
+    建议查看
+    <a
+      target="_blank"
+      href="https://react-components.c4605.com/?path=/docs/library-use-effect-reducer--readme-zh"
+    >
+      Storybook
+    </a>
+    以获取更好的阅读体验。
+  </h3>
+
+  <h3>
+    Looking for English? Switch to <a href="./README.mdx">README.mdx</a>.
+  </h3>
+</div>
 
 `useEffectReducer` 主要受 [Elm The Elm Architecture](https://guide.elm-lang.org/architecture/) 启发：`update : Model -> Msg -> ( Model, Cmd Msg )` 这种「状态 + 事件 = 新状态 + 副作用描述」的模式能让 reducer 保持纯净，同时显式声明副作用。我们把这套范式带回 React Hook 世界：reducer 仍是纯函数，但除了新状态，还能返回副作用描述，执行细节交给 hook 的解释器。
 
