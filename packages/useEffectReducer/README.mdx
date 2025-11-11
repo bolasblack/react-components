@@ -1,0 +1,65 @@
+# @c4/use-effect-reducer
+
+<style>{`.sbdocs .markdown-only { display: none !important; }`}</style>
+
+<div className="markdown-only">
+  <p>
+    查看中文文档请点击 <a href="./README.zh.mdx">README.zh.mdx</a>.
+  </p>
+</div>
+
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import * as DogFetcherStories from './src/useEffectReducer.stories'
+
+<Meta title="Library/use-effect-reducer" name="README" />
+
+`useEffectReducer` takes its primary inspiration from [Elm's TEA](https://guide.elm-lang.org/architecture/): `update : Model -> Msg -> ( Model, Cmd Msg )`. Reducers stay pure while returning both the next state and a description of the side effects to run. This hook brings that pattern to React—reducers output `[state, effect]`, and an interpreter inside the hook coordinates effect execution, lifecycles, and cancellation.
+
+## Why use it?
+
+- **Effects fire from events, not from "watching state"**: reducers declare effects explicitly, so no more guessing with `useEffect` dependency arrays.
+- **Lifecycle & cancellation are first-class**: `ctx.run(id, callback)` and `ctx.cancel(id)` manage scoped `AbortController`s automatically, including component unmounts.
+- **Centralized, testable logic**: reducers remain pure (easy to snapshot test) while `onEffect` is the single place where impure work lives.
+- **Gradual adoption**: the API mirrors `useReducer`, including `init` functions and lazy initialization, so existing reducers can migrate incrementally.
+
+## API overview
+
+```ts
+const [state, dispatch] = useEffectReducer(reducer, onEffect, initialState)
+```
+
+- `reducer(prevState, action) => [nextState, effect?]`
+- `onEffect(effect, ctx)` receives the effect plus helpers:
+  - `dispatch`: send additional events
+  - `getState()`: read the latest state
+  - `abort`: root `AbortSignal`
+  - `run(id, runner)`: launch cancellable async work
+  - `cancel(id)`: abort a previously launched task
+
+## Example: DogFetcher (with auto-cancel & race safety)
+
+Requirements:
+
+1. Clicking the button fetches a random dog image.
+2. The button stays disabled while loading.
+3. Rapid clicks should keep only the latest request; stale responses must be ignored.
+4. In-flight requests must cancel when the component unmounts.
+
+> For the traditional `useReducer + useEffect` implementation (and the pitfalls it carries), see David Khourshid's [No, disabling a button is not app logic](https://dev.to/davidkpiano/no-disabling-a-button-is-not-app-logic-598i).
+
+### DogFetcher implemented with `useEffectReducer`
+
+<Source of={DogFetcherStories.ImplementedBy_useEffectReducer} />
+
+### DogFetcher implemented with `useReducer + useEffect`
+
+Code adapted from David Khourshid's [No, disabling a button is not app logic](https://dev.to/davidkpiano/no-disabling-a-button-is-not-app-logic-598i).
+
+<Source of={DogFetcherStories.ImplementedBy_useReducer} />
+
+## Further reading
+
+- [Elm – The Elm Architecture](https://guide.elm-lang.org/architecture/): the original `(Model, Cmd msg)` pattern.
+- [Redux is half of a pattern (DEV.to)](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7): formalizes `state + event = state' + effects`.
+- [There are so many fundamental misunderstandings about XState… (Medium)](https://medium.com/@DavidKPiano/there-are-so-many-fundamental-misunderstandings-about-xstate-and-state-machines-in-general-in-13aec57d2f85): advocates event-driven effects over state-driven guessing.
+- [No, disabling a button is not app logic (DEV.to)](https://dev.to/davidkpiano/no-disabling-a-button-is-not-app-logic-598i): walks through refactoring from `useState` → `useReducer + useEffect` → declarative state machine effects.

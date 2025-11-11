@@ -11,6 +11,7 @@ Some useful react components.
 ## Hooks
 
 - [useAsync](https://react-components.c4605.com/?path=/docs/library-use-async-useasync--readme) ([README.mdx](./packages/useAsync/README.mdx)): Hooks for loading data and handling asynchronous operations. Includes `useAsync` for automatic data loading and `useAsyncFnFactory` for manual control.
+- [useEffectReducer](https://react-components.c4605.com/?path=/docs/library-use-effect-reducer--readme) ([README.mdx](./packages/useEffectReducer/README.mdx)): Inspired by Elm's TEA, this hook allows reducers to return both state and effects. Provides lifecycle management, automatic cancellation, and race-safe async operations.
 
 ## Deprecated Components
 

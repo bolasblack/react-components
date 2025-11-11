@@ -17,7 +17,8 @@
 
     "target": "es2018",
     "jsx": "react",
-    "types": ["vitest/globals"]
+    "types": ["vitest/globals"],
+    "skipLibCheck": true
   },
   "include": [
     "configs",

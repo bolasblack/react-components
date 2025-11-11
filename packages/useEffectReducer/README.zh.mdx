@@ -1,0 +1,63 @@
+# @c4/use-effect-reducer（中文版）
+
+<style>{`.sbdocs .markdown-only { display: none !important; }`}</style>
+
+<div className="markdown-only">
+  <p>
+    Looking for English? Switch to <a href="./README.mdx">README.mdx</a>.
+  </p>
+</div>
+
+import { Meta, Source } from '@storybook/addon-docs/blocks'
+import * as DogFetcherStories from './src/useEffectReducer.stories'
+
+<Meta title="Library/use-effect-reducer" name="README (zh)" />
+
+`useEffectReducer` 主要受 [Elm The Elm Architecture](https://guide.elm-lang.org/architecture/) 启发：`update : Model -> Msg -> ( Model, Cmd Msg )` 这种「状态 + 事件 = 新状态 + 副作用描述」的模式能让 reducer 保持纯净，同时显式声明副作用。我们把这套范式带回 React Hook 世界：reducer 仍是纯函数，但除了新状态，还能返回副作用描述，执行细节交给 hook 的解释器。
+
+## 它解决了哪些问题？
+
+- **副作用触发不再依赖“监听 state”**：reducer 直接返回 `[state, effect]`，副作用是事件驱动而非基于状态变化的“猜测”。
+- **副作用具备生命周期与可取消性**：通过 `ctx.run(id, callback)` 和 `ctx.cancel(id)` 自动管理 `AbortController`，组件卸载或新的同名任务出现时自动 abort。
+- **逻辑集中、易测试**：reducer 依旧纯净，可以 snapshot；`onEffect` 是唯一执行副作用的位置，可复用/集中 mock。
+- **渐进式迁移**：API 与 `useReducer` 兼容，支持 `init`/延迟初始化等模式。
+
+## API 概览
+
+```ts
+const [state, dispatch] = useEffectReducer(reducer, onEffect, initialState)
+```
+
+- `reducer(prevState, action) => [nextState, effect?]`
+- `onEffect(effect, ctx)` 负责解释 effect，`ctx` 提供：
+  - `dispatch`：继续发事件
+  - `getState()`：读取最新 state
+  - `abort`：当前 effect 根 AbortSignal
+  - `run(id, runner)`：注册可自动取消的异步任务
+  - `cancel(id)`：手动取消 `run` 注册的任务
+
+## 示例：DogFetcher （使用 React 的方式和 `useEffectReducer` 分别实现）
+
+需求：
+
+1. 点击按钮发起随机狗狗图片请求；
+2. 加载中按钮需禁用；
+3. 用户快速连点时只保留最后一次请求，旧响应不能覆盖最新结果；
+4. 组件卸载要取消挂起请求。
+
+### 这是使用 `useEffectReducer` 实现的 DogFetcher
+
+<Source of={DogFetcherStories.ImplementedBy_useEffectReducer} />
+
+### 这是使用 `useReducer + useEffect` 实现的 DogFetcher
+
+代码来自 [No, disabling a button is not app logic](https://dev.to/davidkpiano/no-disabling-a-button-is-not-app-logic-598i)
+
+<Source of={DogFetcherStories.ImplementedBy_useReducer} />
+
+## 相关文章
+
+- [Elm The Elm Architecture 指南](https://guide.elm-lang.org/architecture/)：`(Model, Cmd msg)` 范式的原点。
+- [Redux is half of a pattern (DEV.to)](https://dev.to/davidkpiano/redux-is-half-of-a-pattern-1-2-1hd7)：`state + event = state' + effects` 的公式化阐述。
+- [There are so many fundamental misunderstandings about XState… (Medium)](https://medium.com/@DavidKPiano/there-are-so-many-fundamental-misunderstandings-about-xstate-and-state-machines-in-general-in-13aec57d2f85)：解释为什么事件驱动的副作用比状态驱动更安全。
+- [No, disabling a button is not app logic (DEV.to)](https://dev.to/davidkpiano/no-disabling-a-button-is-not-app-logic-598i)：完整演示从 `useState` → `useReducer+useEffect` → 状态机/ declarative effects 的重构过程。

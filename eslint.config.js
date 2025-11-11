@@ -16,6 +16,7 @@ const globals = {
     clearTimeout: 'readonly',
     setInterval: 'readonly',
     clearInterval: 'readonly',
+    fetch: 'readonly',
   },
   react: {
     React: 'readonly',

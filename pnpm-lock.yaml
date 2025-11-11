@@ -217,6 +217,15 @@ importers:
         specifier: ^19.0.0
         version: 19.2.0
 
+  packages/useEffectReducer:
+    dependencies:
+      '@types/react':
+        specifier: ^19.0.0
+        version: 19.2.2
+      react:
+        specifier: ^19.0.0
+        version: 19.2.0
+
 packages:
 
   '@adobe/css-tools@4.4.4':
