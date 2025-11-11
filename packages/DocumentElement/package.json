@@ -1,6 +1,6 @@
 {
   "name": "@c4605/react-document-element",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "deprecated": "This package is deprecated. Please use react-helmet-async instead: https://github.com/staylor/react-helmet-async",
   "repository": "https://github.com/bolasblack/react-components",
   "author": "c4605 <bolasblack@gmail.com>",
