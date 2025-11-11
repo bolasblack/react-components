@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/bolasblack/react-components/compare/@c4/use-async@1.0.0...@c4/use-async@1.2.0) (2025-11-11)
+
+### Features
+
+- upgrade to React 19 ([237cf57](https://github.com/bolasblack/react-components/commit/237cf5756e8459b15db1bf4d3744e68699252c40))
+
 # [1.1.0](https://github.com/bolasblack/react-components/compare/@c4/use-async@1.0.0...@c4/use-async@1.1.0) (2025-11-11)
 
 ### Features
