@@ -13,7 +13,13 @@ export default defineConfig({
       },
     },
     coverage: {
+      provider: 'v8',
       reporter: ['text', 'json', 'html', 'lcov'],
+      include: ['packages/**/src/**/*.{ts,tsx}'],
+      exclude: [
+        'packages/**/src/**/*.{test,spec}.{ts,tsx}',
+        'packages/**/src/**/*.stories.{ts,tsx}',
+      ],
     },
   },
   resolve: {

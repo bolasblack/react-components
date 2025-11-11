@@ -1,13 +1,9 @@
-import * as React from 'react'
-import { createRef } from 'react'
-import { act, Simulate } from 'react-dom/test-utils'
-import { render } from '@testing-library/react'
+import { render, renderHook } from '@testing-library/react'
 import user from '@testing-library/user-event'
-import { renderHook } from '@testing-library/react'
+import * as React from 'react'
+import { act, createRef } from 'react'
 import { vi } from 'vitest'
-import { Modal, useModal, ModalProps } from './Modal'
-
-const defaultProps = Modal.defaultProps!
+import { Modal, ModalProps, defaultProps, useModal } from './Modal'
 
 describe('Modal', () => {
   it('basicly works', () => {
@@ -46,7 +42,7 @@ describe('Modal', () => {
   })
 
   describe('props.backdrop', () => {
-    it('support `"clickHide"`', () => {
+    it('support `"clickHide"`', async () => {
       const portalContainerRef = createRef<HTMLElement>()
       const onVisibleChange = vi.fn()
 
@@ -61,12 +57,10 @@ describe('Modal', () => {
 
       expect(portalContainerRef.current).toMatchSnapshot()
 
-      act(() =>
-        Simulate.click(
-          modalWrapper.baseElement.querySelector(
-            '.' + defaultProps.backdropClassName!,
-          )!,
-        ),
+      await user.click(
+        modalWrapper.baseElement.querySelector(
+          '.' + defaultProps.backdropClassName!,
+        )!,
       )
 
       expect(onVisibleChange).toHaveBeenCalledTimes(1)

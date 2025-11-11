@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { act, render } from '@testing-library/react'
+import { act, render, fireEvent } from '@testing-library/react'
 import {
   Popover,
   PopoverProps,
   PopoverStyle,
   PopoverVisibleInfo,
 } from './Popover'
-import { Simulate } from 'react-dom/test-utils'
 import { describe } from 'node:test'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
@@ -113,14 +112,18 @@ describe('Popover', () => {
     async function assertPopover(opts: {
       openOn: PopoverProps['openOn']
       visible: boolean
-      event: keyof typeof Simulate
+      event: 'mouseEnter' | 'click'
     }): Promise<void> {
       const onVisibleChange = vi.fn()
       const { triggerContainer } = renderComp({
         openOn: opts.openOn,
         onVisibleChange,
       })
-      await act(() => Simulate[opts.event](triggerContainer()))
+      if (opts.event === 'click') {
+        await userEvent.click(triggerContainer())
+      } else if (opts.event === 'mouseEnter') {
+        fireEvent.mouseEnter(triggerContainer())
+      }
       if (opts.visible) {
         expect(onVisibleChange).toHaveBeenLastCalledWith(opts.visible, {
           event: expect.anything(),
@@ -137,7 +140,7 @@ describe('Popover', () => {
         { visible: true, closeOn: 'hover' },
         {
           invisible({ triggerContainer }) {
-            Simulate.mouseLeave(triggerContainer())
+            fireEvent.mouseLeave(triggerContainer())
           },
           initial({}, { onVisibleChange }) {
             expect(onVisibleChange).not.toBeCalled()
@@ -162,10 +165,10 @@ describe('Popover', () => {
             { wrapper, triggerContainer, contentContainer },
             { onVisibleChange },
           ) {
-            Simulate.mouseLeave(triggerContainer())
+            fireEvent.mouseLeave(triggerContainer())
             expect(onVisibleChange).not.toBeCalled()
 
-            Simulate.mouseLeave(contentContainer())
+            fireEvent.mouseLeave(contentContainer())
             expect(onVisibleChange).not.toBeCalled()
 
             await userEvent.click(triggerContainer())
@@ -201,10 +204,10 @@ describe('Popover', () => {
             { wrapper, triggerContainer, contentContainer },
             { onVisibleChange },
           ) {
-            Simulate.mouseLeave(triggerContainer())
+            fireEvent.mouseLeave(triggerContainer())
             expect(onVisibleChange).not.toBeCalled()
 
-            Simulate.mouseLeave(contentContainer())
+            fireEvent.mouseLeave(contentContainer())
             expect(onVisibleChange).not.toBeCalled()
 
             await userEvent.click(triggerContainer())
@@ -237,10 +240,10 @@ describe('Popover', () => {
             { wrapper, triggerContainer, contentContainer },
             { onVisibleChange },
           ) {
-            Simulate.mouseLeave(triggerContainer())
+            fireEvent.mouseLeave(triggerContainer())
             expect(onVisibleChange).not.toBeCalled()
 
-            Simulate.mouseLeave(contentContainer())
+            fireEvent.mouseLeave(contentContainer())
             expect(onVisibleChange).not.toBeCalled()
 
             await userEvent.click(triggerContainer())
@@ -312,7 +315,7 @@ describe('Popover', () => {
     expect(content).toHaveBeenCalledTimes(0)
     expect(popoverStyle).toHaveBeenCalledTimes(0)
 
-    Simulate.mouseEnter(triggerContainer())
+    fireEvent.mouseEnter(triggerContainer())
     expect(onVisibleChange).toHaveBeenCalledTimes(0)
     expect(content).toHaveBeenCalledTimes(0)
     expect(popoverStyle).toHaveBeenCalledTimes(0)
@@ -335,6 +338,15 @@ describe('Popover', () => {
       expect(wrapper.baseElement).toMatchSnapshot()
     })
   })
+
+  it('exposes popoverContainer static getter', () => {
+    const { wrapper } = renderComp({})
+    // After rendering a non-inline popover, the static popoverContainer should be available
+    expect(Popover.popoverContainer).toBeTruthy()
+    expect(Popover.popoverContainer).toBeInstanceOf(HTMLElement)
+
+    wrapper.unmount()
+  })
 })
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -348,7 +360,7 @@ const renderComp = (defaultProps: Partial<PopoverProps>) => {
     }
   }
 
-  const getEl = (props: Partial<PopoverProps>): JSX.Element => (
+  const getEl = (props: Partial<PopoverProps>): React.ReactElement => (
     <Popover
       trigger={() => <div className="trigger" />}
       content={() => <div className="content" />}

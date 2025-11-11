@@ -74,7 +74,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     disabled: false,
     inline: false,
 
-    onVisibleChange: /* istanbul ignore next */ () => {},
+    onVisibleChange: /* v8 ignore next -- @preserve */ () => {},
     popoverStyle: (info: PopoverVisibleInfo): PopoverStyle => ({
       position: 'absolute',
       top: `${info.popoverTop}px`,
@@ -92,7 +92,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     contentContainer: null,
   }
 
-  render(): JSX.Element {
+  render(): React.ReactElement {
     return (
       <>
         <div
@@ -144,9 +144,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
 
   private popoverStyle(): undefined | PopoverStyle {
     if (this.props.disabled) return
-    // istanbul ignore next
+    /* v8 ignore next 2 -- @preserve */
     if (!document.scrollingElement) return
-    // istanbul ignore next
     if (!this.state.triggerContainer) return
     return this.props.popoverStyle({
       visible: this.visible,
@@ -158,11 +157,9 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   }
 
   private clickClose = (event: MouseEvent): undefined | boolean => {
-    // istanbul ignore next
+    /* v8 ignore next 5 -- @preserve */
     if (!this.state.triggerContainer) return
-    // istanbul ignore next
     if (!this.state.contentContainer) return
-    // istanbul ignore next
     if (
       !(event.target instanceof HTMLElement) &&
       !(event.target instanceof SVGElement)
@@ -183,7 +180,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
       return !clickInside
     }
 
-    // istanbul ignore next
+    /* v8 ignore next -- @preserve */
     return
   }
 
@@ -205,9 +202,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
       return
     }
 
-    // istanbul ignore next
+    /* v8 ignore next 2 -- @preserve */
     visible = this.props.disabled ? false : visible
-    // istanbul ignore next
     if (this.visible === visible) return
     this.props.onVisibleChange(visible, reason)
   }
@@ -227,9 +223,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   private onTriggerClick = (event: React.MouseEvent): void => {
     if (this.props.disabled) return
     if (this.props.openOn !== 'click') return
-    // istanbul ignore next
+    /* v8 ignore next 2 -- @preserve */
     if (!document.scrollingElement) return
-    // istanbul ignore next
     if (!this.state.triggerContainer) return
     this.setState(
       this.getPositionInfo(
@@ -243,9 +238,8 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   private onMouseEnter = (event: React.MouseEvent): void => {
     if (this.props.disabled) return
     if (this.props.openOn !== 'hover') return
-    // istanbul ignore next
+    /* v8 ignore next 2 -- @preserve */
     if (!document.scrollingElement) return
-    // istanbul ignore next
     if (!this.state.triggerContainer) return
     this.setState(
       this.getPositionInfo(
@@ -257,7 +251,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
   }
 
   private onMouseLeave = (event: React.MouseEvent): void => {
-    // istanbul ignore next
+    /* v8 ignore next -- @preserve */
     if (this.props.disabled) return
     if (this.props.closeOn !== 'hover') return
     this.changeVisible(false, { event: event.nativeEvent })

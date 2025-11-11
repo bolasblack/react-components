@@ -95,7 +95,18 @@ export interface ModalProps {
   bodyRef?: Ref<HTMLDivElement>
 }
 
-export const Modal: FC<ModalProps> = function Modal(props) {
+export const defaultProps = {
+  backdrop: 'clickHide' as const,
+  documentElementClassName: 'Modal__html',
+  documentElementClassNameWhenVisible: 'Modal__html--visible',
+  documentElementClassNameWhenInvisible: null,
+  portalClassName: 'Modal',
+  backdropClassName: 'Modal__backdrop',
+  bodyClassName: 'Modal__body',
+}
+
+export const Modal: FC<ModalProps> = function Modal(_props) {
+  const props = { ...defaultProps, ..._props }
   const { visible, onVisibleChange } = props
 
   useEffect(() => {
@@ -188,15 +199,8 @@ export const Modal: FC<ModalProps> = function Modal(props) {
   return portal
 }
 
-Modal.defaultProps = {
-  backdrop: 'clickHide',
-  documentElementClassName: 'Modal__html',
-  documentElementClassNameWhenVisible: 'Modal__html--visible',
-  documentElementClassNameWhenInvisible: null,
-  portalClassName: 'Modal',
-  backdropClassName: 'Modal__backdrop',
-  bodyClassName: 'Modal__body',
-}
+// for compatibility
+;(Modal as any).defaultProps = defaultProps
 
 export function useModal({
   onVisibleChange: _,

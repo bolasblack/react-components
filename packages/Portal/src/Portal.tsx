@@ -141,7 +141,7 @@ export class Portal extends React.PureComponent<PortalProps> {
     if (typeof ref === 'function') {
       ref(el)
     } else {
-      ;(ref as any).current = el
+      ref.current = el
     }
   }
 

@@ -19,7 +19,7 @@ describe('Portal', () => {
 
   describe('support `parent` prop', () => {
     function assertParentPropWorks(
-      renderModal: (props: Partial<PortalProps>) => JSX.Element,
+      renderModal: (props: Partial<PortalProps>) => React.ReactElement,
       parent: null | HTMLElement,
     ): void {
       const res = render(renderModal({ visible: true }))
@@ -63,7 +63,7 @@ describe('Portal', () => {
   async function assertInAllRenderMode(
     asserts: (
       getProps: (props: Partial<PortalProps>) => Partial<PortalProps>,
-      containerRef: React.RefObject<HTMLElement>,
+      containerRef: React.RefObject<null | HTMLElement>,
     ) => any,
   ): Promise<void> {
     const parent = document.createElement('div')
@@ -161,8 +161,29 @@ describe('Portal', () => {
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
     })
   })
+
+  it('support function ref for portalContainerRef', () => {
+    let capturedElement: HTMLElement | null = null
+    const refCallback = (el: HTMLElement | null): void => {
+      capturedElement = el
+    }
+
+    const res = render(
+      <Portal visible={true} portalContainerRef={refCallback}>
+        <div id="test-content" />
+      </Portal>,
+    )
+
+    expect(capturedElement).toBeTruthy()
+    expect(capturedElement).toBeInstanceOf(HTMLElement)
+    expect(
+      (capturedElement as any as HTMLElement).querySelector('#test-content'),
+    ).toBeTruthy()
+
+    res.unmount()
+  })
 })
 
-const renderPortal = (props: Partial<PortalProps>): JSX.Element => (
+const renderPortal = (props: Partial<PortalProps>): React.ReactElement => (
   <Portal {...props} />
 )
