@@ -1,4 +1,4 @@
-# @c4605/react-components [![Build Status](https://travis-ci.com/bolasblack/react-components.svg?branch=master)](https://travis-ci.com/bolasblack/react-components) [![Coverage Status](https://coveralls.io/repos/github/bolasblack/react-components/badge.svg?branch=master)](https://coveralls.io/github/bolasblack/react-components?branch=master) [![Netlify Status](https://api.netlify.com/api/v1/badges/959b0ca3-36af-424d-b710-0f596303ff03/deploy-status)](https://react-components.c4605.com/)
+# @c4605/react-components [![Coverage Status](https://coveralls.io/repos/github/bolasblack/react-components/badge.svg?branch=master)](https://coveralls.io/github/bolasblack/react-components?branch=master) [![Netlify Status](https://api.netlify.com/api/v1/badges/959b0ca3-36af-424d-b710-0f596303ff03/deploy-status)](https://react-components.c4605.com/)
 
 Some useful react components.
 
