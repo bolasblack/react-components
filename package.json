@@ -63,7 +63,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-storybook": "^10.0.6",
     "happy-dom": "^20.0.10",
-    "lerna": "8.1.9",
+    "lerna": "9.0.3",
     "storybook": "10.0.6",
     "tsup": "^8.5.0",
     "vite": "^7.2.2",
