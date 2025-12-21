@@ -1,4 +1,14 @@
 {
-  "extends": ["github>bolasblack/js-toolconfs:renovate"],
-  "baseBranches": ["develop"]
+  "extends": [
+    "github>bolasblack/js-toolconfs:renovate",
+    "security:openssf-scorecard"
+  ],
+  "baseBranches": ["develop"],
+  "packageRules": [
+    {
+      "matchDatasources": ["npm"],
+      "minimumReleaseAge": "7 days",
+      "internalChecksFilter": "strict"
+    }
+  ]
 }
