@@ -1,5 +1,3 @@
-[Original Post](https://www.reddit.com/r/react/comments/1ov35kq/i_built_another_elmstyle_useeffectreducer_hook/)
-
 Hey folks 👋
 
 TL;DR – I’ve been playing with Elm-style “**state + event → state + effects**” in React and turned it into a tiny hook called `useEffectReducer`.
