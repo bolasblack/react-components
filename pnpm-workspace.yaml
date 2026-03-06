@@ -12,3 +12,6 @@ catalogs:
     '@types/react-dom': ^16.8.0 || ^16.9.0 || ^18.0.0 || ^19.0.0
     react: ^16.8.0 || ^16.9.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^16.9.0 || ^18.0.0 || ^19.0.0
+minimumReleaseAgeExclude:
+  # Renovate security update: storybook@10.2.10
+  - storybook@10.2.10
