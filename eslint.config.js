@@ -1,6 +1,5 @@
 import js from '@eslint/js'
-import tseslint from '@typescript-eslint/eslint-plugin'
-import tsparser from '@typescript-eslint/parser'
+import tseslint from 'typescript-eslint'
 import prettier from 'eslint-plugin-prettier/recommended'
 import react from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
@@ -99,10 +98,10 @@ export default [
   {
     files: ['**/*.{ts,tsx}'],
     plugins: {
-      '@typescript-eslint': tseslint,
+      '@typescript-eslint': tseslint.plugin,
     },
     languageOptions: {
-      parser: tsparser,
+      parser: tseslint.parser,
       parserOptions: {
         project: './tsconfig.json',
       },
@@ -110,7 +109,7 @@ export default [
     },
     rules: {
       // TypeScript recommended rules
-      ...tseslint.configs.recommended.rules,
+      ...tseslint.flatConfigs.recommended.rules,
       // TypeScript rules - off
       '@typescript-eslint/consistent-type-definitions': 'off',
       '@typescript-eslint/no-empty-interface': 'off',
