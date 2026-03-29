@@ -15,5 +15,5 @@ catalogs:
 minimumReleaseAgeExclude:
   # Renovate security update: storybook@10.2.10
   - storybook@10.2.10
-  # Renovate security update: happy-dom@20.8.8
-  - happy-dom@20.8.8
+  # Renovate security update: happy-dom@20.8.8 || 20.8.9
+  - happy-dom@20.8.8 || 20.8.9
