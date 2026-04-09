@@ -17,3 +17,5 @@ minimumReleaseAgeExclude:
   - storybook@10.2.10
   # Renovate security update: happy-dom@20.8.8 || 20.8.9
   - happy-dom@20.8.8 || 20.8.9
+  # Renovate security update: vite@8.0.5
+  - vite@8.0.5
