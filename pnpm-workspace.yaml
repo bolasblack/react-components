@@ -19,3 +19,5 @@ minimumReleaseAgeExclude:
   - happy-dom@20.8.8 || 20.8.9
   # Renovate security update: vite@8.0.5
   - vite@8.0.5
+  # Manually verified: @vitest/utils@4.0.8 was published 2025-11-07; CI registry metadata is missing time
+  - '@vitest/utils@4.0.8'
