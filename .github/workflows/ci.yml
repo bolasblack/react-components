@@ -31,6 +31,8 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
+        env:
+          PNPM_CONFIG_RESOLUTION_MODE: highest
 
       - name: Run tests with coverage
         run: pnpm test --coverage
