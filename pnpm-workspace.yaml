@@ -21,3 +21,5 @@ minimumReleaseAgeExclude:
   - vite@8.0.5
   # Manually verified @vitest/utils@4.0.8: published 2025-11-07; CI registry metadata is missing time
   - '@vitest/utils'
+  # Manually verified yaml@2.8.1: published 2025-08-05; CI registry metadata is missing time
+  - yaml
