@@ -23,23 +23,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v6
-        with:
-          version: 10
-          run_install: false
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: "lts/*"
-          cache: "pnpm"
+      - name: Setup mise
+        uses: jdx/mise-action@v4.0.1
 
       - name: Update React version
         run: node scripts/change_react_deps_version.cjs "${{ matrix.react-version.version }}"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile --ignore-scripts
+        env:
+          # GitHub Actions appears to reach npm through a registry proxy that omits
+          # the version "time" metadata required by pnpm's minimumReleaseAge check,
+          # So we disable it in the test flow
+          PNPM_CONFIG_MINIMUM_RELEASE_AGE: 0
 
       - name: Run tests with coverage
         run: pnpm test --coverage

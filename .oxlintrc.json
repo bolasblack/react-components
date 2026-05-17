@@ -1,0 +1,72 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["react", "typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "browser": true,
+    "es2020": true
+  },
+  "globals": {
+    "React": "readonly",
+    "ReactDOM": "readonly",
+    "JSX": "readonly"
+  },
+  "settings": {
+    "react": {
+      "version": "19.0.0"
+    }
+  },
+  "ignorePatterns": [
+    ".git/**",
+    "coverage/**",
+    "node_modules/**",
+    "**/build/**",
+    "**/dist/**",
+    "**/lib/**",
+    "**/__snapshots__/**"
+  ],
+  "rules": {
+    "no-unused-vars": [
+      "error",
+      {
+        "args": "none",
+        "caughtErrors": "none",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "curly": ["error", "multi-line"],
+    "react/rules-of-hooks": "error",
+    "react/exhaustive-deps": "error",
+    "typescript/explicit-member-accessibility": [
+      "error",
+      { "accessibility": "no-public" }
+    ],
+    "typescript/consistent-type-assertions": [
+      "error",
+      {
+        "assertionStyle": "as",
+        "objectLiteralTypeAssertions": "allow-as-parameter"
+      }
+    ],
+    "typescript/explicit-function-return-type": [
+      "error",
+      { "allowExpressions": true }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/*.spec.*", "**/*.test.*"],
+      "env": {
+        "vitest": true
+      },
+      "rules": {
+        "react/no-find-dom-node": "off",
+        "typescript/no-floating-promises": "off",
+        "typescript/consistent-type-assertions": "off",
+        "no-empty-pattern": "off"
+      }
+    }
+  ]
+}

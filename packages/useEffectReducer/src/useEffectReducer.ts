@@ -19,10 +19,7 @@ export interface EffectContext<S, A extends AnyActionArg> {
   getState(): S
 
   abort: AbortSignal
-  run<T>(
-    id: string,
-    callback: (ctx: EffectRunContext<A>) => Promise<T>,
-  ): Promise<T>
+  run<T>(id: string, callback: (ctx: EffectRunContext<A>) => Promise<T>): Promise<T>
   cancel(id: string): void
 }
 
@@ -121,11 +118,7 @@ export function useEffectReducer<S, I, A extends AnyActionArg, E>(
     [initFn],
   )
 
-  const [state, dispatch] = useReducer(
-    wrappedReducer,
-    initialArgOrState,
-    wrappedInit,
-  )
+  const [state, dispatch] = useReducer(wrappedReducer, initialArgOrState, wrappedInit)
 
   const latestStateRef = useLatestRef(state)
   const latestOnEffectRef = useLatestRef(onEffect)

@@ -88,11 +88,6 @@ describe('useEffectReducer - init function', () => {
     })
 
     await vi.runAllTimersAsync()
-    expect(sequence).toEqual([
-      'init',
-      'effect-init',
-      'reducer',
-      'effect-action',
-    ])
+    expect(sequence).toEqual(['init', 'effect-init', 'reducer', 'effect-action'])
   })
 })

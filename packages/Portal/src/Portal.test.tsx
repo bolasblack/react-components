@@ -42,10 +42,7 @@ describe('Portal', () => {
 
     it('as a function', () => {
       const parent = document.createElement('div')
-      assertParentPropWorks(
-        p => <Portal {...p} parent={() => parent} />,
-        parent,
-      )
+      assertParentPropWorks(p => <Portal {...p} parent={() => parent} />, parent)
     })
 
     it('as null', () => {
@@ -69,9 +66,7 @@ describe('Portal', () => {
     const parent = document.createElement('div')
     const containerRef = createRef<HTMLElement>()
 
-    const wrappedAsserts = (
-      overrideProps: Partial<PortalProps>,
-    ): Promise<void> =>
+    const wrappedAsserts = (overrideProps: Partial<PortalProps>): Promise<void> =>
       asserts(
         props => ({
           ...props,
@@ -134,19 +129,14 @@ describe('Portal', () => {
         await act(() => user.click(baseElement))
       }
 
-      const res = render(
-        renderPortal(
-          getProps({ visible: false, baseElement, onVisibleChange }),
-        ),
-        { baseElement },
-      )
+      const res = render(renderPortal(getProps({ visible: false, baseElement, onVisibleChange })), {
+        baseElement,
+      })
 
       await clickBaseElement()
       expect(onVisibleChange).toHaveBeenCalledTimes(0)
 
-      res.rerender(
-        renderPortal(getProps({ visible: true, baseElement, onVisibleChange })),
-      )
+      res.rerender(renderPortal(getProps({ visible: true, baseElement, onVisibleChange })))
       await clickBaseElement()
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
       expect(onVisibleChange).toHaveBeenCalledWith(
@@ -176,14 +166,10 @@ describe('Portal', () => {
 
     expect(capturedElement).toBeTruthy()
     expect(capturedElement).toBeInstanceOf(HTMLElement)
-    expect(
-      (capturedElement as any as HTMLElement).querySelector('#test-content'),
-    ).toBeTruthy()
+    expect((capturedElement as any as HTMLElement).querySelector('#test-content')).toBeTruthy()
 
     res.unmount()
   })
 })
 
-const renderPortal = (props: Partial<PortalProps>): React.ReactElement => (
-  <Portal {...props} />
-)
+const renderPortal = (props: Partial<PortalProps>): React.ReactElement => <Portal {...props} />

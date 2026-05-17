@@ -14,17 +14,17 @@ const wrap = fn => next => (filenames, commands) =>
 
 const finish = (filenames, commands) => commands
 
-const prettier = wrap(filenames => {
+const oxfmt = wrap(filenames => {
   if (!filenames.length) return []
 
   const cliFileNames = fileNamesToCliArg(filenames)
 
-  return ['pnpm prettier --write ' + cliFileNames]
+  return ['pnpm oxfmt --write ' + cliFileNames]
 })
 
-const js = prettier(finish)
-const css = prettier(finish)
-const md = prettier(finish)
+const js = oxfmt(finish)
+const css = oxfmt(finish)
+const md = oxfmt(finish)
 
 module.exports = {
   '*.{ts,tsx}': js,

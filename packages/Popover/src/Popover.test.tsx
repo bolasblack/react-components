@@ -1,11 +1,6 @@
 import * as React from 'react'
 import { act, render, fireEvent } from '@testing-library/react'
-import {
-  Popover,
-  PopoverProps,
-  PopoverStyle,
-  PopoverVisibleInfo,
-} from './Popover'
+import { Popover, PopoverProps, PopoverStyle, PopoverVisibleInfo } from './Popover'
 import { describe } from 'node:test'
 import userEvent from '@testing-library/user-event'
 import { vi } from 'vitest'
@@ -24,8 +19,7 @@ describe('Popover', () => {
     const popoverStyleReturnDataKey = '--test-key'
     const popoverStyleReturnDataValue = Date.now()
     const popoverStyle = vi.fn(
-      (): PopoverStyle =>
-        ({ [popoverStyleReturnDataKey]: popoverStyleReturnDataValue }) as any,
+      (): PopoverStyle => ({ [popoverStyleReturnDataKey]: popoverStyleReturnDataValue }) as any,
     )
 
     const { getEl, wrapper, triggerContainer, popoverContainer } = renderComp({
@@ -62,9 +56,7 @@ describe('Popover', () => {
     expect(popoverStyle).toHaveBeenLastCalledWith({
       visible: false,
       popoverTop:
-        boundingClientRect.top +
-        boundingClientRect.height +
-        document.documentElement.scrollTop,
+        boundingClientRect.top + boundingClientRect.height + document.documentElement.scrollTop,
       popoverLeft:
         boundingClientRect.left +
         boundingClientRect.width / 2 +
@@ -76,9 +68,7 @@ describe('Popover', () => {
     expect(popoverStyle).toHaveBeenLastCalledWith({
       visible: true,
       popoverTop:
-        boundingClientRect.top +
-        boundingClientRect.height +
-        document.documentElement.scrollTop,
+        boundingClientRect.top + boundingClientRect.height + document.documentElement.scrollTop,
       popoverLeft:
         boundingClientRect.left +
         boundingClientRect.width / 2 +
@@ -161,10 +151,7 @@ describe('Popover', () => {
           initial({}, { onVisibleChange }) {
             expect(onVisibleChange).not.toBeCalled()
           },
-          async invisible(
-            { wrapper, triggerContainer, contentContainer },
-            { onVisibleChange },
-          ) {
+          async invisible({ wrapper, triggerContainer, contentContainer }, { onVisibleChange }) {
             fireEvent.mouseLeave(triggerContainer())
             expect(onVisibleChange).not.toBeCalled()
 
@@ -200,10 +187,7 @@ describe('Popover', () => {
           initial({}, { onVisibleChange }) {
             expect(onVisibleChange).not.toBeCalled()
           },
-          async invisible(
-            { wrapper, triggerContainer, contentContainer },
-            { onVisibleChange },
-          ) {
+          async invisible({ wrapper, triggerContainer, contentContainer }, { onVisibleChange }) {
             fireEvent.mouseLeave(triggerContainer())
             expect(onVisibleChange).not.toBeCalled()
 
@@ -236,10 +220,7 @@ describe('Popover', () => {
           initial({}, { onVisibleChange }) {
             expect(onVisibleChange).not.toBeCalled()
           },
-          async invisible(
-            { wrapper, triggerContainer, contentContainer },
-            { onVisibleChange },
-          ) {
+          async invisible({ wrapper, triggerContainer, contentContainer }, { onVisibleChange }) {
             fireEvent.mouseLeave(triggerContainer())
             expect(onVisibleChange).not.toBeCalled()
 

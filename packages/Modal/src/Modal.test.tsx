@@ -26,18 +26,14 @@ describe('Modal', () => {
     // assert in initial state
     expect(portalContainerRef.current).toMatchSnapshot()
     expect(html.classList).toContain(defaultProps.documentElementClassName)
-    expect(html.classList).not.toContain(
-      defaultProps.documentElementClassNameWhenVisible,
-    )
+    expect(html.classList).not.toContain(defaultProps.documentElementClassNameWhenVisible)
     expect(html.classList).toContain(documentElementClassNameWhenInvisible)
 
     // assert in visibie state
     modalWrapper.rerender(<Modal {...modalProps} visible={true} />)
     expect(portalContainerRef.current).toMatchSnapshot()
     expect(html.classList).toContain(defaultProps.documentElementClassName)
-    expect(html.classList).toContain(
-      defaultProps.documentElementClassNameWhenVisible,
-    )
+    expect(html.classList).toContain(defaultProps.documentElementClassNameWhenVisible)
     expect(html.classList).not.toContain(documentElementClassNameWhenInvisible)
   })
 
@@ -58,9 +54,7 @@ describe('Modal', () => {
       expect(portalContainerRef.current).toMatchSnapshot()
 
       await user.click(
-        modalWrapper.baseElement.querySelector(
-          '.' + defaultProps.backdropClassName!,
-        )!,
+        modalWrapper.baseElement.querySelector('.' + defaultProps.backdropClassName!)!,
       )
 
       expect(onVisibleChange).toHaveBeenCalledTimes(1)
@@ -88,11 +82,7 @@ describe('Modal', () => {
       expect(portalContainerRef.current).toMatchSnapshot()
 
       await act(() =>
-        user.click(
-          modalWrapper.baseElement.querySelector(
-            '.' + defaultProps.backdropClassName!,
-          )!,
-        ),
+        user.click(modalWrapper.baseElement.querySelector('.' + defaultProps.backdropClassName!)!),
       )
       expect(onVisibleChange).not.toHaveBeenCalled()
     })

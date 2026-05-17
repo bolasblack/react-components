@@ -33,10 +33,7 @@ export interface PopoverProps {
   /** Popover visiblity */
   visible?: boolean
   /** Callback when popover visiblity needs to be changed */
-  onVisibleChange: (
-    visible: boolean,
-    reason: PopoverVisibleChangeReason,
-  ) => void
+  onVisibleChange: (visible: boolean, reason: PopoverVisibleChangeReason) => void
   /** If set to true, popover won't be shown, popoverStyle, content, onVisibleChange won't be called */
   disabled: boolean
   /** Set to true to render content inline */
@@ -149,10 +146,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     if (!this.state.triggerContainer) return
     return this.props.popoverStyle({
       visible: this.visible,
-      ...this.getPositionInfo(
-        this.state.triggerContainer,
-        document.scrollingElement,
-      ),
+      ...this.getPositionInfo(this.state.triggerContainer, document.scrollingElement),
     })
   }
 
@@ -160,10 +154,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     /* v8 ignore next 5 -- @preserve */
     if (!this.state.triggerContainer) return
     if (!this.state.contentContainer) return
-    if (
-      !(event.target instanceof HTMLElement) &&
-      !(event.target instanceof SVGElement)
-    ) {
+    if (!(event.target instanceof HTMLElement) && !(event.target instanceof SVGElement)) {
       return
     }
 
@@ -189,10 +180,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     return !!this.props.visible
   }
 
-  private changeVisible = (
-    visible: boolean,
-    reason: PopoverVisibleChangeReason,
-  ): void => {
+  private changeVisible = (visible: boolean, reason: PopoverVisibleChangeReason): void => {
     if (
       visible === false &&
       reason?.event instanceof MouseEvent &&
@@ -226,12 +214,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     /* v8 ignore next 2 -- @preserve */
     if (!document.scrollingElement) return
     if (!this.state.triggerContainer) return
-    this.setState(
-      this.getPositionInfo(
-        this.state.triggerContainer,
-        document.scrollingElement,
-      ),
-    )
+    this.setState(this.getPositionInfo(this.state.triggerContainer, document.scrollingElement))
     this.changeVisible(true, { event: event.nativeEvent })
   }
 
@@ -241,12 +224,7 @@ export class Popover extends React.PureComponent<PopoverProps, PopoverState> {
     /* v8 ignore next 2 -- @preserve */
     if (!document.scrollingElement) return
     if (!this.state.triggerContainer) return
-    this.setState(
-      this.getPositionInfo(
-        this.state.triggerContainer,
-        document.scrollingElement,
-      ),
-    )
+    this.setState(this.getPositionInfo(this.state.triggerContainer, document.scrollingElement))
     this.changeVisible(true, { event: event.nativeEvent })
   }
 

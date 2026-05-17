@@ -39,15 +39,12 @@ export function useAsync<Result = any, Args extends any[] = any[]>(
 }
 
 export namespace useAsync {
-  export type State<T> =
-    | AsyncState.Loading<T>
-    | AsyncState.Success<T>
-    | AsyncState.Failed<T>
+  export type State<T> = AsyncState.Loading<T> | AsyncState.Success<T> | AsyncState.Failed<T>
 
-  export type AsyncFn<
-    Result = any,
-    Args extends any[] = any[],
-  > = useAsyncFnFactory.AsyncFn<Result, Args>
+  export type AsyncFn<Result = any, Args extends any[] = any[]> = useAsyncFnFactory.AsyncFn<
+    Result,
+    Args
+  >
 
   export type Controller<Result = any, Args extends any[] = any[]> = [
     State<Result>,
