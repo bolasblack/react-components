@@ -1,11 +1,4 @@
-import {
-  DependencyList,
-  useCallback,
-  useRef,
-  useState,
-  useDebugValue,
-  useMemo,
-} from 'react'
+import { DependencyList, useCallback, useRef, useState, useDebugValue, useMemo } from 'react'
 import { AsyncState } from './types'
 
 export function useAsyncFnFactory<Result = any, Args extends any[] = any[]>(
@@ -34,12 +27,7 @@ export function useAsyncFnFactory<Result = any, Args extends any[] = any[]>(
         // this can make use always return the result for the last call
         promise =
           // state should never be `Idle` after useAsyncFnFactory has ever been called
-          (
-            stateRef.current as Exclude<
-              useAsyncFnFactory.State<Result>,
-              AsyncState.Idle
-            >
-          ).promise
+          (stateRef.current as Exclude<useAsyncFnFactory.State<Result>, AsyncState.Idle>).promise
       }
 
       async function handlePromiseImpl(
@@ -84,10 +72,7 @@ export function useAsyncFnFactory<Result = any, Args extends any[] = any[]>(
     }
   }
 
-  const res: useAsyncFnFactory.Controller<Result, Args> = [
-    stateRef.current,
-    reRun,
-  ]
+  const res: useAsyncFnFactory.Controller<Result, Args> = [stateRef.current, reRun]
 
   useDebugValue(res)
 
@@ -101,9 +86,7 @@ export namespace useAsyncFnFactory {
     | AsyncState.Success<T>
     | AsyncState.Failed<T>
 
-  export type AsyncFn<Result = any, Args extends any[] = any[]> = (
-    ...args: Args
-  ) => Promise<Result>
+  export type AsyncFn<Result = any, Args extends any[] = any[]> = (...args: Args) => Promise<Result>
 
   export type Controller<Result = any, Args extends any[] = any[]> = [
     State<Result>,

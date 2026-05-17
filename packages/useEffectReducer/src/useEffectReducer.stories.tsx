@@ -65,9 +65,7 @@ export const ImplementedBy_useReducer: StoryFn = () => {
 
       const fetchDog = async (): Promise<void> => {
         try {
-          const response = await fetch(
-            'https://dog.ceo/api/breeds/image/random',
-          )
+          const response = await fetch('https://dog.ceo/api/breeds/image/random')
           if (!response.ok) throw new Error('Network error')
           await new Promise(r => setTimeout(r, 1000 * 2))
           const data = (await response.json()) as { message: string }
@@ -98,13 +96,7 @@ export const ImplementedBy_useReducer: StoryFn = () => {
         onDoubleClick={() => dispatch({ type: 'FETCH' })}
         style={{ margin: 0 }}
       >
-        {dog && (
-          <img
-            src={dog}
-            alt="doggo"
-            style={{ maxWidth: 320, borderRadius: 8 }}
-          />
-        )}
+        {dog && <img src={dog} alt="doggo" style={{ maxWidth: 320, borderRadius: 8 }} />}
       </figure>
 
       <button onClick={() => dispatch({ type: 'FETCH' })}>
@@ -145,10 +137,9 @@ export const ImplementedBy_useEffectReducer: StoryFn = () => {
 
       try {
         await ctx.run('dog', async nestedCtx => {
-          const response = await fetch(
-            'https://dog.ceo/api/breeds/image/random',
-            { signal: nestedCtx.abort },
-          )
+          const response = await fetch('https://dog.ceo/api/breeds/image/random', {
+            signal: nestedCtx.abort,
+          })
           if (!response.ok) throw new Error('Network error')
           await new Promise(r => setTimeout(r, 1000 * 2))
           const data = (await response.json()) as { message: string }
@@ -182,13 +173,7 @@ export const ImplementedBy_useEffectReducer: StoryFn = () => {
         onDoubleClick={() => dispatch({ type: 'FETCH' })}
         style={{ margin: 0 }}
       >
-        {dog && (
-          <img
-            src={dog}
-            alt="doggo"
-            style={{ maxWidth: 320, borderRadius: 8 }}
-          />
-        )}
+        {dog && <img src={dog} alt="doggo" style={{ maxWidth: 320, borderRadius: 8 }} />}
       </figure>
 
       <button onClick={() => dispatch({ type: 'FETCH' })}>

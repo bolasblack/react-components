@@ -101,10 +101,9 @@ describe('useAsync', () => {
         }),
     )
 
-    const res = renderHook(
-      (props: { some: number }) => useAsync(asyncFn, [props.some]),
-      { initialProps: { some: 0 } },
-    )
+    const res = renderHook((props: { some: number }) => useAsync(asyncFn, [props.some]), {
+      initialProps: { some: 0 },
+    })
     await waitFor(() => expect(res.result.current[0].loading).toBe(false))
 
     const [initialState, initialReRun] = res.result.current
@@ -140,19 +139,16 @@ describe('useAsync', () => {
     let calledTimes = 0
     let resolvedTimes = 0
     const deferA = defer<void>() // will never be resolved
-    const asyncFn = vi.fn(
-      async (val = 'a', timeoutPromise = deferA.promise) => {
-        calledTimes++
-        await timeoutPromise
-        resolvedTimes++
-        return val
-      },
-    )
+    const asyncFn = vi.fn(async (val = 'a', timeoutPromise = deferA.promise) => {
+      calledTimes++
+      await timeoutPromise
+      resolvedTimes++
+      return val
+    })
 
-    const res = renderHook(
-      (props: { some: number }) => useAsync(asyncFn, [props.some]),
-      { initialProps: { some: 0 } },
-    )
+    const res = renderHook((props: { some: number }) => useAsync(asyncFn, [props.some]), {
+      initialProps: { some: 0 },
+    })
 
     const deferB = defer<void>()
     act(() => void res.result.current[1]('b', deferB.promise))

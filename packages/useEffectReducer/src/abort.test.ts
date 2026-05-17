@@ -22,21 +22,18 @@ describe('useEffectReducer - abort and cancellation', () => {
         },
         async (effect, ctx) => {
           try {
-            const data = await ctx.run(
-              `task-${effect.id}`,
-              async ({ abort }) => {
-                return new Promise<string>((resolve, reject) => {
-                  const timer = setTimeout(() => {
-                    resolve(`done-${effect.id}`)
-                  }, 100)
+            const data = await ctx.run(`task-${effect.id}`, async ({ abort }) => {
+              return new Promise<string>((resolve, reject) => {
+                const timer = setTimeout(() => {
+                  resolve(`done-${effect.id}`)
+                }, 100)
 
-                  abort.addEventListener('abort', () => {
-                    clearTimeout(timer)
-                    reject(new Error('aborted'))
-                  })
+                abort.addEventListener('abort', () => {
+                  clearTimeout(timer)
+                  reject(new Error('aborted'))
                 })
-              },
-            )
+              })
+            })
             results.push(data)
           } catch (err) {
             // Ignore abort errors

@@ -18,9 +18,7 @@ export const BasicUsage: StoryFn = () => {
       callbacksRef.current = {
         resolve() {
           if (timeWhenClick == null) {
-            resolve(
-              `Current time: ${new Date().toString()}, issued after initialized`,
-            )
+            resolve(`Current time: ${new Date().toString()}, issued after initialized`)
           } else {
             resolve(
               `Current time: ${new Date().toString()}, issued when clicked at ${timeWhenClick}`,
@@ -35,17 +33,11 @@ export const BasicUsage: StoryFn = () => {
   return (
     <>
       <p>
-        <button onClick={() => reRun(new Date().toString())}>
-          Load current time
-        </button>
-        <button
-          onClick={() => callbacksRef.current?.resolve(new Date().toString())}
-        >
+        <button onClick={() => reRun(new Date().toString())}>Load current time</button>
+        <button onClick={() => callbacksRef.current?.resolve(new Date().toString())}>
           Load success
         </button>
-        <button
-          onClick={() => callbacksRef.current?.reject(new Error('Load failed'))}
-        >
+        <button onClick={() => callbacksRef.current?.reject(new Error('Load failed'))}>
           Load failed
         </button>
       </p>
@@ -53,13 +45,9 @@ export const BasicUsage: StoryFn = () => {
       <p>
         {reqState.loading && <span>Loading...</span>}
         {(reqState.error as any) && (
-          <span style={{ color: 'red' }}>
-            {(reqState.error as any).message}
-          </span>
+          <span style={{ color: 'red' }}>{(reqState.error as any).message}</span>
         )}
-        {reqState.value && (
-          <span style={{ color: 'green' }}>{reqState.value}</span>
-        )}
+        {reqState.value && <span style={{ color: 'green' }}>{reqState.value}</span>}
       </p>
     </>
   )

@@ -12,10 +12,7 @@ export const BasicUsage: StoryFn = () => {
   const [color, changeColor] = useState('blue')
 
   return (
-    <DocumentElement
-      className="root-class-name"
-      style={{ '--font-color': 'black' }}
-    >
+    <DocumentElement className="root-class-name" style={{ '--font-color': 'black' }}>
       <DocumentElement style={{ '--font-color': color }} />
       <label>
         Choose text color:

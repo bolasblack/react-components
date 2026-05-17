@@ -1,9 +1,4 @@
-import {
-  CSSProperties,
-  ReactNode,
-  ReactElement,
-  FunctionComponent,
-} from 'react'
+import { CSSProperties, ReactNode, ReactElement, FunctionComponent } from 'react'
 import withSideEffect from 'react-side-effect'
 import { SimpleJSON, ExcludeKey } from '@c4605/ts-types'
 
@@ -13,9 +8,8 @@ export interface DocumentElementProps {
   children?: ReactNode
 }
 
-export const _DocumentElementInner: FunctionComponent<DocumentElementProps> = ({
-  children,
-}) => (children || null) as ReactElement
+export const _DocumentElementInner: FunctionComponent<DocumentElementProps> = ({ children }) =>
+  (children || null) as ReactElement
 
 function mergeClassNames(classNames: string[]): string {
   const classNameSet = new Set(classNames.join(' ').split(' '))
@@ -34,9 +28,7 @@ function reducePropsToState(
   }
 }
 
-function handleStateChangeOnClient(
-  props: ReturnType<typeof reducePropsToState>,
-): void {
+function handleStateChangeOnClient(props: ReturnType<typeof reducePropsToState>): void {
   const { documentElement } = document
   const { style } = props
 
@@ -45,9 +37,7 @@ function handleStateChangeOnClient(
     // jsdom not support css variable
     // https://github.com/jsdom/jsdom/issues/1895
     // istanbul ignore next
-    Object.keys(style).forEach(k =>
-      documentElement.style.setProperty(k, style[k]),
-    )
+    Object.keys(style).forEach(k => documentElement.style.setProperty(k, style[k]))
   }
 
   const nextClassName = props.className || ''

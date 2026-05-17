@@ -3,10 +3,7 @@ import * as ReactDOM from 'react-dom'
 import { SimpleJSON } from '@c4605/ts-types'
 import shallowEqual from 'shallowequal'
 
-export type OnVisibleChangeCallback = (
-  visible: boolean,
-  reason: { event?: Event },
-) => void
+export type OnVisibleChangeCallback = (visible: boolean, reason: { event?: Event }) => void
 
 export interface PortalProps {
   portalContainerRef?: React.Ref<HTMLElement>
@@ -112,11 +109,7 @@ export class Portal extends React.PureComponent<PortalProps> {
       const nextStyle = nextProps.style ?? {}
       if (!shallowEqual(prevStyle, nextStyle)) {
         portalEl.style.cssText = ''
-        Object.assign(
-          portalEl.style,
-          this._getDisplayStyle(nextProps.visible),
-          nextStyle,
-        )
+        Object.assign(portalEl.style, this._getDisplayStyle(nextProps.visible), nextStyle)
         Object.keys(nextStyle)
           .filter(p => p.startsWith('--'))
           .forEach(p => {
@@ -132,10 +125,7 @@ export class Portal extends React.PureComponent<PortalProps> {
     }
   }
 
-  private _assignRef(
-    ref: React.Ref<HTMLElement> | undefined,
-    el: HTMLElement | null,
-  ): void {
+  private _assignRef(ref: React.Ref<HTMLElement> | undefined, el: HTMLElement | null): void {
     if (ref == null) return
 
     if (typeof ref === 'function') {

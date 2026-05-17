@@ -1,13 +1,5 @@
 import * as React from 'react'
-import {
-  FC,
-  ReactNode,
-  ReactElement,
-  useMemo,
-  useState,
-  useEffect,
-  Ref,
-} from 'react'
+import { FC, ReactNode, ReactElement, useMemo, useState, useEffect, Ref } from 'react'
 import { Portal, OnVisibleChangeCallback } from '@c4605/react-portal'
 import cssText from './Modal.css?inline'
 

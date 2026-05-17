@@ -19,15 +19,9 @@ export const BasicUsage: StoryFn = () => {
 
   const [closeOnClick, setCloseOnClick] = useInputValue(false, 'checked')
 
-  const [closeOnOutsideClick, setCloseOnOutsideClick] = useInputValue(
-    false,
-    'checked',
-  )
+  const [closeOnOutsideClick, setCloseOnOutsideClick] = useInputValue(false, 'checked')
 
-  const onVisibleChange: OnVisibleChangeCallback = (
-    visible,
-    { event },
-  ): void => {
+  const onVisibleChange: OnVisibleChangeCallback = (visible, { event }): void => {
     if (event == null) return
     if (!(event.target instanceof HTMLElement)) return
     if (!triggerContentRef.current) return
@@ -50,39 +44,23 @@ export const BasicUsage: StoryFn = () => {
       <p>
         <label>
           renderInline
-          <input
-            type="checkbox"
-            checked={renderInline}
-            onChange={setRenderInline}
-          />
+          <input type="checkbox" checked={renderInline} onChange={setRenderInline} />
         </label>
       </p>
       <p>
         <label>
           closeOnClick
-          <input
-            type="checkbox"
-            checked={closeOnClick}
-            onChange={setCloseOnClick}
-          />
+          <input type="checkbox" checked={closeOnClick} onChange={setCloseOnClick} />
         </label>
       </p>
       <p>
         <label>
           closeOnOutsideClick
-          <input
-            type="checkbox"
-            checked={closeOnOutsideClick}
-            onChange={setCloseOnOutsideClick}
-          />
+          <input type="checkbox" checked={closeOnOutsideClick} onChange={setCloseOnOutsideClick} />
         </label>
       </p>
       <p>
-        <button
-          ref={triggerContentRef}
-          type="button"
-          onClick={() => setVisible(true)}
-        >
+        <button ref={triggerContentRef} type="button" onClick={() => setVisible(true)}>
           Show Portal
         </button>
       </p>

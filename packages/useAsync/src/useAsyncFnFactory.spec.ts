@@ -109,9 +109,7 @@ describe('useAsyncFn', () => {
       promise: deferred.promise,
     } as const
 
-    const res = renderHook(() =>
-      useAsyncFnFactory(() => asyncFn, [], initialState),
-    )
+    const res = renderHook(() => useAsyncFnFactory(() => asyncFn, [], initialState))
 
     expect(asyncFn).toBeCalledTimes(0)
     expect(res.result.current[0]).toBe(initialState)
@@ -131,8 +129,7 @@ describe('useAsyncFn', () => {
 
   it('regenerate rerun function when deps changed', async () => {
     const res = renderHook(
-      (props: { some: number }) =>
-        useAsyncFnFactory(() => () => asyncFn(), [props.some]),
+      (props: { some: number }) => useAsyncFnFactory(() => () => asyncFn(), [props.some]),
       { initialProps: { some: 0 } },
     )
     const [initialState, initialReRun] = res.result.current
@@ -148,17 +145,14 @@ describe('useAsyncFn', () => {
 
   it('handle async race condition safely', async () => {
     let resolvedTimes = 0
-    const asyncFn = vi.fn(
-      async (val: string, timeoutPromise: Promise<void>) => {
-        await timeoutPromise
-        resolvedTimes++
-        return val
-      },
-    )
+    const asyncFn = vi.fn(async (val: string, timeoutPromise: Promise<void>) => {
+      await timeoutPromise
+      resolvedTimes++
+      return val
+    })
 
     const res = renderHook(
-      (props: { some: number }) =>
-        useAsyncFnFactory(() => asyncFn, [props.some]),
+      (props: { some: number }) => useAsyncFnFactory(() => asyncFn, [props.some]),
       { initialProps: { some: 0 } },
     )
 

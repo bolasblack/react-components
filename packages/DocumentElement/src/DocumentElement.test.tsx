@@ -24,9 +24,7 @@ describe(DocumentElement.name, () => {
         }}
       />,
     )
-    expect(Array.from(document.documentElement.classList)).toEqual([
-      'html-class',
-    ])
+    expect(Array.from(document.documentElement.classList)).toEqual(['html-class'])
     expect(document.documentElement.style.cssText).toBe(
       'display: flex; width: 10px; --test-var: 20px;',
     )
@@ -38,17 +36,11 @@ describe(DocumentElement.name, () => {
 
   it('support nesting', () => {
     wrapper = render(
-      <DocumentElement
-        className="html-class-1"
-        style={{ display: 'flex', width: '10px' }}
-      >
+      <DocumentElement className="html-class-1" style={{ display: 'flex', width: '10px' }}>
         <div>
           <DocumentElement style={{ height: 'auto' }}>
             <span>
-              <DocumentElement
-                className="html-class-3"
-                style={{ overflow: 'hidden' }}
-              >
+              <DocumentElement className="html-class-3" style={{ overflow: 'hidden' }}>
                 Text
               </DocumentElement>
             </span>
@@ -56,10 +48,7 @@ describe(DocumentElement.name, () => {
         </div>
       </DocumentElement>,
     )
-    expect(Array.from(document.documentElement.classList)).toEqual([
-      'html-class-1',
-      'html-class-3',
-    ])
+    expect(Array.from(document.documentElement.classList)).toEqual(['html-class-1', 'html-class-3'])
     expect(document.documentElement.style.cssText).toBe(
       'display: flex; width: 10px; height: auto; overflow: hidden;',
     )

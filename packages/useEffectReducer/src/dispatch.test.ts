@@ -42,11 +42,7 @@ describe('useEffectReducer - onEffect ctx.dispatch', () => {
 
     await vi.runAllTimersAsync()
 
-    expect(sequence).toEqual([
-      'reducer-start',
-      'effect-effect-start',
-      'reducer-next',
-    ])
+    expect(sequence).toEqual(['reducer-start', 'effect-effect-start', 'reducer-next'])
     expect(result.current[0]).toBe(10)
   })
 

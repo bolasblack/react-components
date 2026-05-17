@@ -37,11 +37,7 @@ describe('useSyncExternalStore batching behavior', () => {
 
     const { result } = renderHook(() => {
       renderCount++
-      return useSyncExternalStore(
-        store.subscribe,
-        store.getSnapshot,
-        store.getSnapshot,
-      )
+      return useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot)
     })
 
     expect(result.current).toBe(0)
@@ -99,11 +95,7 @@ describe('useSyncExternalStore batching behavior', () => {
 
     const { result } = renderHook(() => {
       renderCount++
-      const queue = useSyncExternalStore(
-        store.subscribe,
-        store.getSnapshot,
-        store.getSnapshot,
-      )
+      const queue = useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot)
       return queue
     })
 
@@ -152,11 +144,7 @@ describe('useSyncExternalStore batching behavior', () => {
 
     const { result } = renderHook(() => {
       renderCount++
-      return useSyncExternalStore(
-        store.subscribe,
-        store.getSnapshot,
-        store.getSnapshot,
-      )
+      return useSyncExternalStore(store.subscribe, store.getSnapshot, store.getSnapshot)
     })
 
     expect(renderCount).toBe(1)
