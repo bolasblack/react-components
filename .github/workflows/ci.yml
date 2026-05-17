@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         # GitHub Actions appears to reach npm through a registry proxy that omits
         # the version "time" metadata required by pnpm's minimumReleaseAge check.
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --no-frozen-lockfile --ignore-scripts
         env:
           PNPM_CONFIG_MINIMUM_RELEASE_AGE: 0
 
