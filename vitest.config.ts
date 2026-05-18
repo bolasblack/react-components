@@ -1,20 +1,16 @@
+import { createRequire } from 'node:module'
 import { defineConfig } from 'vitest/config'
 import path from 'path'
 
-const reactLegacyTestInclude = [
-  'packages/DocumentElement/src/**/*.{test,spec}.{ts,tsx}',
-  'packages/Modal/src/**/*.{test,spec}.{ts,tsx}',
-  'packages/Popover/src/**/*.{test,spec}.{ts,tsx}',
-  'packages/Portal/src/**/*.{test,spec}.{ts,tsx}',
-  'packages/useAsync/src/**/*.{test,spec}.{ts,tsx}',
-]
-const reactLegacyCoverageInclude = [
-  'packages/DocumentElement/src/**/*.{ts,tsx}',
-  'packages/Modal/src/**/*.{ts,tsx}',
-  'packages/Popover/src/**/*.{ts,tsx}',
-  'packages/Portal/src/**/*.{ts,tsx}',
-  'packages/useAsync/src/**/*.{ts,tsx}',
-]
+const require = createRequire(import.meta.url)
+const { getReactLegacyPackages } = require('./scripts/workspace_packages.ts') as {
+  getReactLegacyPackages: (root?: string) => Array<{ dir: string; name: string }>
+}
+const reactLegacyPackageDirs = getReactLegacyPackages(__dirname).map(pkg => pkg.dir)
+const reactLegacyTestInclude = reactLegacyPackageDirs.map(
+  dir => `${dir}/src/**/*.{test,spec}.{ts,tsx}`,
+)
+const reactLegacyCoverageInclude = reactLegacyPackageDirs.map(dir => `${dir}/src/**/*.{ts,tsx}`)
 const isReactLegacyTest = process.env.REACT_LEGACY_TEST === '1'
 
 export default defineConfig({

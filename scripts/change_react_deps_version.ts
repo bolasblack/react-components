@@ -1,10 +1,25 @@
-const fs = require('fs')
-const path = require('path')
+import { readFileSync, writeFileSync } from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
-const packageJsonPath = path.resolve(__dirname, '../package.json')
-const workspacePath = path.resolve(__dirname, '../pnpm-workspace.yaml')
+const scriptDir = path.dirname(fileURLToPath(import.meta.url))
+const packageJsonPath = path.resolve(scriptDir, '../package.json')
+const workspacePath = path.resolve(scriptDir, '../pnpm-workspace.yaml')
 
-const compatibilityVersions = {
+type PackageJson = {
+  dependencies: Record<string, string>
+  devDependencies: Record<string, string>
+  [key: string]: unknown
+}
+
+type CompatibilityVersions = {
+  reactTypes: string
+  reactDomTypes: string
+  testingLibraryReact: string
+  testingLibraryReactHooks?: string
+}
+
+const compatibilityVersions: Record<string, CompatibilityVersions> = {
   16: {
     reactTypes: '^16.14.69',
     reactDomTypes: '^16.9.25',
@@ -29,16 +44,23 @@ const compatibilityVersions = {
   },
 }
 
-if (require.main === module) {
+if (isMain()) {
   const version = process.argv[2]
-  fs.writeFileSync(
+
+  if (!version) {
+    throw new Error('React version is required')
+  }
+
+  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf8')) as PackageJson
+
+  writeFileSync(
     packageJsonPath,
-    `${JSON.stringify(updateVersion(version, require(packageJsonPath)), null, '  ')}\n`,
+    `${JSON.stringify(updateVersion(version, packageJson), null, '  ')}\n`,
   )
-  fs.writeFileSync(workspacePath, updateWorkspaceVersion(version, fs.readFileSync(workspacePath, 'utf8')))
+  writeFileSync(workspacePath, updateWorkspaceVersion(version, readFileSync(workspacePath, 'utf8')))
 }
 
-function updateVersion(version, pkgs) {
+export function updateVersion(version: string, pkgs: PackageJson): PackageJson {
   const versions = getCompatibilityVersions(version)
   const devDependencies = {
     ...pkgs.devDependencies,
@@ -64,7 +86,7 @@ function updateVersion(version, pkgs) {
   }
 }
 
-function updateWorkspaceVersion(version, workspace) {
+export function updateWorkspaceVersion(version: string, workspace: string): string {
   const major = Number(getReactMajor(version))
   const versions = getCompatibilityVersions(version)
   const catalogVersions = {
@@ -82,7 +104,11 @@ function updateWorkspaceVersion(version, workspace) {
   return updated
 }
 
-function updateCatalog(workspace, catalogName, versions) {
+function updateCatalog(
+  workspace: string,
+  catalogName: string,
+  versions: Record<string, string>,
+): string {
   const lines = workspace.split('\n')
   const start = lines.findIndex(line => line === `  ${catalogName}:`)
 
@@ -108,7 +134,7 @@ function updateCatalog(workspace, catalogName, versions) {
   return lines.join('\n')
 }
 
-function getCompatibilityVersions(version) {
+function getCompatibilityVersions(version: string): CompatibilityVersions {
   const major = getReactMajor(version)
   const versions = compatibilityVersions[major]
 
@@ -119,8 +145,16 @@ function getCompatibilityVersions(version) {
   return versions
 }
 
-function getReactMajor(version) {
-  return String(version).match(/\d+/)?.[0]
+function getReactMajor(version: string): string {
+  const major = version.match(/\d+/)?.[0]
+
+  if (!major) {
+    throw new Error(`Unsupported React version: ${version}`)
+  }
+
+  return major
 }
 
-module.exports = { updateVersion, updateWorkspaceVersion }
+function isMain(): boolean {
+  return process.argv[1] != null && import.meta.url === pathToFileURL(process.argv[1]).href
+}

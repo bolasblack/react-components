@@ -27,7 +27,7 @@ jobs:
         uses: jdx/mise-action@v4.0.1
 
       - name: Update React version
-        run: node scripts/change_react_deps_version.cjs "${{ matrix.react-version.version }}"
+        run: node scripts/change_react_deps_version.ts "${{ matrix.react-version.version }}"
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile --ignore-scripts
