@@ -55,7 +55,7 @@
     "happy-dom": "^20.0.10",
     "lerna": "9.0.7",
     "oxfmt": "0.48.0",
-    "oxlint": "1.62.0",
+    "oxlint": "1.63.0",
     "oxlint-tsgolint": "0.22.1",
     "storybook": "10.3.6",
     "tsup": "^8.5.0",
