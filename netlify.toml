@@ -1,8 +1,17 @@
 [build]
-  base = ""
-  publish = "storybook-static"
-  command = "corepack enable && pnpm storybook:build"
-  environment = { NODE_VERSION = "24.11.0" }
+  # Netlify installs JavaScript dependencies before running build.command. That
+  # automatic install step does not read .mise.toml, so it can use the site's
+  # pinned Node version and fail before mise gets a chance to install the Node
+  # and pnpm versions declared by this repository.
+  #
+  # Keep this base directory free of package.json so Netlify skips its automatic
+  # dependency install. The build command then returns to the repository root,
+  # lets mise install/run the tools from .mise.toml, and writes Storybook output
+  # back under this base directory for publishing. This keeps .mise.toml as the
+  # single source of truth for both Node and pnpm versions.
+  base = "netlify-base"
+  publish = "netlify-base/storybook-static"
+  command = "cd .. && mise trust -a && mise install && mise exec -- pnpm install --frozen-lockfile && mise exec -- pnpm storybook:build -o netlify-base/storybook-static"
 
 [[redirects]]
   from = "/*"
