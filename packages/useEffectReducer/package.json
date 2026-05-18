@@ -12,7 +12,7 @@
     "compile": "rm -rf lib && tsdown"
   },
   "peerDependencies": {
-    "@types/react": "^16.8.0 || ^16.9.0 || ^18.0.0 || ^19.0.0",
-    "react": "^16.8.0 || ^16.9.0 || ^18.0.0 || ^19.0.0"
+    "@types/react": "catalog:peerDepsReact18",
+    "react": "catalog:peerDepsReact18"
   }
 }

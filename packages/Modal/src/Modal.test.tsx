@@ -1,7 +1,7 @@
-import { render, renderHook } from '@testing-library/react'
+import { act, render, renderHook } from '../../../configs/testUtils'
 import user from '@testing-library/user-event'
 import * as React from 'react'
-import { act, createRef } from 'react'
+import { createRef } from 'react'
 import { vi } from 'vitest'
 import { Modal, ModalProps, defaultProps, useModal } from './Modal'
 

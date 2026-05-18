@@ -1,4 +1,4 @@
-import { renderHook, act, waitFor } from '@testing-library/react'
+import { renderHook, act, waitFor } from '../../../configs/testUtils'
 import { vi } from 'vitest'
 import { useAsync } from './useAsync'
 import { defer, sleep } from './utils'

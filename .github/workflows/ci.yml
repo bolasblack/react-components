@@ -14,10 +14,10 @@ jobs:
     strategy:
       matrix:
         react-version:
-          - { name: "19", version: "^19.2.0" }
-          - { name: "18", version: "^18.3.1" }
-          - { name: "17", version: "^17.0.2" }
-          - { name: "16", version: "^16.14.0" }
+          - { name: "19", version: "^19.2.0", test: "test" }
+          - { name: "18", version: "^18.3.1", test: "test" }
+          - { name: "17", version: "^17.0.2", test: "test:react-legacy" }
+          - { name: "16", version: "^16.14.0", test: "test:react-legacy" }
 
     steps:
       - name: Checkout code
@@ -27,7 +27,7 @@ jobs:
         uses: jdx/mise-action@v4.0.1
 
       - name: Update React version
-        run: node scripts/change_react_deps_version.cjs "${{ matrix.react-version.version }}"
+        run: node scripts/change_react_deps_version.ts "${{ matrix.react-version.version }}"
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile --ignore-scripts
@@ -38,7 +38,7 @@ jobs:
           PNPM_CONFIG_MINIMUM_RELEASE_AGE: 0
 
       - name: Run tests with coverage
-        run: pnpm test --coverage
+        run: pnpm ${{ matrix.react-version.test }} --coverage
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2

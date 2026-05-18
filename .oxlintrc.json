@@ -4,6 +4,10 @@
   "categories": {
     "correctness": "error"
   },
+  "options": {
+    "denyWarnings": true,
+    "typeAware": true
+  },
   "env": {
     "browser": true,
     "es2020": true
@@ -39,6 +43,8 @@
     "curly": ["error", "multi-line"],
     "react/rules-of-hooks": "error",
     "react/exhaustive-deps": "error",
+    "typescript/no-floating-promises": "error",
+    "typescript/unbound-method": "off",
     "typescript/explicit-member-accessibility": [
       "error",
       { "accessibility": "no-public" }

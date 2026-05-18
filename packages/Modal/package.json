@@ -15,7 +15,7 @@
     "@c4605/react-portal": "workspace:*"
   },
   "peerDependencies": {
-    "@types/react": "catalog:peerDeps",
-    "react": "catalog:peerDeps"
+    "@types/react": "catalog:peerDepsReact16",
+    "react": "catalog:peerDepsReact16"
   }
 }

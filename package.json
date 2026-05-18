@@ -12,9 +12,10 @@
   ],
   "scripts": {
     "postinstall": "patch-package",
-    "lint": "oxlint packages --ignore-pattern \"packages/*/tsdown.config.mts\" --deny-warnings && oxlint packages --ignore-pattern \"packages/*/tsdown.config.mts\" --type-aware -A all -D typescript/no-floating-promises --ignore-pattern \"**/*.test.*\" --ignore-pattern \"**/*.spec.*\" --deny-warnings && oxfmt --check \"packages/**/src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "node scripts/lint.ts",
     "compile": "lerna run compile",
     "test": "pnpm lint && pnpm compile && vitest run",
+    "test:react-legacy": "node scripts/react_legacy_tests.ts",
     "test:watch": "vitest watch",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",

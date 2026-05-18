@@ -16,7 +16,7 @@
     "@c4605/ts-types": "catalog:"
   },
   "peerDependencies": {
-    "@types/react": "catalog:peerDeps",
-    "react": "catalog:peerDeps"
+    "@types/react": "catalog:peerDepsReact16",
+    "react": "catalog:peerDepsReact16"
   }
 }
