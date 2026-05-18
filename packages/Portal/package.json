@@ -17,10 +17,10 @@
     "shallowequal": "^1.1.0"
   },
   "peerDependencies": {
-    "@types/react": "catalog:peerDeps",
-    "@types/react-dom": "catalog:peerDeps",
-    "react": "catalog:peerDeps",
-    "react-dom": "catalog:peerDeps"
+    "@types/react": "catalog:peerDepsReact16",
+    "@types/react-dom": "catalog:peerDepsReact16",
+    "react": "catalog:peerDepsReact16",
+    "react-dom": "catalog:peerDepsReact16"
   },
   "devDependencies": {
     "@c4605/react-document-element": "workspace:*"

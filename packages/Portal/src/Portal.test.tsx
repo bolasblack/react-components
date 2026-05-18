@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render, act } from '@testing-library/react'
+import { render, act } from '../../../configs/testUtils'
 import user from '@testing-library/user-event'
 import { Portal, PortalProps } from './Portal'
 import { createRef } from 'react'

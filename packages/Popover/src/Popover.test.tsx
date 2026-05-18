@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { act, render, fireEvent } from '@testing-library/react'
+import { act, render, fireEvent } from '../../../configs/testUtils'
 import { Popover, PopoverProps, PopoverStyle, PopoverVisibleInfo } from './Popover'
 import { describe } from 'node:test'
 import userEvent from '@testing-library/user-event'

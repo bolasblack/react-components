@@ -18,7 +18,7 @@
     "react-side-effect": "^2.1.0"
   },
   "peerDependencies": {
-    "@types/react": "catalog:peerDeps",
-    "react": "catalog:peerDeps"
+    "@types/react": "catalog:peerDepsReact16",
+    "react": "catalog:peerDepsReact16"
   }
 }

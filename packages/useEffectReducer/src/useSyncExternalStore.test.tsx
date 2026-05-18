@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react'
+import { act, renderHook } from '../../../configs/testUtils'
 import { useSyncExternalStore } from 'react'
 import { describe, expect, it } from 'vitest'
 

@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react'
+import { act, renderHook } from '../../../configs/testUtils'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { useEffectReducer } from './useEffectReducer'
 

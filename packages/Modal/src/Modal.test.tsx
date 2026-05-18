@@ -1,4 +1,4 @@
-import { render, renderHook } from '@testing-library/react'
+import { render, renderHook } from '../../../configs/testUtils'
 import user from '@testing-library/user-event'
 import * as React from 'react'
 import { act, createRef } from 'react'

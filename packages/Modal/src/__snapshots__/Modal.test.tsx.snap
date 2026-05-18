@@ -79,7 +79,7 @@ exports[`Modal > props.backdrop > support \`false\` 1`] = `
 `;
 
 exports[`useModal > basicly works 1`] = `
-<Modal2
+<Modal
   backdrop="clickHide"
   backdropClassName="Modal__backdrop"
   bodyClassName="Modal__body"
@@ -93,11 +93,11 @@ exports[`useModal > basicly works 1`] = `
   <div>
     hello
   </div>
-</Modal2>
+</Modal>
 `;
 
 exports[`useModal > basicly works 2`] = `
-<Modal2
+<Modal
   backdrop="clickHide"
   backdropClassName="Modal__backdrop"
   bodyClassName="Modal__body"
@@ -111,11 +111,11 @@ exports[`useModal > basicly works 2`] = `
   <div>
     hello
   </div>
-</Modal2>
+</Modal>
 `;
 
 exports[`useModal > basicly works 3`] = `
-<Modal2
+<Modal
   backdrop="clickHide"
   backdropClassName="Modal__backdrop"
   bodyClassName="Modal__body"
@@ -129,5 +129,5 @@ exports[`useModal > basicly works 3`] = `
   <div>
     hello
   </div>
-</Modal2>
+</Modal>
 `;

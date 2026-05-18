@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { render, RenderResult } from '@testing-library/react'
+import { render, type RenderResult } from '../../../configs/testUtils'
 import { DocumentElement } from './DocumentElement'
 
 describe(DocumentElement.name, () => {
