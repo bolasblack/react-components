@@ -1,3 +1,3 @@
-import { generateConfig } from '../../configs/tsup.config.base'
+import { generateConfig } from '../../configs/tsdown.config.base.mts'
 
 export default generateConfig({ entry: ['src/DocumentElement.tsx'] })

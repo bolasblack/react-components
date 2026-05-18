@@ -9,7 +9,7 @@
   "types": "./lib/Modal.d.ts",
   "scripts": {
     "prepublish": "pnpm compile",
-    "compile": "rm -rf lib && tsup"
+    "compile": "rm -rf lib && tsdown"
   },
   "dependencies": {
     "@c4605/react-portal": "workspace:*"
