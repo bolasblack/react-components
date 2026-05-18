@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode, ReactElement, FunctionComponent } from 'react'
+import { CSSProperties, ReactNode, ReactElement, FunctionComponent, ComponentType } from 'react'
 import withSideEffect from 'react-side-effect'
 import { SimpleJSON, ExcludeKey } from '@c4605/ts-types'
 
@@ -46,7 +46,7 @@ function handleStateChangeOnClient(props: ReturnType<typeof reducePropsToState>)
   }
 }
 
-export const DocumentElement = withSideEffect(
+export const DocumentElement: ComponentType<DocumentElementProps> = withSideEffect(
   reducePropsToState,
   handleStateChangeOnClient,
 )(_DocumentElementInner)

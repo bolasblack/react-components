@@ -1,6 +1,9 @@
 const fs = require('fs')
 const path = require('path')
 
+const packageJsonPath = path.resolve(__dirname, '../package.json')
+const workspacePath = path.resolve(__dirname, '../pnpm-workspace.yaml')
+
 const compatibilityVersions = {
   16: {
     reactTypes: '^16.14.69',
@@ -27,10 +30,12 @@ const compatibilityVersions = {
 }
 
 if (require.main === module) {
+  const version = process.argv[2]
   fs.writeFileSync(
-    path.resolve(__dirname, '../package.json'),
-    `${JSON.stringify(updateVersion(process.argv[2], require('../package.json')), null, '  ')}\n`,
+    packageJsonPath,
+    `${JSON.stringify(updateVersion(version, require(packageJsonPath)), null, '  ')}\n`,
   )
+  fs.writeFileSync(workspacePath, updateWorkspaceVersion(version, fs.readFileSync(workspacePath, 'utf8')))
 }
 
 function updateVersion(version, pkgs) {
@@ -59,8 +64,52 @@ function updateVersion(version, pkgs) {
   }
 }
 
+function updateWorkspaceVersion(version, workspace) {
+  const major = Number(getReactMajor(version))
+  const versions = getCompatibilityVersions(version)
+  const catalogVersions = {
+    '@types/react': versions.reactTypes,
+    '@types/react-dom': versions.reactDomTypes,
+    react: version,
+    'react-dom': version,
+  }
+
+  let updated = updateCatalog(workspace, 'peerDepsReact16', catalogVersions)
+  if (major >= 18) {
+    updated = updateCatalog(updated, 'peerDepsReact18', catalogVersions)
+  }
+
+  return updated
+}
+
+function updateCatalog(workspace, catalogName, versions) {
+  const lines = workspace.split('\n')
+  const start = lines.findIndex(line => line === `  ${catalogName}:`)
+
+  if (start === -1) {
+    throw new Error(`Cannot find catalog: ${catalogName}`)
+  }
+
+  let end = start + 1
+  while (end < lines.length && lines[end].startsWith('    ')) {
+    end++
+  }
+
+  lines.splice(
+    start,
+    end - start,
+    `  ${catalogName}:`,
+    `    '@types/react': ${versions['@types/react']}`,
+    `    '@types/react-dom': ${versions['@types/react-dom']}`,
+    `    react: ${versions.react}`,
+    `    react-dom: ${versions['react-dom']}`,
+  )
+
+  return lines.join('\n')
+}
+
 function getCompatibilityVersions(version) {
-  const major = String(version).match(/\d+/)?.[0]
+  const major = getReactMajor(version)
   const versions = compatibilityVersions[major]
 
   if (!versions) {
@@ -70,4 +119,8 @@ function getCompatibilityVersions(version) {
   return versions
 }
 
-module.exports = { updateVersion }
+function getReactMajor(version) {
+  return String(version).match(/\d+/)?.[0]
+}
+
+module.exports = { updateVersion, updateWorkspaceVersion }
