@@ -10,7 +10,7 @@
   "types": "lib/DocumentElement.d.ts",
   "scripts": {
     "prepublish": "pnpm compile",
-    "compile": "rm -rf lib && tsup"
+    "compile": "rm -rf lib && tsdown"
   },
   "dependencies": {
     "@c4605/ts-types": "catalog:",

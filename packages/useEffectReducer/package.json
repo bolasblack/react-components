@@ -9,7 +9,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "prepublish": "pnpm compile",
-    "compile": "rm -rf lib && tsup"
+    "compile": "rm -rf lib && tsdown"
   },
   "peerDependencies": {
     "@types/react": "^16.8.0 || ^16.9.0 || ^18.0.0 || ^19.0.0",

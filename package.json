@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "postinstall": "patch-package",
-    "lint": "oxlint packages --ignore-pattern \"packages/*/tsup.config.ts\" --deny-warnings && oxlint packages --ignore-pattern \"packages/*/tsup.config.ts\" --type-aware -A all -D typescript/no-floating-promises --ignore-pattern \"**/*.test.*\" --ignore-pattern \"**/*.spec.*\" --deny-warnings && oxfmt --check \"packages/**/src/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "oxlint packages --ignore-pattern \"packages/*/tsdown.config.mts\" --deny-warnings && oxlint packages --ignore-pattern \"packages/*/tsdown.config.mts\" --type-aware -A all -D typescript/no-floating-promises --ignore-pattern \"**/*.test.*\" --ignore-pattern \"**/*.spec.*\" --deny-warnings && oxfmt --check \"packages/**/src/**/*.{js,jsx,ts,tsx}\"",
     "compile": "lerna run compile",
     "test": "pnpm lint && pnpm compile && vitest run",
     "test:watch": "vitest watch",
@@ -34,7 +34,7 @@
     "postinstall-postinstall": "^2.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.3"
   },
   "resolutions": {
     "@types/react": "^19.0.0",
@@ -58,7 +58,7 @@
     "oxlint": "1.63.0",
     "oxlint-tsgolint": "0.22.1",
     "storybook": "10.3.6",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.22.0",
     "vite": "^8.0.0",
     "vitest": "^4.0.8"
   },
