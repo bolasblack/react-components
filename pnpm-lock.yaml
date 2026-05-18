@@ -9,26 +9,6 @@ catalogs:
     '@c4605/ts-types':
       specifier: ^0.3.0
       version: 0.3.0
-  peerDepsReact16:
-    '@types/react':
-      specifier: ^16.8.0 || ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      version: 19.2.14
-    '@types/react-dom':
-      specifier: ^16.8.0 || ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      version: 19.2.3
-    react:
-      specifier: ^16.8.0 || ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      version: 19.2.6
-    react-dom:
-      specifier: ^16.8.0 || ^16.9.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-      version: 19.2.6
-  peerDepsReact18:
-    '@types/react':
-      specifier: ^18.0.0 || ^19.0.0
-      version: 19.2.14
-    react:
-      specifier: ^18.0.0 || ^19.0.0
-      version: 19.2.6
 
 importers:
 
