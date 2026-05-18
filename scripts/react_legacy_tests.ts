@@ -4,14 +4,14 @@ import { lint } from './lint.ts'
 import { getReactLegacyPackages, rootDir } from './workspace_packages.ts'
 
 function main(): void {
-  const packages = getReactLegacyPackages()
+  const reactLegacyPackages = getReactLegacyPackages()
 
-  if (packages.length === 0) {
+  if (reactLegacyPackages.length === 0) {
     throw new Error('No packages use catalog:peerDepsReact16')
   }
 
-  lint(packages)
-  run('pnpm', [...packages.flatMap(pkg => ['--filter', pkg.name]), '-r', 'compile'])
+  lint(reactLegacyPackages)
+  run('pnpm', [...reactLegacyPackages.flatMap(pkg => ['--filter', pkg.name]), '-r', 'compile'])
   run('pnpm', ['exec', 'vitest', 'run', ...process.argv.slice(2)], {
     env: { ...process.env, REACT_LEGACY_TEST: '1' },
   })

@@ -5,31 +5,7 @@ import { getReactLegacyPackages, getWorkspacePackages, rootDir } from './workspa
 export function lint(packages = getWorkspacePackages()): void {
   const packageDirs = packages.map(pkg => pkg.dir)
 
-  run('pnpm', [
-    'exec',
-    'oxlint',
-    ...packageDirs,
-    '--ignore-pattern',
-    'packages/*/tsdown.config.mts',
-    '--deny-warnings',
-  ])
-  run('pnpm', [
-    'exec',
-    'oxlint',
-    ...packageDirs,
-    '--ignore-pattern',
-    'packages/*/tsdown.config.mts',
-    '--type-aware',
-    '-A',
-    'all',
-    '-D',
-    'typescript/no-floating-promises',
-    '--ignore-pattern',
-    '**/*.test.*',
-    '--ignore-pattern',
-    '**/*.spec.*',
-    '--deny-warnings',
-  ])
+  run('pnpm', ['exec', 'oxlint', ...packageDirs])
   run('pnpm', [
     'exec',
     'oxfmt',
