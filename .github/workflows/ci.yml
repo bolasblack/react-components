@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Setup mise
-        uses: jdx/mise-action@v4.0.1
+        uses: jdx/mise-action@v4.3.0
 
       - name: Update React version
         run: node scripts/change_react_deps_version.ts "${{ matrix.react-version.version }}"
