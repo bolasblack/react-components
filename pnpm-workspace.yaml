@@ -23,3 +23,6 @@ allowBuilds:
   git-hook-pure: false
   nx: false
   postinstall-postinstall: true
+minimumReleaseAgeExclude:
+  # Renovate security update: vite@8.0.16
+  - vite@8.0.16
