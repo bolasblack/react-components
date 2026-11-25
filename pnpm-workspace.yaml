@@ -23,3 +23,6 @@ allowBuilds:
   git-hook-pure: false
   nx: false
   postinstall-postinstall: true
+minimumReleaseAgeExclude:
+  # Renovate security update: storybook@10.6.2
+  - storybook@10.6.2
